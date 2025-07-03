@@ -1,0 +1,7 @@
+{
+  "name": "StayNest",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
