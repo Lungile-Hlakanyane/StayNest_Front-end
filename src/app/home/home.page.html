@@ -1,20 +1,58 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+<div class="home-wrapper">
+  <div class="home-header">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+   <div style="display:flex; justify-content: space-between;">
+     <div class="logo-brand">
+      <div class="logo-dot"></div>
+      <span class="logo-text">StayNest</span>
+    </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <div style="font-size: 25px; cursor: pointer; position: relative; bottom:10px;" (click)="openMenuModal()">
+     <p style="color:#4caf50; font-weight: bold"><ion-icon name="grid"></ion-icon></p>
+    </div>
+
+   </div>
+
+    <h2 class="welcome-title">Explore Accommodations</h2>
+
+    <!-- 🔍 Searchbar -->
+    <ion-searchbar
+      [(ngModel)]="searchTerm"
+      placeholder="Search by name or description..."
+      (ionInput)="filterAccommodations()"
+      debounce="300"
+      color="light">
+    </ion-searchbar>
   </div>
+
+  <!-- 🏡 Filtered Accommodation List -->
+  <div class="feed">
+    <div class="accommodation-card" *ngFor="let post of filteredAccommodations">
+      <img [src]="post.imageUrl" alt="Accommodation Image" class="accommodation-image" />
+      
+      <div class="card-content">
+        <div class="card-header">
+          <h3 class="landlord-name">{{ post.landlord }}</h3>
+          <div class="stars">
+            <ion-icon name="star" *ngFor="let star of [].constructor(post.rating)"></ion-icon>
+          </div>
+        </div>
+
+        <p class="caption">{{ post.caption }}</p>
+
+        <div class="card-footer">
+          <div class="comments">
+            <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+            <span>{{ post.comments }} comments</span>
+          </div>
+
+          <ion-button fill="outline" size="small" (click)="viewMore(post)">
+            View More
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </ion-content>

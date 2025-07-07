@@ -1,0 +1,38 @@
+ <div class="action-btn-container">
+      <p (click)="goBack()" style="font-size: 30px; font-weight: bold; padding-left:15px;"><ion-icon name="arrow-back-outline"></ion-icon></p>
+</div>
+
+<div class="login-wrapper">
+  <div class="login-box">
+
+    <div class="logo-brand">
+      <div class="logo-dot"></div>
+      <span class="logo-text">StayNest</span>
+    </div>
+
+    <h1 class="welcome-title">Enter OTP</h1>
+    <p class="subtitle">
+      We've sent a 5-digit OTP to your email. Please enter it below.
+    </p>
+
+    <form class="login-form" (ngSubmit)="verifyOtp()">
+      <div class="otp-group">
+        <input
+          *ngFor="let digit of otp; let i = index"
+          #otpInput
+          maxlength="1"
+          type="text"
+          pattern="[0-9]*"
+          inputmode="numeric"
+          [(ngModel)]="otp[i]"
+          name="otp{{i}}"
+          (input)="onInputChange(i, $event)"
+        />
+      </div>
+
+      <button type="submit" class="sign-in">
+        Verify
+      </button>
+    </form>
+  </div>
+</div>

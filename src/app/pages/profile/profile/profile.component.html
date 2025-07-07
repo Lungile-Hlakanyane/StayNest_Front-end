@@ -1,0 +1,47 @@
+<div class="profile-wrapper">
+
+  <div class="header">
+    <div class="logo-brand">
+      <div class="logo-dot"></div>
+      <span class="logo-text">StayNest</span>
+    </div>
+    <h2 class="title">My Profile</h2>
+  </div>
+
+  <div class="profile-content">
+
+    <!-- Avatar -->
+    <div class="avatar-container">
+        <img src="../../../../assets/profile-image.svg" alt="Avatar" class="avatar-img" />
+    </div>
+
+    <!-- Info -->
+    <div class="profile-info">
+      <p class="info-label">Full Name</p>
+      <p class="info-value">{{ profile.fullName }}</p>
+
+      <p class="info-label">Email</p>
+      <p class="info-value">{{ profile.email }}</p>
+
+      <p class="info-label">Phone</p>
+      <p class="info-value">{{ profile.phone }}</p>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons" style="display: flex; justify-content: space-evenly;">
+      <ion-button expand="block" fill="solid" (click)="editProfile()" class="custom-btn">
+        Edit Profile
+      </ion-button>
+
+      <ion-button expand="block" color="medium" fill="outline" (click)="changePassword()">
+        Change Password
+      </ion-button>
+
+      <ion-button expand="block" color="danger" fill="solid" (click)="logout()">
+        Logout
+      </ion-button>
+    </div>
+
+  </div>
+
+</div>

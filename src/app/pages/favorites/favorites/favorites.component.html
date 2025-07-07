@@ -1,0 +1,54 @@
+<div class="favorites-wrapper">
+
+  <div class="header">
+    <div class="logo-brand">
+      <div class="logo-dot"></div>
+      <span class="logo-text">StayNest</span>
+    </div>
+    <h2 class="favorites-title">Saved Accommodations</h2>
+  </div>
+
+  <ion-searchbar
+  [(ngModel)]="searchTerm"
+  placeholder="Search favorites..."
+  (ionInput)="filterFavorites()"
+  debounce="300"
+  color="light"
+  class="search-bar">
+  </ion-searchbar>
+
+ <div class="favorites-feed" *ngIf="filteredFavorites.length > 0; else noFavorites">
+    <div class="accommodation-card" *ngFor="let item of filteredFavorites">
+      <img [src]="item.imageUrl" alt="Favorite Image" class="accommodation-image" />
+      
+      <div class="card-content">
+        <div class="card-header">
+          <h3 class="landlord-name">{{ item.landlord }}</h3>
+          <div class="stars">
+            <ion-icon name="star" *ngFor="let star of [].constructor(item.rating)"></ion-icon>
+          </div>
+        </div>
+
+        <p class="caption">{{ item.caption }}</p>
+
+        <div class="card-footer">
+          <ion-button size="small" fill="clear" color="primary" (click)="view(item)">
+            View
+          </ion-button>
+
+          <ion-button size="small" color="danger" fill="outline" (click)="remove(item)">
+            Remove
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noFavorites>
+    <div class="no-favorites">
+      <ion-icon name="heart-dislike" size="large" color="medium"></ion-icon>
+      <p>No favorites yet.</p>
+    </div>
+  </ng-template>
+
+</div>

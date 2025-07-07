@@ -1,0 +1,135 @@
+/* Wrapper and Base */
+.profile-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #fff, #fff);
+  font-family: 'Poppins', sans-serif;
+}
+
+.profile-box {
+  background-color: #ffffff;
+  padding: 50px 40px;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 450px;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+/* Branding */
+.logo-brand {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.logo-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: 600;
+  color:  #4caf50;
+}
+
+/* Headings */
+.title {
+  font-size: 30px;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #777;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+
+/* Form Fields */
+.profile-form .input-group {
+  margin-bottom: 18px;
+}
+
+.profile-form input,
+.profile-form select {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 15px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-form input:focus,
+.profile-form select:focus {
+  border-color: #4caf50;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+}
+
+.profile-form select {
+  background-color: #fff;
+  color: #444;
+}
+
+/* Save Button */
+.save-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg,  #4caf50,  #4caf50);
+  color: white;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.save-btn:hover {
+  background: linear-gradient(135deg,  #4caf50,  #4caf50);
+  box-shadow: 0 8px 18px  #4caf50;
+  transform: translateY(-2px);
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.avatar-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+  cursor: pointer;
+}
+
+.avatar-img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #4caf50;
+}
+
+.upload-text {
+  font-size: 14px;
+  color: #4caf50;
+  margin-top: 8px;
+}

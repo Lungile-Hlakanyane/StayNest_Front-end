@@ -1,0 +1,101 @@
+/* Container that centers the form */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f7fa;
+  padding: 1rem;
+}
+
+/* Main box holding the OTP form */
+.login-box {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+/* Logo section */
+.logo-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.logo-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #4caf50;
+}
+
+.logo-text {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #222;
+}
+
+/* Headings and paragraph */
+.welcome-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+/* OTP input boxes */
+.otp-group {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 1.8rem;
+
+  input {
+    width: 3.2rem;
+    height: 3.6rem;
+    font-size: 1.5rem;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 0.8rem;
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+
+    &:focus {
+      border-color: #4caf50;
+      box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+    }
+  }
+}
+
+/* Submit button */
+.sign-in {
+  width: 100%;
+  padding: 0.85rem;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 0.7rem;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #43a047;
+  }
+
+  &:disabled {
+    background-color: #9e9e9e;
+  }
+}

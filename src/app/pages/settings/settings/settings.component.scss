@@ -1,0 +1,54 @@
+.settings-wrapper {
+  padding: 20px;
+  background: #f4f4f4;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
+
+.logo-brand {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.logo-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.logo-text {
+  font-size: 24px;
+  font-weight: 600;
+  color: #4caf50;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+ion-item {
+  --background: #fff;
+  --color: #333;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  padding: 10px 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+ion-button {
+  width: 100%;
+  font-weight: 500;
+  border-radius: 10px;
+}

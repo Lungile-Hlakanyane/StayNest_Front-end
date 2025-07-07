@@ -1,0 +1,75 @@
+<ion-content class="booking-wrapper">
+
+  <div class="action-btn-container" style="padding: 20px;">
+    <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </p>
+  </div>
+
+  <div class="form-box">
+    <!-- Header -->
+    <div class="logo-brand">
+      <div class="logo-dot"></div>
+      <span class="logo-text">StayNest</span>
+    </div>
+
+    <h1 class="title">Book This Accommodation</h1>
+    <p class="subtitle">Fill in the details to send your booking request</p>
+
+    <!-- Booking Form -->
+    <form class="booking-form" (ngSubmit)="submitBooking()" #form="ngForm">
+
+      <!-- Check-in Date -->
+      <div class="input-group">
+        <ion-label>Check-in Date</ion-label>
+        <ion-datetime
+          presentation="date"
+          [(ngModel)]="booking.checkIn"
+          name="checkIn"
+          required>
+        </ion-datetime>
+      </div>
+
+      <!-- Check-out Date -->
+      <div class="input-group">
+        <ion-label>Check-out Date</ion-label>
+        <ion-datetime
+          presentation="date"
+          [(ngModel)]="booking.checkOut"
+          name="checkOut"
+          required>
+        </ion-datetime>
+      </div>
+
+      <!-- Number of Guests -->
+      <div class="input-group">
+        <ion-label>Number of Guests</ion-label>
+        <ion-input
+          type="number"
+          placeholder="e.g. 2"
+          [(ngModel)]="booking.guests"
+          name="guests"
+          required>
+        </ion-input>
+      </div>
+
+      <!-- Message to Landlord -->
+      <div class="input-group">
+        <ion-label>Message to Landlord</ion-label>
+        <ion-textarea
+          placeholder="Any special requests?"
+          [(ngModel)]="booking.message"
+          name="message">
+        </ion-textarea>
+      </div>
+
+      <!-- Submit -->
+      <ion-button expand="block" type="submit" color="success" [disabled]="form.invalid">
+        Submit Booking
+      </ion-button>
+
+    </form>
+
+  </div>
+
+</ion-content>

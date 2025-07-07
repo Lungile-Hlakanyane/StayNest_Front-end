@@ -1,0 +1,55 @@
+  <div class="action-btn-container" style="padding: 20px;">
+    <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </p>
+  </div>
+
+<div class="settings-wrapper">
+
+  <div class="header">
+    <div class="logo-brand">
+      <div class="logo-dot"></div>
+      <span class="logo-text">StayNest</span>
+    </div>
+    <h2 class="title">Settings</h2>
+    <p class="subtitle">Manage your app preferences</p>
+  </div>
+
+  <div class="settings-list">
+
+    <!-- 🔔 Notification Toggle -->
+    <ion-item>
+      <ion-label>Enable Notifications</ion-label>
+      <ion-toggle [(ngModel)]="notificationsEnabled" color="success" style="position:relative; left: 15px;"></ion-toggle>
+    </ion-item>
+
+    <!-- 🌍 Language Selection -->
+    <ion-item>
+      <ion-label>Language</ion-label>
+      <ion-select [(ngModel)]="selectedLanguage">
+        <ion-select-option value="en">English</ion-select-option>
+        <ion-select-option value="af">Afrikaans</ion-select-option>
+        <ion-select-option value="zu">Zulu</ion-select-option>
+        <ion-select-option value="xh">Xhosa</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- 📄 Privacy Policy -->
+    <ion-item (click)="openPolicy('privacy')">
+      <ion-icon name="document-outline" slot="start"></ion-icon>
+      <ion-label>Privacy Policy</ion-label>
+    </ion-item>
+
+    <!-- 📜 Terms & Conditions -->
+    <ion-item (click)="openPolicy('terms')">
+      <ion-icon name="reader-outline" slot="start"></ion-icon>
+      <ion-label>Terms & Conditions</ion-label>
+    </ion-item>
+
+    <!-- 🗑️ Delete Account -->
+    <ion-item lines="none">
+      <ion-button expand="block" color="danger" (click)="confirmDelete()">Delete Account</ion-button>
+    </ion-item>
+
+  </div>
+</div>
