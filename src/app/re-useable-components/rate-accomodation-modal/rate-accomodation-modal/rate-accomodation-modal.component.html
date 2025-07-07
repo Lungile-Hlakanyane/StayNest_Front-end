@@ -1,0 +1,37 @@
+<ion-content>
+  <div class="bookings-wrapper" style="padding: 20px;">
+
+    <!-- 🔰 Header -->
+    <div class="header">
+      <div class="logo-brand" style="display: flex; gap:5px;">
+        <div class="logo-dot" style="margin-top:6px;"></div>
+        <span class="logo-text">StayNest</span>
+      </div>
+      <h2 class="title">Rate Your Stay</h2>
+      <p class="subtitle">Let us know how your accommodation was</p>
+    </div>
+
+    <!-- ⭐️ Star Rating -->
+    <div class="star-rating">
+      <ion-icon
+        *ngFor="let star of stars; let i = index"
+        name="star"
+        [class.filled]="i < rating"
+        (click)="setRating(i + 1)"
+      ></ion-icon>
+    </div>
+
+    <!-- 📝 Feedback Textarea (Optional) -->
+    <ion-textarea
+      placeholder="Leave a comment (optional)..."
+      [(ngModel)]="comment"
+      auto-grow
+      class="comment-box"
+    ></ion-textarea>
+
+    <!-- ✅ Submit Button -->
+    <ion-button expand="block" color="success" (click)="submitRating()">
+      Submit Rating
+    </ion-button>
+  </div>
+</ion-content>

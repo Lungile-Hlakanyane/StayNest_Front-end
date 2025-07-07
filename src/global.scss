@@ -39,6 +39,18 @@
   }
 }
 
+.booking-success-modal {
+  --width: 90%;
+  --height: 500px;
+  --border-radius: 12px;
+}
+
+.rate-modal {
+  --width: 90%;
+  --height: 500px;
+  --border-radius: 12px;
+}
+
 
 /* Basic CSS for apps built with Ionic */
 @import "@ionic/angular/css/normalize.css";

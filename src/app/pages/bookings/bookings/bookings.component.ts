@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, IonicModule, NavController } from '@ionic/angular';
+import { AlertController, IonicModule, NavController, ModalController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { RateAccomodationModalComponent } from 'src/app/re-useable-components/rate-accomodation-modal/rate-accomodation-modal/rate-accomodation-modal.component';
 
 @Component({
   selector: 'app-bookings',
@@ -35,7 +36,8 @@ export class BookingsComponent  implements OnInit {
 
   constructor(
     private alertCtrl: AlertController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private modalController:ModalController,
   ) { }
 
   ngOnInit() {}
@@ -52,5 +54,23 @@ export class BookingsComponent  implements OnInit {
   viewDetails(booking: any) {
     console.log('View details:', booking);
   }
+
+  navigateToChat(){
+    this.navCtrl.navigateForward('/chat');
+  }
+
+  async rateBooking() {
+  const modal = await this.modalController.create({
+    component: RateAccomodationModalComponent,
+    cssClass: 'rate-modal',
+    backdropDismiss: true,
+    animated: true
+  });
+  await modal.present();
+  const { data } = await modal.onDidDismiss();
+  if (data) {
+    console.log('Rating submitted:', data);
+  }
+}
 
 }

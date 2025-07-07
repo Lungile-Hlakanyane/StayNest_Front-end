@@ -1,0 +1,35 @@
+.star-rating {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+  font-size: 36px;
+  gap: 12px;
+
+  ion-icon {
+    color: #ccc;
+    transition: color 0.2s ease;
+    cursor: pointer;
+
+    &.filled {
+      color: #ffc107; 
+    }
+  }
+}
+
+.logo-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+
+.comment-box {
+  margin: 20px 0;
+  border-radius: 12px;
+  background: #fff;
+  padding: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  font-size: 15px;
+}

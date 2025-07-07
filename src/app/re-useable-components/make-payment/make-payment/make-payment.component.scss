@@ -1,0 +1,155 @@
+/* Reuse login styles with customization */
+.payment-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #fff, #fff);
+}
+
+.payment-box {
+  background-color: #ffffff;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 420px;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+.logo-brand {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.logo-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: #4caf50;
+}
+
+.title {
+  font-size: 28px;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #777;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+ion-select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  --background: #f9f9f9;
+  --border-color: #ccc;
+  --color: #333;
+  --placeholder-color: #999;
+}
+
+.sign-in {
+  --background: #4caf50;
+  color: white;
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.card-section {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  margin-top: 20px;
+  animation: fadeIn 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Each input group is stacked */
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure consistent styling on all inputs */
+.input-group input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  transition: 0.3s ease;
+}
+
+/* Focus effect */
+.input-group input:focus {
+  outline: none;
+  border-color: #007bff;
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.12);
+}
+
+/* Placeholder text */
+::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Card Expiry and CVV side-by-side on wider screens, stacked on narrow screens */
+.input-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Two-column layout for larger screens */
+@media (min-width: 480px) {
+  .input-row {
+    flex-direction: row;
+  }
+
+  .input-row .input-group {
+    flex: 1;
+  }
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

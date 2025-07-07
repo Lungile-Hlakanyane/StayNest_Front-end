@@ -1,15 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, IonicModule, NavController } from '@ionic/angular';
+import { IonicModule, NavController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import {
-  IonContent,
-  IonInput,
-  IonTextarea,
-  IonDatetime
-} from '@ionic/angular';
+import { ModalController, LoadingController } from '@ionic/angular';
+import { SuccessBookingComponent } from 'src/app/re-useable-components/success-booking/success-booking/success-booking.component';
 
 @Component({
   selector: 'app-book',
@@ -21,7 +16,9 @@ import {
 export class BookComponent  implements OnInit {
 
   constructor(
-     private navCtrl: NavController
+     private navCtrl: NavController,
+     private loadingController:LoadingController,
+     private modalController:ModalController
   ) { }
 
   ngOnInit() {}
@@ -33,8 +30,23 @@ export class BookComponent  implements OnInit {
     message: ''
   };
 
-  submitBooking() {
+async submitBooking() {
     console.log('Booking Submitted:', this.booking);
+    const loading = await this.loadingController.create({
+      message: 'Booking accommodation...',
+      spinner: 'crescent',
+      duration: 2000 
+    });
+    await loading.present();
+    setTimeout(async () => {
+      await loading.dismiss();
+      const modal = await this.modalController.create({
+        component: SuccessBookingComponent,
+        cssClass: 'booking-success-modal'
+      });
+
+      await modal.present();
+    }, 2000);
   }
 
   goBack(){

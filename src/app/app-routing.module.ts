@@ -13,6 +13,8 @@ import { SettingsComponent } from './pages/settings/settings/settings.component'
 import { BookingsComponent } from './pages/bookings/bookings/bookings.component';
 import { AccomodationDetailsComponent } from './pages/accomodation-details/accomodation-details/accomodation-details.component';
 import { BookComponent } from './pages/book/book/book.component';
+import { MakePaymentComponent } from './re-useable-components/make-payment/make-payment/make-payment.component';
+import { ChatComponent } from './pages/chat/chat/chat.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -25,6 +27,8 @@ const routes: Routes = [
   { path: 'settings', component:SettingsComponent},
   { path: 'accomodation-details', component:AccomodationDetailsComponent},
   { path: 'book', component: BookComponent},
+  { path: 'make-payment', component:MakePaymentComponent},
+  { path: 'chat', component: ChatComponent},
   {
     path: '',
     component: TabsComponent,

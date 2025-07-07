@@ -1,7 +1,14 @@
 <ion-content class="details-wrapper">
 
+  <div class="action-btn-container" style="padding: 20px; display: flex; gap:15px;">
+    <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </p>
+    <p style="position: relative; top: 5px; font-size: 25px;">View Accomodation</p>
+  </div>
+
   <!-- 🏡 Static Image Preview -->
-  <div class="image-preview">
+  <div class="image-preview" style="position: relative; bottom:25px;">
     <img [src]="accommodation.images[0]" class="details-image" alt="Accommodation Image" />
   </div>
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, IonicModule, NavController } from '@ionic/angular';
+import { AlertController, IonicModule, NavController, ToastController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -16,7 +16,12 @@ export class AccomodationDetailsComponent  implements OnInit {
 
    accommodation: any;
 
-  constructor(private route: ActivatedRoute, private router:Router) {
+  constructor(
+    private route: ActivatedRoute, 
+    private router:Router, 
+    private navCtrl: NavController,
+    private toastController: ToastController,
+    ) {
     this.accommodation = {
       id: 1,
       name: 'GreenVilla Lodge',
@@ -43,8 +48,20 @@ export class AccomodationDetailsComponent  implements OnInit {
     console.log('Booking:', this.accommodation);
   }
 
-  addToFavorites() {
+  async addToFavorites() {
     console.log('Added to favorites:', this.accommodation.id);
+    const toast = await this.toastController.create({
+      message: 'Added to favorites',
+      duration: 2000, 
+      color: 'success',
+      position: 'top'
+    });
+
+    await toast.present();
+  }
+
+  goBack(){
+    this.navCtrl.back();
   }
 
 }

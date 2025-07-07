@@ -40,8 +40,14 @@
         </p>
 
         <div class="actions">
-          <ion-button fill="clear" size="small" color="danger" *ngIf="booking.status === 'upcoming'" (click)="cancelBooking(booking)">
+          <ion-button fill="outline" size="small" color="success" *ngIf="booking.status === 'upcoming'" (click)="navigateToChat()">
+            Chat
+          </ion-button>
+          <ion-button fill="outline" size="small" color="danger" *ngIf="booking.status === 'upcoming'" (click)="cancelBooking(booking)">
             Cancel
+          </ion-button>
+           <ion-button fill="outline" size="small" color="success" *ngIf="booking.status === 'past'" (click)="rateBooking()">
+            Rate
           </ion-button>
           <ion-button fill="outline" size="small" color="primary" (click)="viewDetails(booking)">
             View Details

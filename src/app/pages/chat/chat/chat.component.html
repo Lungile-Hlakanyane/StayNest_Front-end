@@ -1,0 +1,43 @@
+<ion-content fullscreen>
+  <!-- Header back button -->
+  <div class="action-btn-container" style="padding: 20px; display: flex; gap:15px;">
+    <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </p>
+    <p style="position: relative; top: 5px; font-size: 25px;">Chats</p>
+  </div>
+
+  <!-- Scrollable area -->
+  <div class="chat-scroll-area">
+    <div class="chat-header">
+      <img class="chat-avatar" src="../../../../assets/profile-pic-image.jpg" alt="User Avatar" />
+      <h2 class="chat-name">GreenVilla Lodge</h2>
+      <p class="chat-subtitle">Landlord</p>
+      <p class="chat-subtitle">greenvillarlodge.co.za</p>
+    </div>
+
+    <div class="chat-window">
+      <div class="message-list">
+        <div
+          *ngFor="let message of messages"
+          [ngClass]="{ 'message-bubble': true, 'sent': message.fromUser, 'received': !message.fromUser }"
+        >
+          <p>{{ message.text }}</p>
+          <span class="time">{{ message.time }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fixed message input -->
+  <div class="message-input-fixed">
+    <div class="message-input">
+      <ion-input
+        [(ngModel)]="newMessage"
+        placeholder="Type your message..."
+        class="message-box"
+      ></ion-input>
+      <ion-button fill="solid" color="success" (click)="sendMessage()">Send</ion-button>
+    </div>
+  </div>
+</ion-content>

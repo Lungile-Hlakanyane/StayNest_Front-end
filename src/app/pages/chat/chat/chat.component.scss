@@ -1,0 +1,126 @@
+  .chat-header {
+    text-align: center;
+    margin-top: 20px;
+
+    .chat-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #ffffff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 10px;
+    }
+
+    .chat-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #222;
+    }
+
+    .chat-subtitle {
+      font-size: 14px;
+      color: #666;
+    }
+  }
+
+
+.chat-window {
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  max-height: 60vh;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.message-bubble {
+  max-width: 75%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 15px;
+  line-height: 1.4;
+  position: relative;
+}
+
+.sent {
+  align-self: flex-end;
+  background-color: #e6f4ea;
+  color: #333;
+  border-bottom-right-radius: 0;
+}
+
+.received {
+  align-self: flex-start;
+  background-color: #f1f1f1;
+  color: #444;
+  border-bottom-left-radius: 0;
+}
+
+.time {
+  font-size: 11px;
+  color: #999;
+  margin-top: 4px;
+  display: block;
+  text-align: right;
+}
+
+.message-input {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.message-box {
+  flex: 1;
+  font-size: 15px;
+}
+
+ion-content {
+  --padding-bottom: 80px; // Reserve space for fixed input
+  position: relative;
+}
+
+.chat-scroll-area {
+  padding: 0 20px 100px 20px; // bottom padding so messages aren't hidden under input
+  overflow-y: auto;
+}
+
+.message-input-fixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: #ffffff;
+  padding: 10px 20px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* Rest of your SCSS remains unchanged */
+.message-input {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.message-box {
+  flex: 1;
+  font-size: 15px;
+}
+

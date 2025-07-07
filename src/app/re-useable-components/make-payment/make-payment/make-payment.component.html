@@ -1,0 +1,86 @@
+<ion-content>
+    <div class="action-btn-container" style="padding: 20px;">
+    <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </p>
+  </div>
+
+<div class="payment-wrapper">
+  <div class="payment-box">
+    <div class="logo-brand">
+      <div class="logo-dot"></div>
+      <span class="logo-text">StayNest</span>
+    </div>
+
+    <h1 class="title">Make a Payment</h1>
+    <p class="subtitle">Choose your preferred payment method</p>
+
+    <form class="payment-form" (ngSubmit)="submitPayment()" #paymentForm="ngForm">
+      <div class="input-group">
+        <ion-select
+          [(ngModel)]="paymentMethod"
+          name="paymentMethod"
+          placeholder="Select payment method"
+          interface="popover"
+          required
+        >
+          <ion-select-option value="cash">Cash Payment</ion-select-option>
+          <ion-select-option value="card">Card Payment</ion-select-option>
+          <ion-select-option value="bank">Bank Transfer</ion-select-option>
+          <ion-select-option value="mobile">Mobile Payment</ion-select-option>
+        </ion-select>
+      </div>
+
+      <!-- Card Payment Section -->
+      <div *ngIf="paymentMethod === 'card'" class="card-section">
+        <div class="input-group">
+          <input
+            type="text"
+            placeholder="Cardholder Name"
+            name="cardholder"
+            [(ngModel)]="cardDetails.cardholder"
+            required
+          />
+        </div>
+
+        <div class="input-group">
+          <input
+            type="text"
+            placeholder="Card Number"
+            name="cardNumber"
+            [(ngModel)]="cardDetails.cardNumber"
+            maxlength="19"
+            required
+          />
+        </div>
+
+        <div class="input-row">
+          <div class="input-group">
+            <input
+              type="text"
+              placeholder="MM/YY"
+              name="expiry"
+              [(ngModel)]="cardDetails.expiry"
+              maxlength="5"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <input
+              type="text"
+              placeholder="CVV"
+              name="cvv"
+              [(ngModel)]="cardDetails.cvv"
+              maxlength="4"
+              required
+            />
+          </div>
+        </div>
+      </div>
+
+      <ion-button expand="block" type="submit" class="sign-in">Pay Now</ion-button>
+    </form>
+  </div>
+</div>
+</ion-content>
