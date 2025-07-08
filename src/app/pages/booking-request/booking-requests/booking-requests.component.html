@@ -1,0 +1,66 @@
+<ion-content>
+
+    <!-- Header back button -->
+  <div class="action-btn-container" style="padding: 20px; display: flex; gap:15px;">
+    <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </p>
+    <p style="position: relative; top: 5px; font-size: 25px;">Bookings & Requests</p>
+  </div>
+
+  <div class="bookings-wrapper" style="padding:20px;">
+
+    <!-- 🔰 Header Branding -->
+    <div class="header">
+       <div class="logo-brand" style="display: flex; gap:5px;">
+        <div class="logo-dot"></div>
+        <span class="logo-text" style="position: relative; bottom:6px;">StayNest</span>
+      </div>
+      <p class="subtitle">Manage upcoming and past bookings</p>
+    </div>
+
+    <!-- 🧭 Segment Tabs -->
+    <ion-segment [(ngModel)]="selectedTab" color="success">
+      <ion-segment-button value="upcoming">
+        <ion-label>Upcoming</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="past">
+        <ion-label>Past</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <!-- 📦 Bookings List -->
+    <div class="booking-feed">
+      <div
+        class="booking-card"
+        *ngFor="let booking of filteredBookings()"
+      >
+        <img [src]="booking.image" alt="Accommodation" class="booking-image" />
+
+        <div class="card-content">
+          <div class="info-row">
+            <h3>{{ booking.name }}</h3>
+            <span class="status" [ngClass]="booking.status">{{ booking.status | titlecase }}</span>
+          </div>
+
+          <p class="dates">📅 {{ booking.checkIn }} → {{ booking.checkOut }}</p>
+
+          <p class="location">📍 {{ booking.location }}</p>
+
+          <div class="actions">
+            <ion-button *ngIf="selectedTab === 'upcoming'" color="success" size="small" (click)="approveBooking(booking)">
+              Approve
+            </ion-button>
+            <ion-button *ngIf="selectedTab === 'upcoming'" color="danger" size="small" (click)="rejectBooking(booking)">
+              Reject
+            </ion-button>
+            <ion-button fill="outline" color="primary" size="small" (click)="viewBooking(booking)">
+              View Booking
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

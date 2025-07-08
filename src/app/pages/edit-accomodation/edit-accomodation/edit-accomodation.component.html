@@ -4,7 +4,7 @@
     <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
       <ion-icon name="arrow-back-outline"></ion-icon>
     </p>
-    <p style="position: relative; top: 5px; font-size: 25px;">Add Propertiy</p>
+    <p style="position: relative; top: 5px; font-size: 25px;">Edit Propertiy</p>
   </div>
 
   <div class="bookings-wrapper" style="padding:20px;">
@@ -17,6 +17,7 @@
       <p class="subtitle">List a new accommodation for booking</p>
     </div>
     <form (ngSubmit)="submitProperty()" #propertyForm="ngForm" class="property-form">
+
       <ion-item>
         <ion-input
           type="text"
@@ -62,7 +63,7 @@
         ></ion-input>
       </ion-item>
 
-      <ion-item>
+       <ion-item>
         <ion-input
           type="number"
           placeholder="Phone Number"

@@ -27,6 +27,12 @@ import { NotificationsComponent } from './pages/notifications/notifications/noti
 import { DashboardComponent } from './pages/dashboard/dashboard/dashboard.component';
 import { MyPropertiesComponent } from './pages/my-properties/my-properties/my-properties.component';
 import { AddPropertyComponent } from './pages/add-property/add-property/add-property.component';
+import { EditAccomodationComponent } from './pages/edit-accomodation/edit-accomodation/edit-accomodation.component';
+import { LandlordViewAccomodationComponent } from './pages/landlord-view-accomodation/landlord-view-accomodation/landlord-view-accomodation.component';
+import { BookingRequestsComponent } from './pages/booking-request/booking-requests/booking-requests.component';
+import { LandlordViewBookingComponent } from './pages/landlord-view-booking/landlord-view-booking/landlord-view-booking.component';
+import { AnalyticsReportsComponent } from './pages/analytics-reports/analytics-reports/analytics-reports.component';
+import { TenantListComponent } from './pages/tenant-list/tenant-list/tenant-list.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,7 +40,8 @@ import { AddPropertyComponent } from './pages/add-property/add-property/add-prop
   ForgotPasswordComponent, OtpComponent, NewPasswordComponent, TabsComponent, SideMenuComponent, FavoritesComponent, 
   ProfileComponent, ChangePasswordComponent, SettingsComponent, BookingsComponent, AccomodationDetailsComponent, BookComponent,
   SuccessBookingComponent, MakePaymentComponent, SuccessPaymentComponent, ChatComponent, RateAccomodationModalComponent, 
-  NotificationsComponent, DashboardComponent, MyPropertiesComponent,AddPropertyComponent],
+  NotificationsComponent, DashboardComponent, MyPropertiesComponent,AddPropertyComponent, EditAccomodationComponent, 
+  LandlordViewAccomodationComponent, BookingRequestsComponent, LandlordViewBookingComponent, AnalyticsReportsComponent, TenantListComponent],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

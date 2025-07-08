@@ -30,7 +30,10 @@
           <p class="price">R{{ property.price }} / night</p>
 
           <div class="actions">
-            <ion-button fill="outline" color="primary" size="small" (click)="editProperty(property)">
+            <ion-button fill="outline" color="success" size="small" (click)="viewAccomodation()">
+              View
+            </ion-button>
+            <ion-button fill="outline" color="primary" size="small" (click)="editProperty()">
               Edit
             </ion-button>
             <ion-button fill="outline" color="danger" size="small" (click)="deleteProperty(property)">

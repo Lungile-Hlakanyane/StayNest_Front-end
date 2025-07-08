@@ -1,0 +1,75 @@
+<ion-content>
+  <div class="bookings-wrapper" style="padding:20px;">
+
+  <div class="action-btn-container" style="padding: 20px; display: flex; gap:15px;">
+    <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </p>
+    <p style="position: relative; top: 5px; font-size: 25px;">Analytics & Reports</p>
+  </div>
+
+    <!-- 🔰 Header -->
+    <div class="header">
+      <div class="logo-brand" style="display: flex; gap:5px;">
+        <div class="logo-dot" style="position: relative; top:7px;"></div>
+        <span class="logo-text">StayNest</span>
+      </div>
+      <p class="subtitle">Track your earnings and occupancy rates</p>
+    </div>
+
+    <!-- 💰 Earnings Overview -->
+    <div class="dashboard-cards">
+      <div class="summary-card">
+        <ion-icon name="wallet-outline"></ion-icon>
+        <div class="info">
+          <h3>R{{ totalEarnings }}</h3>
+          <p>Total Earnings</p>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <ion-icon name="calendar-number-outline"></ion-icon>
+        <div class="info">
+          <h3>R{{ earningsThisMonth }}</h3>
+          <p>This Month</p>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <ion-icon name="bar-chart-outline"></ion-icon>
+        <div class="info">
+          <h3>R{{ earningsThisYear }}</h3>
+          <p>This Year</p>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <ion-icon name="pie-chart-outline"></ion-icon>
+        <div class="info">
+          <h3>{{ occupancyRate }}%</h3>
+          <p>Occupancy Rate</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 📈 Reports Chart -->
+    <div class="info-card">
+      <h4>📅 Monthly Earnings</h4>
+      <canvas id="monthlyChart"></canvas>
+    </div>
+
+    <div class="info-card">
+      <h4>📅 Yearly Earnings</h4>
+      <canvas id="yearlyChart"></canvas>
+    </div>
+
+     <!-- 📥 Download Button -->
+    <div style="margin-top: 30px;">
+      <ion-button expand="block" color="success" (click)="downloadReport()">
+        <ion-icon name="download-outline" slot="start"></ion-icon>
+        Download Report
+      </ion-button>
+    </div>
+
+  </div>
+</ion-content>

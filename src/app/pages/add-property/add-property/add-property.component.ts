@@ -11,6 +11,7 @@ import { IonicModule, NavController, ToastController } from '@ionic/angular';
   imports: [CommonModule, IonicModule, FormsModule, ReactiveFormsModule],
 })
 export class AddPropertyComponent  implements OnInit {
+  
   property = {
     name: '',
     location: '',

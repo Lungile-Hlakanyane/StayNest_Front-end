@@ -19,6 +19,12 @@ import { NotificationsComponent } from './pages/notifications/notifications/noti
 import { DashboardComponent } from './pages/dashboard/dashboard/dashboard.component';
 import { MyPropertiesComponent } from './pages/my-properties/my-properties/my-properties.component';
 import { AddPropertyComponent } from './pages/add-property/add-property/add-property.component';
+import { EditAccomodationComponent } from './pages/edit-accomodation/edit-accomodation/edit-accomodation.component';
+import { LandlordViewAccomodationComponent } from './pages/landlord-view-accomodation/landlord-view-accomodation/landlord-view-accomodation.component';
+import { BookingRequestsComponent } from './pages/booking-request/booking-requests/booking-requests.component';
+import { LandlordViewBookingComponent } from './pages/landlord-view-booking/landlord-view-booking/landlord-view-booking.component';
+import { AnalyticsReportsComponent } from './pages/analytics-reports/analytics-reports/analytics-reports.component';
+import { TenantListComponent } from './pages/tenant-list/tenant-list/tenant-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -36,6 +42,12 @@ const routes: Routes = [
   { path: 'notifications', component:NotificationsComponent},
   { path: 'my-properties', component: MyPropertiesComponent},
   { path: 'add-property', component: AddPropertyComponent},
+  { path: 'edit-accomodation', component: EditAccomodationComponent},
+  { path: 'landlord-view-accomodation', component: LandlordViewAccomodationComponent},
+  { path: 'booking-request', component: BookingRequestsComponent},
+  { path: 'landlord-view-booking', component: LandlordViewBookingComponent},
+  { path: 'analytics-reports', component:AnalyticsReportsComponent},
+  { path: 'tenant-list', component: TenantListComponent},
   {
     path: '',
     component: TabsComponent,

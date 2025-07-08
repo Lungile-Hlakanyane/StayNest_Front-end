@@ -14,6 +14,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class SideMenuComponent  implements OnInit {
 
+  userRole: string | null = null;
+
   constructor(
     private modalController:ModalController,
     private loadingController:LoadingController,
@@ -22,7 +24,7 @@ export class SideMenuComponent  implements OnInit {
   ) { }
 
   ngOnInit() {
-   
+    this.userRole = localStorage.getItem('role');
   }
 
   async closeMenu(){

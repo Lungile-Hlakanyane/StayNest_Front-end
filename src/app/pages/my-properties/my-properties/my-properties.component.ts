@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -41,8 +41,12 @@ export class MyPropertiesComponent  implements OnInit {
 
   ngOnInit() {}
 
-   editProperty(property: any) {
-    console.log('Edit:', property);
+   editProperty() {
+    this.router.navigate(['edit-accomodation']);
+  }
+
+  viewAccomodation(){
+    this.router.navigate(['landlord-view-accomodation']);
   }
 
   deleteProperty(property: any) {
