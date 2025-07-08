@@ -13,6 +13,11 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent  implements OnInit {
 
+  loginData = {
+    email: '',
+    password: ''
+  };
+
   constructor(
     private router: Router,
     private loadingController:LoadingController,
@@ -22,27 +27,32 @@ export class LoginComponent  implements OnInit {
 
   ngOnInit() {}
 
-  async onLogin() {
+   async onLogin() {
     const loading = await this.loadingController.create({
       message: 'Logging In...',
       spinner: 'circles',
-      duration: 3000 
+      duration: 3000
     });
-
     await loading.present();
     setTimeout(async () => {
       await loading.dismiss();
+      if (this.loginData.email === 'landlord@gmail.com') {
+        localStorage.setItem('role', 'Landlord');
+      } else {
+        localStorage.setItem('role', 'Tenant');
+      }
+
       const toast = await this.toastController.create({
         message: 'You have successfully logged in the app...',
         duration: 3000,
         color: 'success',
-        position: 'top',
+        position: 'top'
       });
 
       await toast.present();
-     this.router.navigate(['/home']);
-  }, 2000); 
-}
+      this.router.navigate(['/home']);
+    }, 2000);
+  }
 
 
 navigate(link: string){

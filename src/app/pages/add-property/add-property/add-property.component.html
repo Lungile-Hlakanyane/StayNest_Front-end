@@ -1,0 +1,94 @@
+<ion-content>
+
+  <div class="action-btn-container" style="padding: 20px; display: flex; gap:15px;">
+    <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </p>
+    <p style="position: relative; top: 5px; font-size: 25px;">Add Propertiy</p>
+  </div>
+
+  <div class="bookings-wrapper" style="padding:20px;">
+    <div class="header">
+      <div class="logo-brand" style="display: flex; gap:4px;">
+        <div class="logo-dot"></div>
+        <span class="logo-text" style="position: relative; bottom:4px;">StayNest</span>
+      </div>
+      <h2 class="title">Add New Property</h2>
+      <p class="subtitle">List a new accommodation for booking</p>
+    </div>
+    <form (ngSubmit)="submitProperty()" #propertyForm="ngForm" class="property-form">
+      <ion-item>
+        <ion-input
+          type="text"
+          placeholder="Property Name"
+          required
+          [(ngModel)]="property.name"
+          name="name"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          type="text"
+          placeholder="Location"
+          required
+          [(ngModel)]="property.location"
+          name="location"
+        ></ion-input>
+      </ion-item>
+
+      <!-- ✅ Amenities Section -->
+<div class="amenities-section">
+  <h4>Amenities</h4>
+
+  <ion-item lines="none" *ngFor="let amenity of availableAmenities">
+    <ion-checkbox
+      slot="start"
+      [(ngModel)]="amenity.selected"
+      name="{{ amenity.name }}"
+    ></ion-checkbox>
+    <ion-label>{{ amenity.name }}</ion-label>
+  </ion-item>
+</div>
+
+
+      <ion-item>
+        <ion-input
+          type="number"
+          placeholder="Price per night"
+          required
+          [(ngModel)]="property.price"
+          name="price"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-textarea
+          placeholder="Description"
+          required
+          [(ngModel)]="property.description"
+          name="description"
+          auto-grow
+        ></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <input
+          type="file"
+          accept="image/*"
+          (change)="onImageSelected($event)"
+        />
+      </ion-item>
+
+      <div class="preview-img" *ngIf="imagePreview">
+        <img [src]="imagePreview" />
+      </div>
+
+      <ion-button expand="block" color="success" type="submit" [disabled]="!propertyForm.form.valid">
+        Submit Property
+      </ion-button>
+
+    </form>
+
+  </div>
+</ion-content>

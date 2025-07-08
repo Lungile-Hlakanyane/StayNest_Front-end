@@ -1,0 +1,39 @@
+<ion-content>
+  <div class="bookings-wrapper">
+
+  <div class="action-btn-container" style="padding: 20px; display: flex; gap:15px;">
+    <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </p>
+    <p style="position: relative; top: 5px; font-size: 25px;">Notifications</p>
+  </div>
+
+    <!-- 🔰 Header -->
+    <div class="header" style="padding:15px;">
+      <div class="logo-brand" style="display: flex; gap:5px;">
+        <div class="logo-dot" style="position: relative; top:7px;"></div>
+        <span class="logo-text">StayNest</span>
+      </div>
+
+      <p class="subtitle">Recent chats and landlord messages</p>
+    </div>
+
+    <!-- 📩 Chat Notifications List -->
+    <div class="notification-feed">
+      <div
+        class="notification-card"
+        *ngFor="let chat of recentChats"
+        (click)="openChat(chat)"
+      >
+        <img [src]="chat.avatar" alt="Landlord Avatar" class="avatar" />
+        <div class="chat-info">
+          <div class="chat-header">
+            <h3>{{ chat.landlord }}</h3>
+            <span class="timestamp">{{ chat.time }}</span>
+          </div>
+          <p class="preview">{{ chat.message }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

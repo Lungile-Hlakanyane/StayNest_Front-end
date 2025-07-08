@@ -11,8 +11,12 @@ import { CommonModule } from '@angular/common';
 })
 export class TabsComponent  implements OnInit {
 
+  userRole: string | null = null;
+
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+     this.userRole = localStorage.getItem('role');
+  }
 
 }

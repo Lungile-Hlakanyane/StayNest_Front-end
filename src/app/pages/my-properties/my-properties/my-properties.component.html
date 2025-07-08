@@ -1,0 +1,44 @@
+<ion-content>
+  
+  <div class="action-btn-container" style="padding: 20px; display: flex; gap:15px;">
+    <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </p>
+    <p style="position: relative; top: 5px; font-size: 25px;">My Properties</p>
+  </div>
+
+  <div class="bookings-wrapper" style="padding:20px;">
+
+    <!-- 🔰 Header Branding -->
+    <div class="header">
+      <div class="logo-brand" style="display: flex; gap:5px;">
+        <div class="logo-dot"></div>
+        <span class="logo-text" style="position: relative; bottom:6px;">StayNest</span>
+      </div>
+      <h2 class="title">My Properties</h2>
+      <p class="subtitle">Manage all your listed accommodations</p>
+    </div>
+
+    <!-- 🏡 Property Cards List -->
+    <div class="property-list">
+      <div class="property-card" *ngFor="let property of properties">
+        <img src="../../../../assets/accomodation_01.jpeg" alt="Property Image" class="property-image" />
+
+        <div class="card-content">
+          <h3>{{ property.name }}</h3>
+          <p class="location">{{ property.location }}</p>
+          <p class="price">R{{ property.price }} / night</p>
+
+          <div class="actions">
+            <ion-button fill="outline" color="primary" size="small" (click)="editProperty(property)">
+              Edit
+            </ion-button>
+            <ion-button fill="outline" color="danger" size="small" (click)="deleteProperty(property)">
+              Delete
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

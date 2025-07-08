@@ -15,6 +15,10 @@ import { AccomodationDetailsComponent } from './pages/accomodation-details/accom
 import { BookComponent } from './pages/book/book/book.component';
 import { MakePaymentComponent } from './re-useable-components/make-payment/make-payment/make-payment.component';
 import { ChatComponent } from './pages/chat/chat/chat.component';
+import { NotificationsComponent } from './pages/notifications/notifications/notifications.component';
+import { DashboardComponent } from './pages/dashboard/dashboard/dashboard.component';
+import { MyPropertiesComponent } from './pages/my-properties/my-properties/my-properties.component';
+import { AddPropertyComponent } from './pages/add-property/add-property/add-property.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -29,6 +33,9 @@ const routes: Routes = [
   { path: 'book', component: BookComponent},
   { path: 'make-payment', component:MakePaymentComponent},
   { path: 'chat', component: ChatComponent},
+  { path: 'notifications', component:NotificationsComponent},
+  { path: 'my-properties', component: MyPropertiesComponent},
+  { path: 'add-property', component: AddPropertyComponent},
   {
     path: '',
     component: TabsComponent,
@@ -37,6 +44,7 @@ const routes: Routes = [
       { path: 'favorites', component: FavoritesComponent}, 
       { path: 'profile', component: ProfileComponent },
       { path: 'bookings', component: BookingsComponent },
+      { path: 'dashboard', component: DashboardComponent},
     ]
   }
 ];

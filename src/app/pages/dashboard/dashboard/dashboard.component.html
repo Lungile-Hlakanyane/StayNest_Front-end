@@ -1,0 +1,70 @@
+<ion-content style="--padding: 20px;">
+
+  <div class="banner-img-container">
+   <img src="../../../../assets/accomodation_01.jpeg" alt="Dashboard Banner" class="banner-img" />
+  </div>
+
+  <div class="bookings-wrapper" style="padding: 20px">
+
+  <!-- 🔰 Header Branding -->
+  <div class="header">
+    <div class="logo-brand" style="display: flex; gap:5px;">
+      <div class="logo-dot" style="position:relative; top:6px;"></div>
+      <span class="logo-text">StayNest</span>
+    </div>
+    <h2 class="title">Dashboard</h2>
+    <p class="subtitle">Welcome back, manage your rentals efficiently</p>
+  </div>
+
+   <!-- 📊 Summary Cards -->
+<div class="dashboard-cards">
+
+  <div class="summary-card" (click)="navigate('/my-properties')">
+    <ion-icon name="home-outline"></ion-icon>
+    <div class="info">
+      <h3>{{ propertiesCount }}</h3>
+      <p>My Properties</p>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <ion-icon name="calendar-outline"></ion-icon>
+    <div class="info">
+      <h3>{{ upcomingBookings }}</h3>
+      <p>Upcoming Bookings</p>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <ion-icon name="cash-outline"></ion-icon>
+    <div class="info">
+      <h3>R{{ earnings }}</h3>
+      <p>Total Earnings</p>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <ion-icon name="notifications-outline"></ion-icon>
+    <div class="info">
+      <h3>{{ pendingRequests }}</h3>
+      <p>Pending Requests</p>
+    </div>
+  </div>
+</div>
+
+
+    <!-- 🏡 Quick Actions -->
+    <div class="section-title">Quick Actions</div>
+    <div class="quick-actions">
+      <ion-button expand="block" color="success" (click)="goToAddProperty()">
+        <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+        Add New Property
+      </ion-button>
+
+      <ion-button expand="block" fill="outline" color="primary" (click)="goToProperties()">
+        <ion-icon name="business-outline" slot="start"></ion-icon>
+        View My Properties
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

@@ -23,13 +23,18 @@ import { MakePaymentComponent } from './re-useable-components/make-payment/make-
 import { SuccessPaymentComponent } from './re-useable-components/success-payment/success-payment/success-payment.component';
 import { ChatComponent } from './pages/chat/chat/chat.component';
 import { RateAccomodationModalComponent } from './re-useable-components/rate-accomodation-modal/rate-accomodation-modal/rate-accomodation-modal.component';
+import { NotificationsComponent } from './pages/notifications/notifications/notifications.component';
+import { DashboardComponent } from './pages/dashboard/dashboard/dashboard.component';
+import { MyPropertiesComponent } from './pages/my-properties/my-properties/my-properties.component';
+import { AddPropertyComponent } from './pages/add-property/add-property/add-property.component';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, LoginComponent, CreateProfileComponent,
   ForgotPasswordComponent, OtpComponent, NewPasswordComponent, TabsComponent, SideMenuComponent, FavoritesComponent, 
   ProfileComponent, ChangePasswordComponent, SettingsComponent, BookingsComponent, AccomodationDetailsComponent, BookComponent,
-  SuccessBookingComponent, MakePaymentComponent, SuccessPaymentComponent, ChatComponent, RateAccomodationModalComponent],
+  SuccessBookingComponent, MakePaymentComponent, SuccessPaymentComponent, ChatComponent, RateAccomodationModalComponent, 
+  NotificationsComponent, DashboardComponent, MyPropertiesComponent,AddPropertyComponent],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
