@@ -29,6 +29,8 @@ import { TenantProfileComponent } from './pages/tenant-profile/tenant-profile/te
 import { MaintenanceComponent } from './pages/maintenannce/maintenance/maintenance.component';
 import { BankDetailsComponent } from './pages/bank-details/bank-details/bank-details.component';
 import { SavedCardsComponent } from './pages/saved-cards/saved-cards/saved-cards.component';
+import { HelpFaqComponent } from './pages/help-faq/help-faq/help-faq.component';
+import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions/terms-and-conditions.component';
 
 
 const routes: Routes = [
@@ -51,12 +53,13 @@ const routes: Routes = [
   { path: 'landlord-view-accomodation', component: LandlordViewAccomodationComponent},
   { path: 'booking-request', component: BookingRequestsComponent},
   { path: 'landlord-view-booking', component: LandlordViewBookingComponent},
-  { path: 'analytics-reports', component:AnalyticsReportsComponent},
   { path: 'tenant-list', component: TenantListComponent},
   { path: 'tenant-profile', component: TenantProfileComponent},
   { path: 'maintenance', component: MaintenanceComponent},
   { path: 'bank-details', component: BankDetailsComponent},
   { path: 'saved-cards', component: SavedCardsComponent},
+  { path: 'help-faq', component: HelpFaqComponent},
+  { path: 'terms-and-conditions', component: TermsAndConditionsComponent},
   {
     path: '',
     component: TabsComponent,
@@ -64,6 +67,7 @@ const routes: Routes = [
       { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)},
       { path: 'favorites', component: FavoritesComponent}, 
       { path: 'profile', component: ProfileComponent },
+      { path: 'analytics-reports', component:AnalyticsReportsComponent},
       { path: 'bookings', component: BookingsComponent },
       { path: 'dashboard', component: DashboardComponent},
     ]

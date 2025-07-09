@@ -18,7 +18,8 @@ export class SettingsComponent  implements OnInit {
 
   constructor(
     private alertCtrl: AlertController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private router:Router
   ) { }
 
   ngOnInit() {}
@@ -51,6 +52,10 @@ export class SettingsComponent  implements OnInit {
 
   goBack(){
     this.navCtrl.back();
+  }
+
+  navigate(link:string){
+    this.router.navigateByUrl(link);
   }
 
 

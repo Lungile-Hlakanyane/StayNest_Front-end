@@ -37,6 +37,8 @@ import { TenantProfileComponent } from './pages/tenant-profile/tenant-profile/te
 import { MaintenanceComponent } from './pages/maintenannce/maintenance/maintenance.component';
 import { BankDetailsComponent } from './pages/bank-details/bank-details/bank-details.component';
 import { SavedCardsComponent } from './pages/saved-cards/saved-cards/saved-cards.component';
+import { HelpFaqComponent } from './pages/help-faq/help-faq/help-faq.component';
+import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions/terms-and-conditions.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -46,7 +48,8 @@ import { SavedCardsComponent } from './pages/saved-cards/saved-cards/saved-cards
   SuccessBookingComponent, MakePaymentComponent, SuccessPaymentComponent, ChatComponent, RateAccomodationModalComponent, 
   NotificationsComponent, DashboardComponent, MyPropertiesComponent,AddPropertyComponent, EditAccomodationComponent, 
   LandlordViewAccomodationComponent, BookingRequestsComponent, LandlordViewBookingComponent, AnalyticsReportsComponent,
-  TenantListComponent, TenantProfileComponent, MaintenanceComponent, BankDetailsComponent, SavedCardsComponent],
+  TenantListComponent, TenantProfileComponent, MaintenanceComponent, BankDetailsComponent, SavedCardsComponent, 
+  HelpFaqComponent, TermsAndConditionsComponent],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

@@ -1,0 +1,43 @@
+<ion-content>
+  <div class="bookings-wrapper" style="padding: 20px;">
+
+    <!-- 🔙 Back & Title -->
+    <div class="action-btn-container" style="padding: 20px 0; display: flex; gap: 15px;">
+      <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </p>
+      <p style="position: relative; top: 5px; font-size: 25px;">Help & FAQ</p>
+    </div>
+
+    <!-- 🏷 Header Branding -->
+    <div class="header">
+      <div class="logo-brand" style="display: flex; gap: 5px;">
+        <div class="logo-dot" style="position: relative; top: 7px;"></div>
+        <span class="logo-text">StayNest</span>
+      </div>
+      <p class="subtitle">Need help? Find answers to common questions below.</p>
+    </div>
+
+    <!-- ❓ FAQ Accordion -->
+    <ion-accordion-group expand="inset">
+      <ion-accordion *ngFor="let faq of faqs">
+        <ion-item slot="header" color="light">
+          <ion-label>{{ faq.question }}</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          {{ faq.answer }}
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!-- 📩 Contact Support -->
+    <div style="margin-top: 40px;">
+      <h4>Still need help?</h4>
+      <p style="color: #666; font-size: 14px;">If your question isn't listed above, feel free to contact our support team.</p>
+      <ion-button expand="block" color="success" (click)="contactSupport()">
+        Contact Support
+      </ion-button>
+    </div>
+
+  </div>
+</ion-content>

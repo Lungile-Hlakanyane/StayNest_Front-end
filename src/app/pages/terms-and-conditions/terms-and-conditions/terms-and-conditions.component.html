@@ -1,0 +1,65 @@
+<ion-content>
+  <div class="bookings-wrapper" style="padding: 20px;">
+
+    <!-- 🔙 Back & Title -->
+    <div class="action-btn-container" style="padding: 20px 0; display: flex; gap: 15px;">
+      <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </p>
+      <p style="position: relative; top: 5px; font-size: 25px;">Terms & Conditions</p>
+    </div>
+
+    <!-- 🏷 Header Branding -->
+    <div class="header">
+      <div class="logo-brand" style="display: flex; gap: 5px;">
+        <div class="logo-dot" style="position: relative; top: 7px;"></div>
+        <span class="logo-text">StayNest</span>
+      </div>
+      <p class="subtitle">Read our terms and conditions carefully before using the platform.</p>
+    </div>
+
+    <!-- 📜 Terms Content -->
+    <div class="info-card" style="margin-top: 20px;">
+      <h4>1. Introduction</h4>
+      <p>
+        By accessing and using StayNest, you agree to comply with these terms and conditions.
+        These govern your use of the platform as a landlord or tenant.
+      </p>
+
+      <h4>2. User Responsibilities</h4>
+      <p>
+        As a user, you are responsible for maintaining accurate profile and property details.
+        Misuse of the platform will lead to suspension or permanent ban.
+      </p>
+
+      <h4>3. Payments & Payouts</h4>
+      <p>
+        All transactions must be processed through StayNest’s secure payment system. Payouts will
+        be made weekly to verified bank accounts only.
+      </p>
+
+      <h4>4. Booking Policies</h4>
+      <p>
+        Bookings must be honored. Cancellations should follow the policy set by StayNest. Repeated
+        violations may result in account suspension.
+      </p>
+
+      <h4>5. Data Protection</h4>
+      <p>
+        We are committed to protecting your personal data and privacy in accordance with POPIA and GDPR.
+      </p>
+
+      <h4>6. Changes to Terms</h4>
+      <p>
+        StayNest reserves the right to update these terms at any time. Continued use constitutes
+        acceptance of the revised terms.
+      </p>
+    </div>
+
+    <!-- ✅ Accept Button (Optional) -->
+    <div style="margin-top: 30px;">
+      <ion-button expand="block" color="success" (click)="goBack()">Accept & Continue</ion-button>
+    </div>
+
+  </div>
+</ion-content>
