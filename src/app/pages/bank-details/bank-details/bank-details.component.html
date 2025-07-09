@@ -1,0 +1,51 @@
+<ion-content>
+  <div class="bookings-wrapper" style="padding: 20px;">
+
+    <!-- 🔙 Back & Title -->
+    <div class="action-btn-container" style="padding: 20px 0; display: flex; gap: 15px;">
+      <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </p>
+      <p style="position: relative; top: 5px; font-size: 25px;">Payout Settings</p>
+    </div>
+
+    <!-- 🏷 Header -->
+    <div class="header">
+      <div class="logo-brand" style="display: flex; gap: 5px;">
+        <div class="logo-dot" style="position: relative; top: 7px;"></div>
+        <span class="logo-text">StayNest</span>
+      </div>
+      <p class="subtitle">Manage your bank account details for payouts</p>
+    </div>
+
+    <!-- 💳 Card Entry Form -->
+    <form (ngSubmit)="submitBankDetails()" style="margin-top: 20px;">
+      <div class="input-group">
+        <ion-label position="stacked">Cardholder Name</ion-label>
+        <ion-input type="text" [(ngModel)]="bankDetails.cardholder" name="cardholder" required></ion-input>
+      </div>
+
+      <div class="input-group">
+        <ion-label position="stacked">Card Number</ion-label>
+        <ion-input type="text" maxlength="19" [(ngModel)]="bankDetails.cardNumber" name="cardNumber" required></ion-input>
+      </div>
+
+      <div class="input-row">
+        <div class="input-group">
+          <ion-label position="stacked">Expiry (MM/YY)</ion-label>
+          <ion-input type="text" maxlength="5" [(ngModel)]="bankDetails.expiry" name="expiry" required></ion-input>
+        </div>
+
+        <div class="input-group">
+          <ion-label position="stacked">CVV</ion-label>
+          <ion-input type="text" maxlength="4" [(ngModel)]="bankDetails.cvv" name="cvv" required></ion-input>
+        </div>
+      </div>
+
+      <ion-button expand="block" color="success" type="submit" style="margin-top: 20px;">
+        Save Bank Details
+      </ion-button>
+    </form>
+
+  </div>
+</ion-content>

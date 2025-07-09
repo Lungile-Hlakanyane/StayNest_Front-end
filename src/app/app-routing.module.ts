@@ -25,6 +25,11 @@ import { BookingRequestsComponent } from './pages/booking-request/booking-reques
 import { LandlordViewBookingComponent } from './pages/landlord-view-booking/landlord-view-booking/landlord-view-booking.component';
 import { AnalyticsReportsComponent } from './pages/analytics-reports/analytics-reports/analytics-reports.component';
 import { TenantListComponent } from './pages/tenant-list/tenant-list/tenant-list.component';
+import { TenantProfileComponent } from './pages/tenant-profile/tenant-profile/tenant-profile.component';
+import { MaintenanceComponent } from './pages/maintenannce/maintenance/maintenance.component';
+import { BankDetailsComponent } from './pages/bank-details/bank-details/bank-details.component';
+import { SavedCardsComponent } from './pages/saved-cards/saved-cards/saved-cards.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -48,6 +53,10 @@ const routes: Routes = [
   { path: 'landlord-view-booking', component: LandlordViewBookingComponent},
   { path: 'analytics-reports', component:AnalyticsReportsComponent},
   { path: 'tenant-list', component: TenantListComponent},
+  { path: 'tenant-profile', component: TenantProfileComponent},
+  { path: 'maintenance', component: MaintenanceComponent},
+  { path: 'bank-details', component: BankDetailsComponent},
+  { path: 'saved-cards', component: SavedCardsComponent},
   {
     path: '',
     component: TabsComponent,

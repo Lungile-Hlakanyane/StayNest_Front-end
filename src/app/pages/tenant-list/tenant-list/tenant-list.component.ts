@@ -48,8 +48,9 @@ goBack() {
   this.router.navigate(['/home']);
 }
 
-viewTenant(tenant: any) {
-  console.log('Viewing tenant:', tenant);
+viewTenant() {
+  this.router.navigateByUrl('/tenant-profile');
+  console.log('Viewing tenant:');
 }
 
 filterTenants() {

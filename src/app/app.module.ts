@@ -33,6 +33,10 @@ import { BookingRequestsComponent } from './pages/booking-request/booking-reques
 import { LandlordViewBookingComponent } from './pages/landlord-view-booking/landlord-view-booking/landlord-view-booking.component';
 import { AnalyticsReportsComponent } from './pages/analytics-reports/analytics-reports/analytics-reports.component';
 import { TenantListComponent } from './pages/tenant-list/tenant-list/tenant-list.component';
+import { TenantProfileComponent } from './pages/tenant-profile/tenant-profile/tenant-profile.component';
+import { MaintenanceComponent } from './pages/maintenannce/maintenance/maintenance.component';
+import { BankDetailsComponent } from './pages/bank-details/bank-details/bank-details.component';
+import { SavedCardsComponent } from './pages/saved-cards/saved-cards/saved-cards.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,7 +45,8 @@ import { TenantListComponent } from './pages/tenant-list/tenant-list/tenant-list
   ProfileComponent, ChangePasswordComponent, SettingsComponent, BookingsComponent, AccomodationDetailsComponent, BookComponent,
   SuccessBookingComponent, MakePaymentComponent, SuccessPaymentComponent, ChatComponent, RateAccomodationModalComponent, 
   NotificationsComponent, DashboardComponent, MyPropertiesComponent,AddPropertyComponent, EditAccomodationComponent, 
-  LandlordViewAccomodationComponent, BookingRequestsComponent, LandlordViewBookingComponent, AnalyticsReportsComponent, TenantListComponent],
+  LandlordViewAccomodationComponent, BookingRequestsComponent, LandlordViewBookingComponent, AnalyticsReportsComponent,
+  TenantListComponent, TenantProfileComponent, MaintenanceComponent, BankDetailsComponent, SavedCardsComponent],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

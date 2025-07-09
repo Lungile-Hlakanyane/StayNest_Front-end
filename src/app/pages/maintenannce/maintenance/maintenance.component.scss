@@ -1,0 +1,58 @@
+.booking-card {
+  background-color: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+// styles here
+.enhanced-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-family: 'Poppins', sans-serif;
+
+  h4 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #4caf50;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+  }
+
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f1f1f1;
+
+    p {
+      margin: 0;
+      color: #444;
+      font-size: 15px;
+      flex: 1;
+    }
+
+    span {
+      flex: 1;
+      text-align: right;
+      color: #333;
+      font-weight: 500;
+    }
+  }
+
+  .info-row:last-child {
+    border-bottom: none;
+  }
+}
+
+.logo-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  margin-right: 8px;
+}

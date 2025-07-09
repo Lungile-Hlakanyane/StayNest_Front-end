@@ -15,7 +15,7 @@
     <!-- 🏷 Header Branding -->
     <div class="header">
       <div class="logo-brand" style="display: flex; gap:5px;">
-        <div class="logo-dot" style="position: relative; top:7px;"></div>
+        <div class="logo-dot"></div>
         <span class="logo-text">StayNest</span>
       </div>
       <p class="subtitle">View all tenants renting your properties</p>
@@ -33,7 +33,7 @@
             <p style="font-size: 13px; color: #999;">Staying at: {{ tenant.propertyName }}</p>
           </div>
 
-          <ion-button fill="outline" color="success" size="small" (click)="viewTenant(tenant)">
+          <ion-button fill="outline" color="success" size="small" (click)="viewTenant()">
             View
           </ion-button>
         </div>

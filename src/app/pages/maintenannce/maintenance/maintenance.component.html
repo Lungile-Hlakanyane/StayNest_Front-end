@@ -1,0 +1,41 @@
+<ion-content>
+  <div class="bookings-wrapper" style="padding: 20px;">
+
+    <!-- 🔙 Back & Title -->
+    <div class="action-btn-container" style="padding: 20px 0; display: flex; gap: 15px;">
+      <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </p>
+      <p style="position: relative; top: 5px; font-size: 25px;">Maintenance Requests</p>
+    </div>
+
+    <!-- 🏷 Header Branding -->
+    <div class="header">
+      <div class="logo-brand" style="display: flex; gap:5px;">
+        <div class="logo-dot" style="position: relative; top:7px;"></div>
+        <span class="logo-text">StayNest</span>
+      </div>
+      <p class="subtitle">Manage and resolve tenant maintenance issues</p>
+    </div>
+
+    <!-- 🧰 Maintenance Cards -->
+    <div class="booking-feed">
+      <div class="booking-card" *ngFor="let request of maintenanceRequests">
+        <div style="padding: 15px;">
+          <h3 style="margin-bottom: 8px;">{{ request.title }}</h3>
+          <p style="font-size: 14px; color: #666;">{{ request.description }}</p>
+          <p style="font-size: 13px; color: #999; margin-top: 10px;">
+            📍 {{ request.propertyName }} | 🧍 {{ request.tenantName }}
+          </p>
+          <p style="font-size: 12px; color: #bbb;">🕒 {{ request.date | date:'mediumDate' }}</p>
+
+          <div style="margin-top: 15px; display: flex; justify-content: flex-end; gap: 10px;">
+            <ion-button fill="outline" color="success" size="small" (click)="approveRequest(request)">Approve</ion-button>
+            <ion-button fill="outline" color="danger" size="small" (click)="rejectRequest(request)">Reject</ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

@@ -1,0 +1,48 @@
+<ion-content>
+  <div class="bookings-wrapper" style="padding: 20px;">
+
+    <!-- 🔙 Back & Title -->
+    <div class="action-btn-container" style="padding: 20px 0; display: flex; gap: 15px;">
+      <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </p>
+      <p style="position: relative; top: 5px; font-size: 25px;">Saved Payout Methods</p>
+    </div>
+
+    <!-- 🏷 Header Branding -->
+    <div class="header">
+      <div class="logo-brand" style="display: flex; gap: 5px;">
+        <div class="logo-dot" style="position: relative; top: 7px;"></div>
+        <span class="logo-text">StayNest</span>
+      </div>
+      <p class="subtitle">View and manage your saved bank accounts and cards</p>
+    </div>
+
+    <!-- 💳 List of Saved Cards -->
+    <div class="booking-feed">
+      <div class="booking-card" *ngFor="let card of savedCards">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px;">
+          <div style="display: flex; align-items: center; gap: 15px;">
+            <ion-icon name="card-outline" style="font-size: 26px; color: #4caf50;"></ion-icon>
+            <div>
+              <h3 style="margin: 0;">**** **** **** {{ card.last4 }}</h3>
+              <p style="font-size: 13px; color: #777;">Expires {{ card.expiry }}</p>
+              <p style="font-size: 13px; color: #aaa;">Cardholder: {{ card.cardholder }}</p>
+            </div>
+          </div>
+          <ion-button fill="clear" color="danger" (click)="removeCard(card)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ➕ Add Bank Account Button -->
+    <div style="margin-top: 30px;">
+      <ion-button expand="block" color="success" (click)="addNewBankAccount()">
+        Add Bank Account
+      </ion-button>
+    </div>
+
+  </div>
+</ion-content>
