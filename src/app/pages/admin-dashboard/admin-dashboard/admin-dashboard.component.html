@@ -1,0 +1,80 @@
+<ion-content>
+  <div class="bookings-wrapper" style="padding: 20px;">
+
+    <!-- 🔙 Title -->
+    <div class="action-btn-container" style="display: flex; gap: 15px; padding-bottom: 20px;">
+      <p style="font-size: 25px; font-weight: bold;">
+        <ion-icon name="stats-chart-outline"></ion-icon>
+      </p>
+      <p style="position: relative; top: 3px; font-size: 24px;">Admin Dashboard</p>
+    </div>
+
+    <!-- 🏷 Branding -->
+    <div class="header">
+      <div class="logo-brand" style="display: flex; gap: 5px;">
+        <div class="logo-dot" style="position: relative; top: 7px;"></div>
+        <span class="logo-text">StayNest</span>
+      </div>
+      <p class="subtitle">Monitor platform metrics and manage key sections</p>
+    </div>
+
+    <!-- 📊 Summary Cards Grid -->
+    <div class="dashboard-cards">
+      <div class="summary-card">
+        <ion-icon name="people-outline"></ion-icon>
+        <div class="info">
+          <h3>{{ totalUsers }}</h3>
+          <p>Total Users</p>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <ion-icon name="home-outline"></ion-icon>
+        <div class="info">
+          <h3>{{ totalProperties }}</h3>
+          <p>Total Properties</p>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <div class="info">
+          <h3>{{ totalBookings }}</h3>
+          <p>Total Bookings</p>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <ion-icon name="cash-outline"></ion-icon>
+        <div class="info">
+          <h3>R{{ totalEarnings }}</h3>
+          <p>Total Earnings</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🔗 Quick Links -->
+    <div class="info-card" style="margin-top: 30px;">
+      <h4>🔗 Quick Links</h4>
+      <ion-list lines="none">
+        <ion-item button (click)="navigateTo('/manage-users')">
+          <ion-icon name="people-circle-outline" slot="start" color="success"></ion-icon>
+          <ion-label>Manage Users</ion-label>
+        </ion-item>
+        <ion-item button (click)="navigateTo('/manage-properties')">
+          <ion-icon name="business-outline" slot="start" color="success"></ion-icon>
+          <ion-label>Manage Properties</ion-label>
+        </ion-item>
+        <ion-item button (click)="navigateTo('/admin/bookings')">
+          <ion-icon name="calendar-number-outline" slot="start" color="success"></ion-icon>
+          <ion-label>Manage Bookings</ion-label>
+        </ion-item>
+        <ion-item button (click)="navigateTo('/admin/reports')">
+          <ion-icon name="bar-chart-outline" slot="start" color="success"></ion-icon>
+          <ion-label>Reports & Analytics</ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+
+  </div>
+</ion-content>

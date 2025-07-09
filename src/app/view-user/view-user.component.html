@@ -1,0 +1,65 @@
+<ion-content>
+  <div class="bookings-wrapper" style="padding: 20px;">
+
+    <!-- 🔙 Back Button -->
+    <div class="action-btn-container" style="padding-bottom: 20px; display: flex; gap: 15px;">
+      <p (click)="goBack()" style="font-size: 28px; font-weight: bold;">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </p>
+      <p style="font-size: 24px;">User Profile</p>
+    </div>
+
+    <!-- 🏷 Branding -->
+    <div class="header">
+      <div class="logo-brand" style="display: flex; gap: 5px;">
+        <div class="logo-dot" style="position: relative; bottom: 2px;"></div>
+        <span class="logo-text">StayNest</span>
+      </div>
+      <p class="subtitle">Detailed profile of the selected user</p>
+    </div>
+
+    <!-- 🖼 Avatar + Basic Info -->
+    <div style="text-align: center; margin-top: 20px;">
+      <img [src]="user.photo" alt="User Photo" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #4caf50;" />
+      <h2 style="margin-top: 10px;">{{ user.fullName }}</h2>
+      <p style="color: #666;">{{ user.role }}</p>
+    </div>
+
+    <!-- 🧾 Enhanced Info Cards -->
+<div class="info-card enhanced-card">
+  <div class="card-header">
+    <ion-icon name="information-circle-outline"></ion-icon>
+    <h4>Basic Information</h4>
+  </div>
+  <div class="card-detail">
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p>
+      <strong>Status:</strong>
+      <span [style.color]="user.status === 'Active' ? '#4caf50' : 'red'">
+        {{ user.status }}
+      </span>
+    </p>
+  </div>
+</div>
+
+<div class="info-card enhanced-card">
+  <div class="card-header">
+    <ion-icon name="call-outline"></ion-icon>
+    <h4>Contact Information</h4>
+  </div>
+  <div class="card-detail">
+    <p><strong>Phone:</strong> {{ user.phone || 'N/A' }}</p>
+    <p><strong>Emergency Contact:</strong> {{ user.emergencyContact || 'N/A' }}</p>
+  </div>
+</div>
+
+
+    <!-- ⚙️ Actions -->
+    <div style="margin-top: 30px; display: flex;gap: 15px;">
+      <ion-button color="danger" expand="block" (click)="blockUser()">Block</ion-button>
+      <ion-button color="medium" expand="block" (click)="deleteUser()">Delete User</ion-button>
+      <ion-button fill="outline" color="success" expand="block" (click)="goBack()">Back</ion-button>
+    </div>
+
+  </div>
+</ion-content>

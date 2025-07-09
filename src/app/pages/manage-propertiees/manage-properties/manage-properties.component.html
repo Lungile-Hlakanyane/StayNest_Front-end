@@ -1,0 +1,55 @@
+<ion-content>
+  <div class="bookings-wrapper" style="padding: 20px;">
+
+    <!-- 🔙 Back & Title -->
+    <div class="action-btn-container" style="padding-bottom: 20px; display: flex; gap: 15px;">
+      <p (click)="goBack()" style="font-size: 28px; font-weight: bold;">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </p>
+      <p style="font-size: 24px;">Manage Properties</p>
+    </div>
+
+    <!-- 🏷 Branding -->
+    <div class="header">
+      <div class="logo-brand" style="display: flex; gap: 5px;">
+        <div class="logo-dot" style="position: relative; top: 7px;"></div>
+        <span class="logo-text">StayNest</span>
+      </div>
+      <p class="subtitle">View and manage all listed properties</p>
+    </div>
+
+    <!-- 🔎 Search Bar -->
+    <!-- <ion-searchbar [(ngModel)]="searchText" placeholder="Search properties..."></ion-searchbar> -->
+  <ion-searchbar [(ngModel)]="searchText"
+   placeholder="Search properties..." 
+   mode="ios" showCancelButton="focus" 
+   animated="true">
+  </ion-searchbar>
+
+    <!-- 🏘️ Property Cards -->
+    <div class="booking-feed">
+      <div class="booking-card" *ngFor="let property of filteredProperties()">
+        <img [src]="property.image" alt="Property" class="booking-image" />
+
+        <div class="card-content">
+          <div class="info-row">
+            <h3>{{ property.name }}</h3>
+            <span class="status" [ngClass]="property.status">{{ property.status }}</span>
+          </div>
+
+          <p class="dates">
+            📍 {{ property.location }}<br />
+            🧑 Owner: {{ property.owner }}
+          </p>
+
+          <div class="actions">
+            <ion-button fill="outline" size="small" color="primary" (click)="viewProperty(property)">View</ion-button>
+            <ion-button fill="outline" size="small" color="danger" (click)="blockProperty(property)">Block</ion-button>
+            <ion-button fill="outline" size="small" color="medium" (click)="deleteProperty(property)">Delete</ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

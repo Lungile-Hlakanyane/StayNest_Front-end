@@ -31,6 +31,10 @@ import { BankDetailsComponent } from './pages/bank-details/bank-details/bank-det
 import { SavedCardsComponent } from './pages/saved-cards/saved-cards/saved-cards.component';
 import { HelpFaqComponent } from './pages/help-faq/help-faq/help-faq.component';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions/terms-and-conditions.component';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard/admin-dashboard.component';
+import { ManageUsersComponent } from './pages/manage-users/manage-users/manage-users.component';
+import { ViewUserComponent } from './view-user/view-user.component';
+import { ManagePropertiesComponent } from './pages/manage-propertiees/manage-properties/manage-properties.component';
 
 
 const routes: Routes = [
@@ -60,6 +64,9 @@ const routes: Routes = [
   { path: 'saved-cards', component: SavedCardsComponent},
   { path: 'help-faq', component: HelpFaqComponent},
   { path: 'terms-and-conditions', component: TermsAndConditionsComponent},
+  { path: 'manage-users', component: ManageUsersComponent},
+  { path: 'view-user', component: ViewUserComponent},
+  { path: 'manage-properties', component: ManagePropertiesComponent},
   {
     path: '',
     component: TabsComponent,
@@ -70,6 +77,7 @@ const routes: Routes = [
       { path: 'analytics-reports', component:AnalyticsReportsComponent},
       { path: 'bookings', component: BookingsComponent },
       { path: 'dashboard', component: DashboardComponent},
+      { path: 'admin-dashboard', component: AdminDashboardComponent},
     ]
   }
 ];

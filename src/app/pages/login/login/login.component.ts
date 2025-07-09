@@ -38,7 +38,10 @@ export class LoginComponent  implements OnInit {
       await loading.dismiss();
       if (this.loginData.email === 'landlord@gmail.com') {
         localStorage.setItem('role', 'Landlord');
-      } else {
+      }else if(this.loginData.email === 'admin@gmail.com'){
+        localStorage.setItem('role', 'Admin' )
+      }
+      else {
         localStorage.setItem('role', 'Tenant');
       }
 

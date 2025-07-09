@@ -10,7 +10,12 @@
     </div>
 
     <!-- 🔍 Add Search Below Header -->
-  <ion-searchbar [(ngModel)]="searchTerm" placeholder="Search tenants..." (ionInput)="filterTenants()" mode="ios" showCancelButton="focus" animated="true"></ion-searchbar>
+  <ion-searchbar [(ngModel)]="searchTerm"
+   placeholder="Search tenants..." 
+   (ionInput)="filterTenants()" 
+   mode="ios" showCancelButton="focus" 
+   animated="true">
+  </ion-searchbar>
 
     <!-- 🏷 Header Branding -->
     <div class="header">

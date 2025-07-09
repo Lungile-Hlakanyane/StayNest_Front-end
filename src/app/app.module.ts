@@ -39,6 +39,10 @@ import { BankDetailsComponent } from './pages/bank-details/bank-details/bank-det
 import { SavedCardsComponent } from './pages/saved-cards/saved-cards/saved-cards.component';
 import { HelpFaqComponent } from './pages/help-faq/help-faq/help-faq.component';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions/terms-and-conditions.component';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard/admin-dashboard.component';
+import { ManageUsersComponent } from './pages/manage-users/manage-users/manage-users.component';
+import { ViewUserComponent } from './view-user/view-user.component';
+import { ManagePropertiesComponent } from './pages/manage-propertiees/manage-properties/manage-properties.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -49,7 +53,8 @@ import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-
   NotificationsComponent, DashboardComponent, MyPropertiesComponent,AddPropertyComponent, EditAccomodationComponent, 
   LandlordViewAccomodationComponent, BookingRequestsComponent, LandlordViewBookingComponent, AnalyticsReportsComponent,
   TenantListComponent, TenantProfileComponent, MaintenanceComponent, BankDetailsComponent, SavedCardsComponent, 
-  HelpFaqComponent, TermsAndConditionsComponent],
+  HelpFaqComponent, TermsAndConditionsComponent, AdminDashboardComponent, ManageUsersComponent, ViewUserComponent, 
+  ManagePropertiesComponent],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

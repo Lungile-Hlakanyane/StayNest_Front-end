@@ -21,6 +21,11 @@
       <ion-label>Dashboard</ion-label>
     </ion-tab-button>
 
+    <ion-tab-button tab="admin-dashboard" *ngIf="userRole === 'Admin'">
+      <ion-icon name="stats-chart"></ion-icon>
+      <ion-label>Dashboard</ion-label>
+    </ion-tab-button>
+
     <ion-tab-button tab="analytics-reports" *ngIf="userRole === 'Landlord'">
       <ion-icon name="pie-chart"></ion-icon>
       <ion-label>Analytics</ion-label>
