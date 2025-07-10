@@ -1,0 +1,49 @@
+<ion-content>
+  <div class="bookings-wrapper" style="padding: 20px;">
+
+    <!-- 🔙 Back & Title -->
+    <div class="action-btn-container" style="display: flex; gap: 15px; margin-bottom: 20px;">
+      <p (click)="goBack()" style="font-size: 28px; font-weight: bold;">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </p>
+      <p style="font-size: 24px;">Booking Oversight</p>
+    </div>
+
+    <!-- 🏷 Header Branding -->
+    <div class="header">
+      <div class="logo-brand" style="display: flex; gap: 5px;">
+        <div class="logo-dot" style="position: relative; top: 7px;"></div>
+        <span class="logo-text">StayNest</span>
+      </div>
+      <p class="subtitle">View and manage all bookings made across the platform</p>
+    </div>
+
+    <!-- 📑 Booking List -->
+    <div class="booking-feed">
+      <div class="booking-card" *ngFor="let booking of bookings">
+        <div style="padding: 15px;">
+          <div class="info-row">
+            <h3>{{ booking.tenantName }}</h3>
+            <span class="status" [ngClass]="booking.status">{{ booking.status | titlecase }}</span>
+          </div>
+
+          <p class="dates">🏠 {{ booking.propertyName }}</p>
+          <p class="dates">📅 {{ booking.checkIn }} → {{ booking.checkOut }}</p>
+
+          <div class="actions">
+            <ion-button fill="outline" color="primary" size="small" (click)="viewBooking(booking)">
+              View Booking
+            </ion-button>
+            <ion-button fill="outline" color="success" size="small" *ngIf="booking.status === 'pending'" (click)="approveBooking(booking)">
+              Approve
+            </ion-button>
+            <ion-button fill="outline" color="danger" size="small" *ngIf="booking.status === 'pending'" (click)="rejectBooking(booking)">
+              Reject
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

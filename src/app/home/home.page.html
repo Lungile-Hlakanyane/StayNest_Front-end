@@ -14,16 +14,15 @@
 
    </div>
 
-    <h2 class="welcome-title">Explore Accommodations</h2>
+  <h2 class="welcome-title">Explore Accommodations</h2>
 
-    <!-- 🔍 Searchbar -->
-    <ion-searchbar
-      [(ngModel)]="searchTerm"
-      placeholder="Search by name or description..."
-      (ionInput)="filterAccommodations()"
-      debounce="300"
-      color="light">
-    </ion-searchbar>
+  <ion-searchbar [(ngModel)]="searchTerm"
+   placeholder="Search Accomodations..." 
+   (ionInput)="filterAccommodations()" 
+   mode="ios" showCancelButton="focus" 
+   animated="true">
+  </ion-searchbar>
+
   </div>
 
   <!-- 🏡 Filtered Accommodation List -->

@@ -44,6 +44,21 @@
       <ion-label class="menu-label">Bank Account</ion-label>
     </ion-item>
 
+    <ion-item lines="none" button (click)="navigate('/admin-payments-transactions')" *ngIf="userRole === 'Admin'">
+      <ion-icon name="cash-outline" slot="start" class="menu-icon"></ion-icon>
+      <ion-label class="menu-label">Manage Payments</ion-label>
+    </ion-item>
+
+      <ion-item lines="none" button (click)="navigate('/push-announcements')" *ngIf="userRole === 'Admin'">
+      <ion-icon name="megaphone-outline" slot="start" class="menu-icon"></ion-icon>
+      <ion-label class="menu-label">Push Announcements</ion-label>
+    </ion-item>
+
+    <ion-item lines="none" button (click)="navigate('/admin-support-ticket')" *ngIf="userRole === 'Admin'">
+      <ion-icon name="ticket-outline" slot="start" class="menu-icon"></ion-icon>
+      <ion-label class="menu-label">Support Tickets</ion-label>
+    </ion-item>
+
     <ion-item lines="none" button (click)="navigate('/maintenance')" *ngIf="userRole === 'Landlord'">
       <ion-icon name="hammer-outline" slot="start" class="menu-icon"></ion-icon>
       <ion-label class="menu-label">Maintenance</ion-label>

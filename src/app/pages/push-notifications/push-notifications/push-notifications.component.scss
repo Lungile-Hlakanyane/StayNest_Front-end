@@ -1,0 +1,24 @@
+.announcement-card {
+  background-color: #f4f4f4;
+  padding: 15px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.announcement-card h5 {
+  margin: 0 0 6px 0;
+  font-size: 17px;
+  color: #333;
+}
+
+.announcement-card p {
+  margin: 0 0 6px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.announcement-card .date {
+  font-size: 12px;
+  color: #999;
+}

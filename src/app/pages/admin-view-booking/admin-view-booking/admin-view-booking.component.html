@@ -1,0 +1,77 @@
+<ion-content>
+  
+  <div class="action-btn-container" style="padding: 20px;">
+    <p (click)="goBack()" style="font-size: 25px; font-weight: 500; position:relative; bottom:10px;">
+      <ion-icon name="arrow-back-outline"></ion-icon> Booking Details
+    </p>
+  </div>
+
+  <div class="bookings-wrapper" style="padding:20px;">
+    <!-- 🔰 Header -->
+    <div class="header">
+      <div class="logo-brand" style="display: flex; gap:5px;">
+        <div class="logo-dot"></div>
+        <span class="logo-text" style="position: relative; bottom:6px;">StayNest</span>
+      </div>
+      <h2 class="title"></h2>
+      <p class="subtitle">Complete details of the guest’s reservation</p>
+    </div>
+
+    <!-- 🏡 Property Information -->
+    <div class="info-card">
+      <h4>🏡 Property Information</h4>
+      <!-- <img [src]="booking.propertyImage" class="property-image" alt="Property" /> -->
+      <p><strong>Name:</strong> {{ booking.propertyName }}</p>
+      <p><strong>Location:</strong> {{ booking.location }}</p>
+    </div>
+
+    <!-- 👤 Tenant Info -->
+    <div class="info-card">
+      <h4>👤 Tenant Information</h4>
+      <div class="tenant-info">
+        <img src="../../../../assets/profile-pic-image.jpg" alt="Profile" class="profile-pic" />
+        <div>
+          <p><strong>Name:</strong> {{ booking.tenantName }}</p>
+          <p><strong>Email:</strong> {{ booking.tenantEmail }}</p>
+          <p><strong>Phone:</strong> {{ booking.tenantPhone }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 📅 Booking Dates -->
+    <div class="info-card">
+      <h4>📅 Booking Dates</h4>
+      <p><strong>Check-in:</strong> {{ booking.checkIn }}</p>
+      <p><strong>Check-out:</strong> {{ booking.checkOut }}</p>
+      <p><strong>Duration:</strong> {{ booking.duration }} nights</p>
+    </div>
+
+    <!-- 💵 Payment Details -->
+    <div class="info-card">
+      <h4>💵 Payment Details</h4>
+      <p><strong>Total Paid:</strong> R{{ booking.totalPaid }}</p>
+      <p><strong>Status:</strong> {{ booking.paymentStatus }}</p>
+      <p><strong>Method:</strong> {{ booking.paymentMethod }}</p>
+    </div>
+
+    <!-- 📌 Booking Status -->
+    <div class="info-card">
+      <h4>📌 Booking Status</h4>
+      <p><strong>Status:</strong> {{ booking.status }}</p>
+      <p><strong>Booking Date:</strong> {{ booking.dateBooked }}</p>
+    </div>
+
+    <!-- 📝 Additional Info -->
+    <div class="info-card">
+      <h4>📝 Additional Details</h4>
+      <p><strong>Guests:</strong> {{ booking.guests }}</p>
+      <p><strong>Notes:</strong> {{ booking.notes }}</p>
+      <p><strong>Policy:</strong> {{ booking.policy }}</p>
+    </div>
+
+    <!-- 📂 Actions -->
+    <div class="action-buttons">
+      <ion-button color="medium" expand="block" (click)="presentInvoiceActionSheet()">Invoice</ion-button>
+    </div>
+  </div>
+</ion-content>

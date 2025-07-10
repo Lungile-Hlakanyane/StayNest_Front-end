@@ -1,0 +1,53 @@
+<ion-content>
+  <div class="bookings-wrapper" style="padding: 20px;">
+
+    <!-- 🔙 Back & Title -->
+    <div class="action-btn-container" style="display: flex; gap: 15px;">
+      <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </p>
+      <p style="position: relative; top: 5px; font-size: 25px;">Push Announcements</p>
+    </div>
+
+    <!-- 🧠 Header Branding -->
+    <div class="header">
+      <div class="logo-brand" style="display: flex; gap:5px;">
+        <div class="logo-dot" style="position: relative; top:7px;"></div>
+        <span class="logo-text">StayNest</span>
+      </div>
+      <p class="subtitle">Create and send announcements to all users</p>
+    </div>
+
+    <!-- 📝 Create Announcement Form -->
+    <div class="info-card">
+      <h4>Create New Announcement</h4>
+      <ion-item>
+        <ion-input placeholder="Title" [(ngModel)]="newAnnouncement.title"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-textarea
+          placeholder="Message"
+          [(ngModel)]="newAnnouncement.message"
+          autoGrow="true">
+        </ion-textarea>
+      </ion-item>
+
+      <ion-button expand="block" color="success" (click)="sendAnnouncement()">
+        <ion-icon name="send-outline" slot="start"></ion-icon>
+        Send Announcement
+      </ion-button>
+    </div>
+
+    <!-- 📢 Previous Announcements -->
+    <div class="info-card" style="margin-top: 30px;">
+      <h4>Past Announcements</h4>
+      <div *ngFor="let announcement of announcements" class="announcement-card">
+        <h5>{{ announcement.title }}</h5>
+        <p>{{ announcement.message }}</p>
+        <span class="date">{{ announcement.date }}</span>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

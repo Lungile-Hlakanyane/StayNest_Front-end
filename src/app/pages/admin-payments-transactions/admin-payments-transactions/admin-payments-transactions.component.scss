@@ -1,0 +1,91 @@
+.status-success {
+  color: green;
+  font-weight: 600;
+}
+
+.status-pending {
+  color: orange;
+  font-weight: 600;
+}
+
+.status-failed {
+  color: red;
+  font-weight: 600;
+}
+
+// 
+.transaction-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.transaction-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.transaction-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.landlord-name {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+.txn-id {
+  font-size: 13px;
+  color: #888;
+}
+
+.transaction-details p {
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+}
+
+.status-pill {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.completed {
+  background-color: #e6f4ea;
+  color: #2e7d32;
+}
+
+.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.failed {
+  background-color: #f8d7da;
+  color: #a94442;
+}
+
+.logo-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+

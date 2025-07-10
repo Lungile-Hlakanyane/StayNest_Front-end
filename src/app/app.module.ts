@@ -43,6 +43,13 @@ import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard
 import { ManageUsersComponent } from './pages/manage-users/manage-users/manage-users.component';
 import { ViewUserComponent } from './view-user/view-user.component';
 import { ManagePropertiesComponent } from './pages/manage-propertiees/manage-properties/manage-properties.component';
+import { AdminViewPropertyComponent } from './pages/admin-view-property/admin-view-property/admin-view-property.component';
+import { AdminBookingOversightComponent } from './pages/manage-bookings/admin-booking-oversight/admin-booking-oversight.component';
+import { AdminViewBookingComponent } from './pages/admin-view-booking/admin-view-booking/admin-view-booking.component';
+import { AdminSupportTicketComponent } from './pages/admin-support-tickets/admin-support-ticket/admin-support-ticket.component';
+import { AdminReportsAnalyticsComponent } from './pages/admin-reports-analytics/admin-reports-analytics/admin-reports-analytics.component';
+import { AdminPaymentsTransactionsComponent } from './pages/admin-payments-transactions/admin-payments-transactions/admin-payments-transactions.component';
+import { PushNotificationsComponent } from './pages/push-notifications/push-notifications/push-notifications.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -54,7 +61,8 @@ import { ManagePropertiesComponent } from './pages/manage-propertiees/manage-pro
   LandlordViewAccomodationComponent, BookingRequestsComponent, LandlordViewBookingComponent, AnalyticsReportsComponent,
   TenantListComponent, TenantProfileComponent, MaintenanceComponent, BankDetailsComponent, SavedCardsComponent, 
   HelpFaqComponent, TermsAndConditionsComponent, AdminDashboardComponent, ManageUsersComponent, ViewUserComponent, 
-  ManagePropertiesComponent],
+  ManagePropertiesComponent, AdminViewPropertyComponent, AdminBookingOversightComponent, AdminViewBookingComponent, 
+  AdminSupportTicketComponent, AdminReportsAnalyticsComponent, AdminPaymentsTransactionsComponent, PushNotificationsComponent],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

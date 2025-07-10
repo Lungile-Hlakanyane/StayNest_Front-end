@@ -1,0 +1,40 @@
+.status {
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 12px;
+  text-transform: capitalize;
+}
+
+.status.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status.approved {
+  background-color: #e6f4ea;
+  color: #4caf50;
+}
+
+.status.rejected {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.status.checked-in {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.status.checked-out {
+  background-color: #e2e3e5;
+  color: #6c757d;
+}
+
+.logo-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  margin-right: 8px;
+}

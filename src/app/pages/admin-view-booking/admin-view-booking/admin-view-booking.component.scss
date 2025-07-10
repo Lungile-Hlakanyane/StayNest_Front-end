@@ -1,0 +1,55 @@
+.info-card {
+  background: #fff;
+  padding: 16px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+  h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 14px;
+    margin: 4px 0;
+    color: #444;
+  }
+}
+
+.property-image {
+  width: 100%;
+  border-radius: 12px;
+  height: 180px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.tenant-info {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+
+  .profile-pic {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #4caf50;
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap:5px;
+}
+
+.logo-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  margin-right: 8px;
+}

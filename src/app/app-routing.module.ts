@@ -35,7 +35,13 @@ import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard
 import { ManageUsersComponent } from './pages/manage-users/manage-users/manage-users.component';
 import { ViewUserComponent } from './view-user/view-user.component';
 import { ManagePropertiesComponent } from './pages/manage-propertiees/manage-properties/manage-properties.component';
-
+import { AdminViewPropertyComponent } from './pages/admin-view-property/admin-view-property/admin-view-property.component';
+import { AdminBookingOversightComponent } from './pages/manage-bookings/admin-booking-oversight/admin-booking-oversight.component';
+import { AdminViewBookingComponent } from './pages/admin-view-booking/admin-view-booking/admin-view-booking.component';
+import { AdminSupportTicketComponent } from './pages/admin-support-tickets/admin-support-ticket/admin-support-ticket.component';
+import { AdminReportsAnalyticsComponent } from './pages/admin-reports-analytics/admin-reports-analytics/admin-reports-analytics.component';
+import { AdminPaymentsTransactionsComponent } from './pages/admin-payments-transactions/admin-payments-transactions/admin-payments-transactions.component';
+import { PushNotificationsComponent } from './pages/push-notifications/push-notifications/push-notifications.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -67,6 +73,12 @@ const routes: Routes = [
   { path: 'manage-users', component: ManageUsersComponent},
   { path: 'view-user', component: ViewUserComponent},
   { path: 'manage-properties', component: ManagePropertiesComponent},
+  { path: 'admin-view-property', component: AdminViewPropertyComponent},
+  { path: 'admin-view-booking', component:AdminViewBookingComponent},
+  { path: 'admin-support-ticket', component: AdminSupportTicketComponent},
+  { path: 'admin-report-analytics', component: AdminReportsAnalyticsComponent},
+  { path: 'admin-payments-transactions', component: AdminPaymentsTransactionsComponent},
+  { path: 'push-announcements', component: PushNotificationsComponent},
   {
     path: '',
     component: TabsComponent,
@@ -78,6 +90,7 @@ const routes: Routes = [
       { path: 'bookings', component: BookingsComponent },
       { path: 'dashboard', component: DashboardComponent},
       { path: 'admin-dashboard', component: AdminDashboardComponent},
+      { path: 'admin-booking-oversight', component: AdminBookingOversightComponent},
     ]
   }
 ];

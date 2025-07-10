@@ -1,0 +1,50 @@
+<ion-content>
+  <div class="bookings-wrapper" style="padding: 20px;">
+
+    <!-- 🔙 Back & Title -->
+    <div class="action-btn-container" style="padding-bottom: 20px; display: flex; gap:15px;">
+      <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </p>
+      <p style="position: relative; top: 5px; font-size: 25px;">Payments & Transactions</p>
+    </div>
+
+    <!-- 🏷 Header -->
+    <div class="header">
+      <div class="logo-brand" style="display: flex; gap: 5px;">
+        <div class="logo-dot" style="position: relative; top: 7px;"></div>
+        <span class="logo-text">StayNest</span>
+      </div>
+      <p class="subtitle">View all payment records and payout activities</p>
+    </div>
+
+    <!-- 💳 Transactions List -->
+<div class="transaction-feed">
+  <div class="transaction-card" *ngFor="let txn of transactions">
+    <div class="transaction-top">
+      <div>
+        <h3 class="landlord-name">{{ txn.landlord }}</h3>
+        <p class="txn-id">ID: {{ txn.id }}</p>
+      </div>
+      <div class="status-pill" [ngClass]="{
+        'completed': txn.status === 'Completed',
+        'pending': txn.status === 'Pending',
+        'failed': txn.status === 'Failed'
+      }">
+        {{ txn.status }}
+      </div>
+    </div>
+
+    <div class="transaction-details">
+      <p><ion-icon name="cash-outline"></ion-icon> <strong>Amount:</strong> R{{ txn.amount }}</p>
+      <p><ion-icon name="calendar-outline"></ion-icon> <strong>Date:</strong> {{ txn.date }}</p>
+    </div>
+
+    <ion-button *ngIf="txn.status === 'Failed'" fill="outline" color="danger" size="small" (click)="handleDispute(txn)">
+      Resolve Issue
+    </ion-button>
+  </div>
+</div>
+
+  </div>
+</ion-content>

@@ -1,0 +1,61 @@
+<ion-content>
+  <div class="bookings-wrapper" style="padding: 20px;">
+
+    <!-- 🔙 Back & Title -->
+    <div class="action-btn-container" style="display: flex; gap: 15px; margin-bottom: 20px;">
+      <p (click)="goBack()" style="font-size: 28px; font-weight: bold;">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </p>
+      <p style="font-size: 24px;">Support Tickets</p>
+    </div>
+
+    <!-- 🏷 Branding -->
+    <div class="header">
+      <div class="logo-brand" style="display: flex; gap: 5px;">
+        <div class="logo-dot" style="position: relative; top: 6px;"></div>
+        <span class="logo-text">StayNest</span>
+      </div>
+      <p class="subtitle">Manage all support tickets and maintenance requests</p>
+    </div>
+
+    <!-- 🔍 Search -->
+    <!-- <ion-searchbar 
+    [(ngModel)]="searchTerm" 
+    placeholder="Search by user or title..." 
+    debounce="300">
+  </ion-searchbar> -->
+
+  <ion-searchbar [(ngModel)]="searchTerm"
+   placeholder="Search tickets..."  
+   mode="ios" showCancelButton="focus" 
+   animated="true">
+  </ion-searchbar>
+
+    <!-- 📋 Ticket List -->
+    <div class="booking-feed">
+      <div class="booking-card" *ngFor="let ticket of filteredTickets()">
+        <div style="padding: 15px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin: 0;">{{ ticket.title }}</h3>
+            <span class="status" [ngClass]="ticket.status">{{ ticket.status | titlecase }}</span>
+          </div>
+          <p style="font-size: 14px; color: #666; margin: 5px 0;">From: {{ ticket.userName }} ({{ ticket.role }})</p>
+          <p style="font-size: 13px; color: #999;">{{ ticket.description }}</p>
+
+          <!-- 🎯 Priority & Actions -->
+          <div style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 13px; color: #555;">
+              Priority: <strong>{{ ticket.priority }}</strong>
+            </span>
+            <div style="display: flex; gap: 10px;">
+              <ion-button size="small" color="primary" fill="outline" (click)="assignTicket(ticket)">Assign</ion-button>
+              <ion-button size="small" color="success" fill="outline" (click)="resolveTicket(ticket)">Resolve</ion-button>
+              <ion-button size="small" color="warning" fill="outline" (click)="escalateTicket(ticket)">Escalate</ion-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

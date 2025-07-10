@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertController, IonicModule, ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-properties',
@@ -32,7 +33,8 @@ export class ManagePropertiesComponent  implements OnInit {
 
   constructor(
     private alertCtrl: AlertController, 
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private router: Router
   ) { }
 
   ngOnInit() {}
@@ -43,9 +45,8 @@ export class ManagePropertiesComponent  implements OnInit {
     );
   }
 
-  viewProperty(property: any) {
-    console.log('Viewing:', property.name);
-    // Navigate to property detail screen if needed
+  viewProperty() {
+   this.router.navigateByUrl('/admin-view-property');
   }
 
    async blockProperty(property: any) {

@@ -1,0 +1,50 @@
+<ion-content class="details-wrapper">
+
+  <div class="action-btn-container" style="padding: 20px; display: flex; gap:15px;">
+    <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </p>
+    <p style="position: relative; top: 5px; font-size: 25px;">View Accomodation</p>
+  </div>
+
+  <!-- 🏡 Static Image Preview -->
+  <div class="image-preview" style="position: relative; bottom:25px;">
+    <img [src]="accommodation.images[0]" class="details-image" alt="Accommodation Image" />
+  </div>
+
+  <div class="details-content">
+
+    <!-- 🏷️ Title & Price -->
+    <div class="title-price">
+      <h2 class="name">{{ accommodation.name }}</h2>
+      <p class="price">R{{ accommodation.price }} / night</p>
+    </div>
+
+    <!-- 📝 Description -->
+    <p class="description">{{ accommodation.description }}</p>
+
+    <!-- 🌟 Amenities -->
+    <div class="section">
+      <h4 class="section-title">Amenities</h4>
+      <ul class="amenities">
+        <li *ngFor="let amenity of accommodation.amenities">
+          <ion-icon name="checkmark-circle-outline" color="success"></ion-icon> {{ amenity }}
+        </li>
+      </ul>
+    </div>
+
+    <!-- 🧑‍💼 Landlord Info -->
+    <div class="section">
+      <h4 class="section-title">Landlord Info</h4>
+      <p><strong>Name:</strong> {{ accommodation.landlord.name }}</p>
+      <p><strong>Contact:</strong> {{ accommodation.landlord.contact }}</p>
+       <p><strong>Contact:</strong> {{ accommodation.landlord.email }}</p>
+    </div>
+
+    <!-- 🔘 Action Buttons -->
+    <div class="actions">
+      <ion-button expand="block" fill="outline" color="danger" (click)="deleteAccomodation()">Delete</ion-button>
+    </div>
+
+  </div>
+</ion-content>
