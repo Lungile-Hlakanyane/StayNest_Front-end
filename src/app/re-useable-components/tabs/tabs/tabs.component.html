@@ -6,32 +6,32 @@
       <ion-label>Home</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="favorites" *ngIf="userRole === 'Tenant'">
+    <ion-tab-button tab="favorites" *ngIf="userRole === 'tenant'">
       <ion-icon name="heart"></ion-icon>
       <ion-label>Favorites</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="bookings" *ngIf="userRole === 'Tenant'">
+    <ion-tab-button tab="bookings" *ngIf="userRole === 'tenant'">
       <ion-icon name="calendar-outline"></ion-icon>
       <ion-label>Bookings</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="dashboard" *ngIf="userRole === 'Landlord'">
+    <ion-tab-button tab="dashboard" *ngIf="userRole === 'landlord'">
       <ion-icon name="stats-chart"></ion-icon>
       <ion-label>Dashboard</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="admin-dashboard" *ngIf="userRole === 'Admin'">
+    <ion-tab-button tab="admin-dashboard" *ngIf="userRole === 'admin'">
       <ion-icon name="stats-chart"></ion-icon>
       <ion-label>Dashboard</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="admin-booking-oversight" *ngIf="userRole === 'Admin'">
+    <ion-tab-button tab="admin-booking-oversight" *ngIf="userRole === 'admin'">
       <ion-icon name="document-text-outline"></ion-icon>
       <ion-label>Bookings</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="analytics-reports" *ngIf="userRole === 'Landlord'">
+    <ion-tab-button tab="analytics-reports" *ngIf="userRole === 'landlord'">
       <ion-icon name="pie-chart"></ion-icon>
       <ion-label>Analytics</ion-label>
     </ion-tab-button>

@@ -7,9 +7,11 @@
     <p style="position: relative; top: 5px; font-size: 25px;">View Accomodation</p>
   </div>
 
-  <!-- 🏡 Static Image Preview -->
+  <div *ngIf="accommodation">
+
+    <!-- 🏡 Static Image Preview -->
   <div class="image-preview" style="position: relative; bottom:25px;">
-    <img [src]="accommodation.images[0]" class="details-image" alt="Accommodation Image" />
+    <img *ngIf="accommodation?.image" [src]="'data:image/jpeg;base64,' + accommodation.image" class="details-image" alt="Accommodation Image" />
   </div>
 
   <div class="details-content">
@@ -36,16 +38,21 @@
     <!-- 🧑‍💼 Landlord Info -->
     <div class="section">
       <h4 class="section-title">Landlord Info</h4>
-      <p><strong>Name:</strong> {{ accommodation.landlord.name }}</p>
-      <p><strong>Contact:</strong> {{ accommodation.landlord.contact }}</p>
-       <p><strong>Contact:</strong> {{ accommodation.landlord.email }}</p>
+      <p><strong>Name:</strong> {{ accommodation.name }}</p>
+      <p><strong>Contact:</strong> {{ accommodation.phoneNumber }}</p>
+       <p><strong>Contact:</strong> {{ accommodation.email }}</p>
     </div>
 
     <!-- 🔘 Action Buttons -->
     <div class="actions">
-      <ion-button expand="block" color="success" (click)="editAccomodation()">Edit</ion-button>
+      <ion-button expand="block" color="success" (click)="editProperty(accomodation)">Edit</ion-button>
       <ion-button expand="block" fill="outline" color="danger" (click)="deleteAccomodation()">Delete</ion-button>
     </div>
 
   </div>
+
+
+  </div>
+
+  
 </ion-content>

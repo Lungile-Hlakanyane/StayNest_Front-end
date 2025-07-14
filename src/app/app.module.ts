@@ -50,10 +50,12 @@ import { AdminSupportTicketComponent } from './pages/admin-support-tickets/admin
 import { AdminReportsAnalyticsComponent } from './pages/admin-reports-analytics/admin-reports-analytics/admin-reports-analytics.component';
 import { AdminPaymentsTransactionsComponent } from './pages/admin-payments-transactions/admin-payments-transactions/admin-payments-transactions.component';
 import { PushNotificationsComponent } from './pages/push-notifications/push-notifications/push-notifications.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, LoginComponent, CreateProfileComponent,
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, LoginComponent, CreateProfileComponent, HttpClientModule,
   ForgotPasswordComponent, OtpComponent, NewPasswordComponent, TabsComponent, SideMenuComponent, FavoritesComponent, 
   ProfileComponent, ChangePasswordComponent, SettingsComponent, BookingsComponent, AccomodationDetailsComponent, BookComponent,
   SuccessBookingComponent, MakePaymentComponent, SuccessPaymentComponent, ChatComponent, RateAccomodationModalComponent, 

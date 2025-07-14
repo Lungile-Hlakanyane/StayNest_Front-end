@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule, NavController, ToastController } from '@ionic/angular';
+import { PropertyService } from 'src/app/servicess/property-service/property.service';
 
 @Component({
   selector: 'app-add-property',
@@ -17,7 +18,9 @@ export class AddPropertyComponent  implements OnInit {
     location: '',
     price: null,
     description: '',
-    image: null
+    image: null,
+    email: '',
+    phoneNumber: ''
   };
 
   availableAmenities = [
@@ -33,6 +36,7 @@ export class AddPropertyComponent  implements OnInit {
   imagePreview: string | ArrayBuffer | null = null;
 
   constructor(
+    private propertyService:PropertyService,
     private toastController: ToastController, 
     private navCtrl: NavController)
   { }
@@ -56,20 +60,51 @@ export class AddPropertyComponent  implements OnInit {
   const selectedAmenities = this.availableAmenities
     .filter(a => a.selected)
     .map(a => a.name);
-  const fullPropertyData = {
-    ...this.property,
-    amenities: selectedAmenities
+
+  const formData = new FormData();
+
+  const userId = localStorage.getItem('user'); // or however you're storing the logged-in user ID
+  const propertyData = {
+    name: this.property.name,
+    location: this.property.location,
+    price: this.property.price,
+    description: this.property.description,
+    email: this.property.email,
+    phoneNumber: this.property.phoneNumber,
+    amenities: selectedAmenities,
+    userId: userId ? Number(userId) : null
   };
-  console.log('Property submitted:', fullPropertyData);
-  const toast = await this.toastController.create({
-    message: 'Property added successfully!',
-    duration: 3000,
-    color: 'success',
-    position: 'top'
+
+  formData.append('property', new Blob([JSON.stringify(propertyData)], { type: 'application/json' }));
+
+  if (this.property.image) {
+    formData.append('image', this.property.image);
+  }
+
+  this.propertyService.addProperty(formData).subscribe({
+    next: async () => {
+      const toast = await this.toastController.create({
+        message: 'Property added successfully!',
+        duration: 3000,
+        color: 'success',
+        position: 'top'
+      });
+      await toast.present();
+      this.navCtrl.navigateBack('/my-properties');
+    },
+    error: async (err) => {
+      const toast = await this.toastController.create({
+        message: 'Failed to add property.',
+        duration: 3000,
+        color: 'danger',
+        position: 'top'
+      });
+      await toast.present();
+      console.error(err);
+    }
   });
-  await toast.present();
-  this.navCtrl.navigateBack('/my-properties');
 }
+
 
 
   goBack(){

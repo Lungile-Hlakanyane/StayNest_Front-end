@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, LoadingController, NavController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/servicess/auth-service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -22,40 +23,44 @@ export class LoginComponent  implements OnInit {
     private router: Router,
     private loadingController:LoadingController,
     private toastController: ToastController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private authService:AuthService
   ) { }
 
   ngOnInit() {}
 
-   async onLogin() {
-    const loading = await this.loadingController.create({
-      message: 'Logging In...',
-      spinner: 'circles',
-      duration: 3000
-    });
-    await loading.present();
-    setTimeout(async () => {
+async onLogin() {
+  const loading = await this.loadingController.create({
+    message: 'Logging In...',
+    spinner: 'crescent',
+  });
+  await loading.present();
+
+  this.authService.login(this.loginData.email, this.loginData.password).subscribe({
+    next: async (res) => {
       await loading.dismiss();
-      if (this.loginData.email === 'landlord@gmail.com') {
-        localStorage.setItem('role', 'Landlord');
-      }else if(this.loginData.email === 'admin@gmail.com'){
-        localStorage.setItem('role', 'Admin' )
-      }
-      else {
-        localStorage.setItem('role', 'Tenant');
-      }
-
-      const toast = await this.toastController.create({
-        message: 'You have successfully logged in the app...',
-        duration: 3000,
-        color: 'success',
-        position: 'top'
-      });
-
-      await toast.present();
+      localStorage.setItem('role', res.role);
+      localStorage.setItem('user', res.userId);
+      this.showToast('Login successful', 'success');
       this.router.navigate(['/home']);
-    }, 2000);
-  }
+    },
+    error: async (err) => {
+      await loading.dismiss();
+      this.showToast(err.error.message || 'Login failed', 'danger');
+    }
+  });
+}
+
+
+async showToast(message: string, color: string = 'success') {
+  const toast = await this.toastController.create({
+    message: message,
+    duration: 3000,
+    position: 'top',
+    color: color
+  });
+  await toast.present();
+}
 
 
 navigate(link: string){

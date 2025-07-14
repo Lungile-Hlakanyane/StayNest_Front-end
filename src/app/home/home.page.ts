@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuController, ModalController } from '@ionic/angular';
 import { SideMenuComponent } from '../re-useable-components/side-menu/side-menu/side-menu.component';
 import { Router } from '@angular/router';
+import { PropertyService } from '../servicess/property-service/property.service';
 
 @Component({
   selector: 'app-home',
@@ -9,26 +10,10 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
   standalone: false,
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  searchTerm: string = '';
-
-  accommodations = [
-  {
-    imageUrl: 'assets/accomodation_01.jpeg',
-    rating: 4,
-    landlord: 'GreenVilla Lodge',
-    caption: 'A peaceful place to stay with your family and friends.',
-    comments: 12
-  },
-  {
-    imageUrl: 'assets/accomodation_02.jpeg',
-    rating: 5,
-    landlord: 'CityScape Apartments',
-    caption: 'Modern living in the heart of the city.',
-    comments: 8
-  },
-];
+ searchTerm: string = '';
+ accommodations: any[] = [];
 
 viewMore(post: any) {
   this.router.navigate(['/accomodation-details'], { state: { post } });
@@ -38,8 +23,13 @@ viewMore(post: any) {
 constructor(
   private menuCtrl: MenuController,
   private modalController: ModalController,
-  private router: Router
+  private router: Router,
+  private propertyService:PropertyService
 ) {}
+
+ngOnInit() {
+  this.loadProperties();
+}
 
 filteredAccommodations = [...this.accommodations];
 
@@ -57,7 +47,6 @@ openMenu() {
 
 async openMenuModal() {
   console.log('openMenuModal() called'); 
-
   const modal = await this.modalController.create({
     component: SideMenuComponent, 
   });
@@ -66,6 +55,26 @@ async openMenuModal() {
   console.log('Modal presented'); 
 }
 
+
+loadProperties() {
+  this.propertyService.getAllProperties().subscribe({
+    next: (res) => {
+      console.log('Fetched properties:', res);
+      this.accommodations = res.map((prop: any) => ({
+        imageUrl: prop.image ? `data:image/jpeg;base64,${prop.image}` : 'assets/default-placeholder.png',
+        rating: 4, // optional: add real ratings later
+        landlord: prop.name,
+        caption: prop.description,
+        comments: 0, // optional: backend integration for comments
+        ...prop
+      }));
+      this.filteredAccommodations = [...this.accommodations];
+    },
+    error: (err) => {
+      console.error('Error fetching properties:', err);
+    }
+  });
+}
 
 
 }

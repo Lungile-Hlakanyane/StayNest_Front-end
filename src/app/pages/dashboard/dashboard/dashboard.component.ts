@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { PropertyService } from 'src/app/servicess/property-service/property.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,15 +19,17 @@ export class DashboardComponent  implements OnInit {
   earnings = 12500;
   pendingRequests = 2;
 
-
   constructor(
+    private propertyService:PropertyService,
     private navCtrl: NavController, 
     private router: Router)
   { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.propertyCount();
+  }
 
-   goToAddProperty() {
+  goToAddProperty() {
     this.navCtrl.navigateForward('/add-property');
   }
 
@@ -36,6 +39,20 @@ export class DashboardComponent  implements OnInit {
 
   navigate(link: string) {
     this.router.navigate([link]); 
+  }
+
+  async propertyCount(){
+      const userId = localStorage.getItem('user');
+  if (userId) {
+    this.propertyService.countPropertiesByUserId(+userId).subscribe({
+      next: (count) => {
+        this.propertiesCount = count;
+      },
+      error: (err) => {
+        console.error('Error fetching property count', err);
+      }
+    });
+  }
   }
 
 }

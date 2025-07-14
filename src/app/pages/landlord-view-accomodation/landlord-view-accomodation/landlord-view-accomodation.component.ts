@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule, NavController, ToastController } from '@ionic/angular';
+import { PropertyService } from 'src/app/servicess/property-service/property.service';
 
 @Component({
   selector: 'app-landlord-view-accomodation',
@@ -13,37 +14,25 @@ import { IonicModule, NavController, ToastController } from '@ionic/angular';
 })
 export class LandlordViewAccomodationComponent  implements OnInit {
 
-  accommodation: any;
+  accommodation!: any;
+  accomodation: any;
 
   constructor(
     private route: ActivatedRoute, 
     private router:Router, 
     private navCtrl: NavController,
     private toastController: ToastController,
+    private propertyService:PropertyService
   ) { 
-     this.accommodation = {
-      id: 1,
-      name: 'GreenVilla Lodge',
-      price: 650,
-      images: [
-        'assets/accomodation_01.jpeg',
-        'assets/accomodation_02.jpeg',
-        'assets/accomodation_03.jpeg'
-      ],
-      description: 'A peaceful lodge perfect for family getaways and cozy weekends.',
-      amenities: ['Wi-Fi', 'Swimming Pool', 'Parking', 'Kitchenette'],
-      landlord: {
-        name: 'Lungile H.',
-        contact: '083 456 7890',
-        email: 'info@greenvilla.co.za'
-      }
-    };
+     
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadPropertyById();
+  }
 
-  editAccomodation() {
-    this.router.navigate(['/edit-accomodation']);
+  editProperty(propertyId: number) {
+    this.router.navigate(['edit-accomodation', propertyId]);
   }
 
   async deleteAccomodation() {
@@ -59,5 +48,23 @@ export class LandlordViewAccomodationComponent  implements OnInit {
   goBack(){
     this.navCtrl.back();
   }
+
+  async loadPropertyById(){
+     const propertyId = this.route.snapshot.paramMap.get('id');
+    if (propertyId) {
+    this.fetchPropertyById(+propertyId);
+   }
+  }
+
+  fetchPropertyById(id: number) {
+  this.propertyService.getPropertyById(id).subscribe({
+    next: (data) => {
+      this.accommodation = data;
+    },
+    error: (err) => {
+      console.error('Error fetching property:', err);
+    }
+  });
+}
 
 }

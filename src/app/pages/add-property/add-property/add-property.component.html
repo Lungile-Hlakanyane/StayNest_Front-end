@@ -67,8 +67,8 @@
           type="number"
           placeholder="Phone Number"
           required
-          [(ngModel)]="property.price"
-          name="price"
+          [(ngModel)]="property.phoneNumber"
+          name="phoneNumber"
         ></ion-input>
       </ion-item>
 
@@ -77,8 +77,8 @@
           type="text"
           placeholder="Email"
           required
-          [(ngModel)]="property.name"
-          name="name"
+          [(ngModel)]="property.email"
+          name="email"
         ></ion-input>
       </ion-item>
 
@@ -99,16 +99,12 @@
           (change)="onImageSelected($event)"
         />
       </ion-item>
-
       <div class="preview-img" *ngIf="imagePreview">
         <img [src]="imagePreview" />
       </div>
-
       <ion-button expand="block" color="success" type="submit" [disabled]="!propertyForm.form.valid">
         Submit Property
       </ion-button>
-
     </form>
-
   </div>
 </ion-content>
