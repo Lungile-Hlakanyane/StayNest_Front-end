@@ -28,7 +28,7 @@ export class CreateProfileComponent  implements OnInit {
   ) { }
 
   user: UserDTO = {
-    username: '',
+    fullName: '',
     email: '',
     password: '',
     role: '',

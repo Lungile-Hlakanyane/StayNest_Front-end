@@ -20,7 +20,7 @@ export class ProfileComponent  implements OnInit {
     avatar: '',
     fullName: '',
     email: '',
-    phone: ''
+    phoneNumber: ''
   };
 
   constructor(
@@ -73,9 +73,9 @@ export class ProfileComponent  implements OnInit {
     }
     this.authService.getUserById(userId).subscribe({
       next: (data: UserDTO) => {
-        this.profile.fullName = data.username;
+        this.profile.fullName = data.fullName;
         this.profile.email = data.email;
-        this.profile.phone = data.phoneNumber || 'Not provided';
+        this.profile.phoneNumber = data.phoneNumber || 'Not provided';
       },
       error: (err) => {
         console.error('Failed to load user profile', err);
