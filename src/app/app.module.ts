@@ -51,6 +51,8 @@ import { AdminReportsAnalyticsComponent } from './pages/admin-reports-analytics/
 import { AdminPaymentsTransactionsComponent } from './pages/admin-payments-transactions/admin-payments-transactions/admin-payments-transactions.component';
 import { PushNotificationsComponent } from './pages/push-notifications/push-notifications/push-notifications.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AddCalenderComponent } from './pages/add-calender/add-calender/add-calender.component';
+import { CalendarSlotsComponent } from './pages/calendar-slots/calendar-slots/calendar-slots.component';
 
 
 @NgModule({
@@ -64,7 +66,9 @@ import { HttpClientModule } from '@angular/common/http';
   TenantListComponent, TenantProfileComponent, MaintenanceComponent, BankDetailsComponent, SavedCardsComponent, 
   HelpFaqComponent, TermsAndConditionsComponent, AdminDashboardComponent, ManageUsersComponent, ViewUserComponent, 
   ManagePropertiesComponent, AdminViewPropertyComponent, AdminBookingOversightComponent, AdminViewBookingComponent, 
-  AdminSupportTicketComponent, AdminReportsAnalyticsComponent, AdminPaymentsTransactionsComponent, PushNotificationsComponent],
+  AdminSupportTicketComponent, AdminReportsAnalyticsComponent, AdminPaymentsTransactionsComponent, PushNotificationsComponent,
+  AddCalenderComponent, CalendarSlotsComponent
+],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

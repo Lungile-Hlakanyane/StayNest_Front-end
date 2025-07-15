@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/servicess/auth-service/auth.service';
+import { UserDTO } from 'src/app/models/UserDTO';
 
 @Component({
   selector: 'app-profile',
@@ -16,20 +18,23 @@ export class ProfileComponent  implements OnInit {
 
   profile = {
     avatar: '',
-    fullName: 'Lungile Hlakanyane',
-    email: 'lungile@example.com',
-    phone: '+27 123 456 789'
+    fullName: '',
+    email: '',
+    phone: ''
   };
 
   constructor(
     private alertCtrl: AlertController,
     private navCtrl: NavController,
-    private router: Router
+    private router: Router,
+    private authService:AuthService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fetchUserProfile();
+  }
 
-   editProfile() {
+  editProfile() {
     console.log('Edit Profile clicked');
   }
 
@@ -60,4 +65,21 @@ export class ProfileComponent  implements OnInit {
   }
 
 
+  fetchUserProfile() {
+    const userId = Number(localStorage.getItem('user'));
+    if (!userId) {
+      console.error('User ID not found in local storage');
+      return;
+    }
+    this.authService.getUserById(userId).subscribe({
+      next: (data: UserDTO) => {
+        this.profile.fullName = data.username;
+        this.profile.email = data.email;
+        this.profile.phone = data.phoneNumber || 'Not provided';
+      },
+      error: (err) => {
+        console.error('Failed to load user profile', err);
+      }
+    });
+  }
 }

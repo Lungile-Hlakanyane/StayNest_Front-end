@@ -31,9 +31,9 @@ export class LandlordViewAccomodationComponent  implements OnInit {
     this.loadPropertyById();
   }
 
-  editProperty(propertyId: number) {
-    this.router.navigate(['edit-accomodation', propertyId]);
-  }
+ viewCalender(propertyId: number) {
+  this.router.navigate(['add-calender', propertyId]);
+ }
 
   async deleteAccomodation() {
     const toast = await this.toastController.create({

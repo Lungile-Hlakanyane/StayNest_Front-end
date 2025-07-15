@@ -42,6 +42,8 @@ import { AdminSupportTicketComponent } from './pages/admin-support-tickets/admin
 import { AdminReportsAnalyticsComponent } from './pages/admin-reports-analytics/admin-reports-analytics/admin-reports-analytics.component';
 import { AdminPaymentsTransactionsComponent } from './pages/admin-payments-transactions/admin-payments-transactions/admin-payments-transactions.component';
 import { PushNotificationsComponent } from './pages/push-notifications/push-notifications/push-notifications.component';
+import { AddCalenderComponent } from './pages/add-calender/add-calender/add-calender.component';
+import { CalendarSlotsComponent } from './pages/calendar-slots/calendar-slots/calendar-slots.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -79,6 +81,8 @@ const routes: Routes = [
   { path: 'admin-report-analytics', component: AdminReportsAnalyticsComponent},
   { path: 'admin-payments-transactions', component: AdminPaymentsTransactionsComponent},
   { path: 'push-announcements', component: PushNotificationsComponent},
+  { path: 'add-calender/:propertyId', component: AddCalenderComponent},
+  { path: 'calendar-slots/:propertyId', component: CalendarSlotsComponent},
   {
     path: '',
     component: TabsComponent,

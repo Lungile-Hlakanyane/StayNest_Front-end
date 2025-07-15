@@ -37,6 +37,11 @@ export class MyPropertiesComponent  implements OnInit {
     this.router.navigate(['landlord-view-accomodation', propertyId]);
   }
 
+ viewCalender(propertyId: number) {
+  this.router.navigate(['calendar-slots', propertyId]);
+ }
+
+
 async deleteProperty(property: any) {
   const alert = await this.alertController.create({
     header: 'Delete Property',

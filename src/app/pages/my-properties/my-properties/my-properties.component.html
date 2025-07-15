@@ -29,6 +29,9 @@
           <p class="price">R{{ property.price }} / night</p>
 
           <div class="actions">
+            <ion-button fill="outline" color="secondary" size="small" (click)="viewCalender(property.id)">
+              Calender
+            </ion-button>
             <ion-button fill="outline" color="success" size="small" (click)="viewAccomodation(property.id)">
               View
             </ion-button>

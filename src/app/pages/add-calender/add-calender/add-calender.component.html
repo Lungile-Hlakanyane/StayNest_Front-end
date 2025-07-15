@@ -1,0 +1,35 @@
+<ion-content class="ion-padding">
+
+ <div style="display: flex; gap: 15px;">
+   <p (click)="goBack()" style="font-size:35px; font-weight: bold; position: relative; bottom:23px;"><ion-icon name="arrow-back-outline"></ion-icon></p>
+   <h2 class="ion-text-center">Set Availability</h2>
+ </div>
+
+  <ion-item>
+    <!-- <ion-label position="floating">Select Available Dates</ion-label> -->
+    <ion-datetime
+      presentation="date"
+      [multiple]="true"
+      [(ngModel)]="availabilityDates">
+    </ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Max Number of Guests</ion-label>
+    <ion-input type="number" [(ngModel)]="maxGuests"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Booking Policy</ion-label>
+    <ion-textarea
+      placeholder="Enter booking rules or policies..."
+      auto-grow="true"
+      [(ngModel)]="bookingPolicy">
+    </ion-textarea>
+  </ion-item>
+
+  <ion-button expand="block" (click)="submitCalendar()" color="success">
+    Submit
+  </ion-button>
+
+</ion-content>

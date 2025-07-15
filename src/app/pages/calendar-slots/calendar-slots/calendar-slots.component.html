@@ -1,0 +1,47 @@
+<ion-content>
+  <!-- 🔙 Header -->
+  <div class="action-btn-container" style="padding: 20px; display: flex; gap:15px;">
+    <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </p>
+    <p style="position: relative; top: 5px; font-size: 25px;">Calendar Slots</p>
+  </div>
+
+  <!-- 📦 Booking Feed Wrapper -->
+  <div class="bookings-wrapper" style="padding:20px;">
+
+    <!-- 🌱 Branding -->
+    <div class="header">
+      <div class="logo-brand" style="display: flex; gap:5px;">
+        <div class="logo-dot"></div>
+        <span class="logo-text" style="position: relative; bottom:6px;">StayNest</span>
+      </div>
+      <p class="subtitle">Manage your calendar slot availability</p>
+    </div>
+
+    <!-- 📅 Slots List -->
+    <div class="booking-feed">
+      <div class="booking-card" *ngFor="let slot of slots">
+        <div class="card-content">
+          <div class="info-row">
+            <h3>{{ slot.date | date: 'fullDate' }}</h3>
+            <span class="status" [ngClass]="slot.status">{{ slot.status | titlecase }}</span>
+          </div>
+
+          <p class="dates">👥 Guests Allowed: {{ slot.maxGuests }}</p>
+          <p class="location">📜 Policy: {{ slot.policy }}</p>
+
+          <div class="actions">
+            <ion-button fill="outline" color="primary" size="small" (click)="viewSlot(slot)">
+              View
+            </ion-button>
+            <ion-button *ngIf="slot.status === 'available'" color="danger" size="small" (click)="deleteSlot(slot)">
+              Remove
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

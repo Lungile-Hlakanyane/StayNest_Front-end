@@ -20,14 +20,13 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}/verify?token=${token}`, { responseType: 'text' });
   }
 
-// login(email: string, password: string): Observable<any> {
-//   return this.http.post(`${this.apiUrl}/login`, { email, password });
-//  }
+  login(email: string, password: string): Observable<any> {
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.post(`${this.apiUrl}/login`, { email, password }, { headers });
+  }
 
-login(email: string, password: string): Observable<any> {
-  const headers = { 'Content-Type': 'application/json' };
-  return this.http.post(`${this.apiUrl}/login`, { email, password }, { headers });
-}
-
+  getUserById(userId: number): Observable<UserDTO> {
+    return this.http.get<UserDTO>(`${this.apiUrl}/user/${userId}`);
+  }
 
 }
