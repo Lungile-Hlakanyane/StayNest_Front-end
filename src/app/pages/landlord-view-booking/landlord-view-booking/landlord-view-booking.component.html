@@ -22,7 +22,7 @@
       <h4>🏡 Property Information</h4>
       <!-- <img [src]="booking.propertyImage" class="property-image" alt="Property" /> -->
       <p><strong>Name:</strong> {{ booking.propertyName }}</p>
-      <p><strong>Location:</strong> {{ booking.location }}</p>
+      <p><strong>Location:</strong> {{ booking.propertyLocation }}</p>
     </div>
 
     <!-- 👤 Tenant Info -->
@@ -31,9 +31,9 @@
       <div class="tenant-info">
         <img src="../../../../assets/profile-pic-image.jpg" alt="Profile" class="profile-pic" />
         <div>
-          <p><strong>Name:</strong> {{ booking.tenantName }}</p>
-          <p><strong>Email:</strong> {{ booking.tenantEmail }}</p>
-          <p><strong>Phone:</strong> {{ booking.tenantPhone }}</p>
+         <p><strong>Name:</strong> {{ tenant?.fullName }}</p>
+         <p><strong>Email:</strong> {{ tenant?.email }}</p>
+         <p><strong>Phone:</strong> {{ tenant?.phoneNumber }}</p>
         </div>
       </div>
     </div>
@@ -41,32 +41,31 @@
     <!-- 📅 Booking Dates -->
     <div class="info-card">
       <h4>📅 Booking Dates</h4>
-      <p><strong>Check-in:</strong> {{ booking.checkIn }}</p>
-      <p><strong>Check-out:</strong> {{ booking.checkOut }}</p>
-      <p><strong>Duration:</strong> {{ booking.duration }} nights</p>
+      <p><strong>Booking Date:</strong> {{ booking.availableDate }}</p>
+      <p><strong>Duration:</strong> 1 night</p>
     </div>
 
     <!-- 💵 Payment Details -->
     <div class="info-card">
       <h4>💵 Payment Details</h4>
-      <p><strong>Total Paid:</strong> R{{ booking.totalPaid }}</p>
-      <p><strong>Status:</strong> {{ booking.paymentStatus }}</p>
-      <p><strong>Method:</strong> {{ booking.paymentMethod }}</p>
+      <p><strong>Price per night:</strong> R{{ propertyPrice }}</p>
+      <p><strong>Status:</strong> {{ booking.status }}</p>
+      <p><strong>Method:</strong> Cash</p>
     </div>
 
     <!-- 📌 Booking Status -->
     <div class="info-card">
       <h4>📌 Booking Status</h4>
       <p><strong>Status:</strong> {{ booking.status }}</p>
-      <p><strong>Booking Date:</strong> {{ booking.dateBooked }}</p>
+      <p><strong>Booking Date:</strong> {{ booking.availableDate }}</p>
     </div>
 
     <!-- 📝 Additional Info -->
     <div class="info-card">
       <h4>📝 Additional Details</h4>
-      <p><strong>Guests:</strong> {{ booking.guests }}</p>
-      <p><strong>Notes:</strong> {{ booking.notes }}</p>
-      <p><strong>Policy:</strong> {{ booking.policy }}</p>
+      <p><strong>Guests:</strong> {{ booking.maxGuests }}</p>
+      <p><strong>Notes:</strong> {{ propertyDescription || 'No Notes Provided' }}</p>
+      <p><strong>Policy:</strong> {{ booking.bookingPolicy }}</p>
     </div>
 
     <!-- 📂 Actions -->

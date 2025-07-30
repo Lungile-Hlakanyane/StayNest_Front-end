@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Booking } from 'src/app/models/Booking';
+import { BookingService } from '../../../servicess/booking-service/booking.service';
+
 
 @Component({
   selector: 'app-booking-requests',
@@ -12,45 +15,39 @@ import { Router } from '@angular/router';
   imports: [CommonModule, IonicModule, FormsModule, ReactiveFormsModule],
 })
 export class BookingRequestsComponent  implements OnInit {
-  
   selectedTab: string = 'upcoming';
+  bookings: Booking[] = [];
 
   constructor(
     private navCtrl: NavController,
-    private router:Router
+    private router:Router,
+    private bookingService:BookingService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadLandlordBookings();
+  }
 
-   bookings = [
-    {
-      name: 'Loft Apartment',
-      location: 'Sandton',
-      checkIn: '2025-07-20',
-      checkOut: '2025-07-25',
-      status: 'pending',
-      image: 'assets/accomodation_01.jpeg',
-      type: 'upcoming'
-    },
-    {
-      name: 'Beach Villa',
-      location: 'Cape Town',
-      checkIn: '2025-06-10',
-      checkOut: '2025-06-15',
-      status: 'approved',
-      image: 'assets/accomodation_01.jpeg',
-      type: 'past'
-    },
-    {
-      name: 'Modern Suite',
-      location: 'Durban',
-      checkIn: '2025-07-28',
-      checkOut: '2025-08-02',
-      status: 'pending',
-      image: 'assets/accomodation_01.jpeg',
-      type: 'upcoming'
+  loadLandlordBookings() {
+    const user = localStorage.getItem('user');
+    if (user) {
+      const landlordId = Number(user);
+      this.bookingService.getBookingsByLandlordId(landlordId).subscribe({
+        next: (data) => {
+          this.bookings = data.map(booking => {
+            return {
+              ...booking,
+              type: booking.status === 'approved' || booking.status === 'rejected' ? 'past' : 'upcoming',
+              image: booking.imageUrl || 'assets/default-placeholder.jpg'
+            };
+          });
+        },
+        error: (err) => {
+          console.error('Error fetching bookings:', err);
+        }
+      });
     }
-  ];
+  }
 
   filteredBookings() {
     return this.bookings.filter(b => b.type === this.selectedTab);
@@ -65,7 +62,7 @@ export class BookingRequestsComponent  implements OnInit {
   }
 
   viewBooking(booking: any) {
-    this.router.navigateByUrl('/landlord-view-booking');
+    this.router.navigateByUrl('/landlord-view-booking', {state: {booking}});
     console.log('Viewing booking:', booking);
   }
 

@@ -35,17 +35,17 @@
         class="booking-card"
         *ngFor="let booking of filteredBookings()"
       >
-        <img [src]="booking.image" alt="Accommodation" class="booking-image" />
+        <img [src]="booking.imageUrl" alt="Accommodation" class="booking-image" />
 
         <div class="card-content">
           <div class="info-row">
-            <h3>{{ booking.name }}</h3>
+            <h3>{{ booking.propertyName }}</h3>
             <span class="status" [ngClass]="booking.status">{{ booking.status | titlecase }}</span>
           </div>
 
-          <p class="dates">📅 {{ booking.checkIn }} → {{ booking.checkOut }}</p>
+          <p class="dates">📅 {{ booking.status }} → {{ booking.availableDate }}</p>
 
-          <p class="location">📍 {{ booking.location }}</p>
+          <p class="location">📍 {{ booking.propertyLocation }}</p>
 
           <div class="actions">
             <ion-button *ngIf="selectedTab === 'upcoming'" color="success" size="small" (click)="approveBooking(booking)">

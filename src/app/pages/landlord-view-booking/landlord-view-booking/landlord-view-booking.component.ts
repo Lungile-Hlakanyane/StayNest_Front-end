@@ -3,6 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule, NavController, AlertController, ToastController,ActionSheetController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../servicess/auth-service/auth.service';
+import { UserDTO } from 'src/app/models/UserDTO';
+import { PropertyService } from '../../../servicess/property-service/property.service';
+import { Property } from 'src/app/models/Property';
+
 
 @Component({
   selector: 'app-landlord-view-booking',
@@ -14,41 +19,22 @@ import { Router } from '@angular/router';
 export class LandlordViewBookingComponent  implements OnInit {
 
   booking: any;
+  tenant: UserDTO | null = null;
+  propertyPrice: number | null = null;
+  propertyDescription: string | null = null;
 
   constructor(
     private navCtrl: NavController,
     private alertController:AlertController,
     private toastController:ToastController,
     private router:Router,
-    private actionSheetController:ActionSheetController
+    private actionSheetController:ActionSheetController,
+    private authService:AuthService,
+    private propertyService:PropertyService
   ) { }
 
   ngOnInit() {
-    this.booking = {
-      propertyName: 'Luxury Apartment - Sandton',
-      propertyImage: 'assets/images/property1.jpg',
-      location: 'Sandton, Johannesburg',
-
-      tenantName: 'Thabo Mokoena',
-      tenantEmail: 'thabo@gmail.com',
-      tenantPhone: '+27 61 234 5678',
-      tenantImage: 'assets/images/profile-thabo.jpg',
-
-      checkIn: '2025-08-01',
-      checkOut: '2025-08-05',
-      duration: 4,
-
-      totalPaid: 3800,
-      paymentStatus: 'Paid',
-      paymentMethod: 'Card',
-
-      status: 'Pending',
-      dateBooked: '2025-07-12',
-
-      guests: 2,
-      notes: 'Will arrive late at 10 PM.',
-      policy: 'Fully refundable up to 48 hours before check-in.'
-    };
+   this.loadFetchedData();
   }
 
   goBack(){
@@ -117,6 +103,43 @@ async presentInvoiceActionSheet() {
 
     await actionSheet.present();
   }
+
+loadFetchedData() {
+  const navigation = this.router.getCurrentNavigation();
+  if (navigation?.extras?.state && navigation.extras.state['booking']) {
+    this.booking = navigation.extras.state['booking'];
+    console.log('Received booking data:', this.booking);
+
+    const tenantId = this.booking.bookedById;
+    this.authService.getUserById(tenantId).subscribe({
+      next: (data) => {
+        this.tenant = data;
+        console.log('Tenant data:', this.tenant);
+      },
+      error: (err) => {
+        console.error('Failed to fetch tenant data', err);
+      }
+    });
+
+    const propertyId = this.booking.propertyId;
+    this.propertyService.getPropertyById(propertyId).subscribe({
+      next: (property: any) => {
+        this.propertyPrice = property.price;
+        this.propertyDescription = property.description;
+        console.log('Property price:', this.propertyPrice);
+        console.log('Property description:', this.propertyDescription);
+      },
+      error: (err) => {
+        console.error('Failed to fetch property data:', err);
+      }
+    });
+
+  } else {
+    console.warn('No booking data received.');
+    this.navCtrl.back();
+  }
+}
+
 
 
 }

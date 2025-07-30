@@ -1,5 +1,4 @@
 <ion-content class="booking-wrapper">
-
   <div class="action-btn-container" style="padding: 20px;">
     <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
       <ion-icon name="arrow-back-outline"></ion-icon>
@@ -14,62 +13,80 @@
     </div>
 
     <h1 class="title">Book This Accommodation</h1>
-    <p class="subtitle">Fill in the details to send your booking request</p>
+    <p class="subtitle">Select an available date to book</p>
 
-    <!-- Booking Form -->
-    <form class="booking-form" (ngSubmit)="submitBooking()" #form="ngForm">
+    <!-- 📅 Slot Grid -->
+    <div class="slots-grid">
+   <ion-grid *ngIf="slots.length > 0">
+  <ion-row *ngFor="let row of slots | slice:0:slots.length; let i = index" [hidden]="i % 2 !== 0">
+    
+    <!-- First Column -->
+    <ion-col size="6" *ngIf="slots[i]">
+      <ion-card
+        (click)="selectSlot(slots[i])"
+        [class.selected]="booking.selectedSlot?.id === slots[i].id">
+        <ion-card-content>
+          <p style="color:#4caf50;"><strong>{{ slots[i].property.name }}</strong></p>
+          <p><strong>Available Date:</strong> {{ slots[i].availableDate }}</p>
+          <p><strong>Status:</strong> {{ slots[i].status }}</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
 
-      <!-- Check-in Date -->
-      <div class="input-group">
-        <ion-label>Check-in Date</ion-label>
-        <ion-datetime
-          presentation="date"
-          [(ngModel)]="booking.checkIn"
-          name="checkIn"
-          required>
-        </ion-datetime>
-      </div>
+    <!-- Second Column -->
+    <ion-col size="6" *ngIf="slots[i+1]">
+      <ion-card
+        (click)="selectSlot(slots[i+1])"
+        [class.selected]="booking.selectedSlot?.id === slots[i+1].id"
+      >
+        <ion-card-content>
+          <p style="color:#4caf50;"><strong>{{ slots[i].property.name }}</strong></p>
+          <p><strong>Available Date:</strong> {{ slots[i+1].availableDate }}</p>
+          <p><strong>Status:</strong> {{ slots[i+1].status }}</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
 
-      <!-- Check-out Date -->
-      <div class="input-group">
-        <ion-label>Check-out Date</ion-label>
-        <ion-datetime
-          presentation="date"
-          [(ngModel)]="booking.checkOut"
-          name="checkOut"
-          required>
-        </ion-datetime>
-      </div>
+  </ion-row>
+</ion-grid>
 
-      <!-- Number of Guests -->
-      <div class="input-group">
-        <ion-label>Number of Guests</ion-label>
-        <ion-input
-          type="number"
-          placeholder="e.g. 2"
-          [(ngModel)]="booking.guests"
-          name="guests"
-          required>
-        </ion-input>
-      </div>
 
-      <!-- Message to Landlord -->
-      <div class="input-group">
-        <ion-label>Message to Landlord</ion-label>
-        <ion-textarea
-          placeholder="Any special requests?"
-          [(ngModel)]="booking.message"
-          name="message">
-        </ion-textarea>
-      </div>
+    </div>
 
-      <!-- Submit -->
-      <ion-button expand="block" type="submit" color="success" [disabled]="form.invalid">
-        Submit Booking
-      </ion-button>
+    <!-- Guests -->
+  <div class="input-group">
+  <ion-label>Number of Guests</ion-label>
+  <ion-input
+    type="number"
+    placeholder="e.g. 2"
+    [(ngModel)]="booking.guests"
+    [attr.max]="booking.selectedSlot?.maxGuests"
+    [attr.min]="1"
+    name="guests"
+    required
+    (ionChange)="validateGuests()">
+  </ion-input>
+  <ion-text color="danger" *ngIf="guestError">{{ guestError }}</ion-text>
+</div>
 
-    </form>
 
+    <!-- Message -->
+    <div class="input-group">
+      <ion-label>Message to Landlord</ion-label>
+      <ion-textarea
+        placeholder="Any special requests?"
+        [(ngModel)]="booking.message"
+        name="message">
+      </ion-textarea>
+    </div>
+
+    <!-- Submit -->
+    <ion-button
+      expand="block"
+      color="success"
+      (click)="submitBooking()"
+      [disabled]="!booking.selectedSlot || !booking.guests">
+      Submit Booking
+    </ion-button>
   </div>
-
 </ion-content>

@@ -1,5 +1,4 @@
 <div class="profile-wrapper">
-
   <div class="header">
     <div class="logo-brand">
       <div class="logo-dot"></div>
@@ -12,36 +11,61 @@
 
     <!-- Avatar -->
     <div class="avatar-container">
-        <img src="../../../../assets/profile-image.svg" alt="Avatar" class="avatar-img" />
+      <img src="../../../../assets/profile-image.svg" alt="Avatar" class="avatar-img" />
     </div>
 
     <!-- Info -->
     <div class="profile-info">
       <p class="info-label">Full Name</p>
-      <p class="info-value">{{ profile.fullName }}</p>
+      <ion-input
+        type="text"
+        class="info-value"
+        [(ngModel)]="profile.fullName"
+        [readonly]="!isEditing">
+      </ion-input>
 
       <p class="info-label">Email</p>
-      <p class="info-value">{{ profile.email }}</p>
+      <ion-input
+        type="email"
+        class="info-value"
+        [value]="profile.email"
+        readonly>
+      </ion-input>
 
       <p class="info-label">Phone</p>
-      <p class="info-value">{{ profile.phoneNumber }}</p>
+      <ion-input
+        type="text"
+        class="info-value"
+        [(ngModel)]="profile.phoneNumber"
+        [readonly]="!isEditing">
+      </ion-input>
     </div>
 
     <!-- Action Buttons -->
     <div class="action-buttons" style="display: flex; justify-content: space-evenly;">
-      <ion-button expand="block" fill="solid" (click)="editProfile()" class="custom-btn">
-        Edit Profile
-      </ion-button>
+      <!-- VIEW MODE -->
+      <ng-container *ngIf="!isEditing">
+        <ion-button expand="block" fill="solid" (click)="editProfile()">
+          Edit Profile
+        </ion-button>
+        <ion-button expand="block" color="medium" fill="outline" (click)="changePassword()">
+          Change Password
+        </ion-button>
+        <ion-button expand="block" color="danger" fill="solid" (click)="logout()">
+          Logout
+        </ion-button>
+      </ng-container>
 
-      <ion-button expand="block" color="medium" fill="outline" (click)="changePassword()">
-        Change Password
-      </ion-button>
-
-      <ion-button expand="block" color="danger" fill="solid" (click)="logout()">
-        Logout
-      </ion-button>
+      <!-- EDIT MODE -->
+      <ng-container *ngIf="isEditing">
+        <ion-button expand="block" fill="solid" (click)="saveProfile()">
+          Save Changes
+        </ion-button>
+        <ion-button expand="block" color="medium" fill="outline" (click)="cancelEdit()">
+          Cancel
+        </ion-button>
+      </ng-container>
     </div>
 
   </div>
-
 </div>

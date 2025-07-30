@@ -1,60 +1,72 @@
 <ion-content>
   <div class="bookings-wrapper">
 
-  <!-- 🔰 Header Branding -->
-  <div class="header">
-    <div class="logo-brand">
-      <div class="logo-dot"></div>
-      <span class="logo-text">StayNest</span>
+    <!-- 🔰 Header Branding -->
+    <div class="header">
+      <div class="logo-brand">
+        <div class="logo-dot"></div>
+        <span class="logo-text">StayNest</span>
+      </div>
+      <h2 class="title">My Bookings</h2>
+      <p class="subtitle">Track and manage your accommodation bookings</p>
     </div>
-    <h2 class="title">My Bookings</h2>
-    <p class="subtitle">Track and manage your accommodation bookings</p>
-  </div>
 
-  <!-- 🧭 Tab Filters -->
-  <ion-segment [(ngModel)]="selectedSegment" color="success">
-    <ion-segment-button value="all">
-      <ion-label>All</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="upcoming">
-      <ion-label>Upcoming</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="past">
-      <ion-label>Past</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+    <!-- 🧭 Tab Filters -->
+    <ion-segment [(ngModel)]="selectedSegment" color="success" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="all">
+        <ion-label>All</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="upcoming">
+        <ion-label>Upcoming</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="past">
+        <ion-label>Past</ion-label>
+      </ion-segment-button>
+    </ion-segment>
 
-  <!-- 📦 Booking Cards -->
-  <div class="booking-feed">
-    <div class="booking-card" *ngFor="let booking of filteredBookings">
-      <img [src]="booking.image" alt="Accommodation" class="booking-image" />
-
-      <div class="card-content">
-        <div class="info-row">
-          <h3>{{ booking.name }}</h3>
-          <span class="status" [ngClass]="booking.status">{{ booking.status | titlecase }}</span>
+    <!-- 📦 Booking Cards -->
+    <div class="booking-feed">
+      <div class="booking-card" *ngFor="let booking of filteredBookings">
+        <img src="../../../../assets/accomodation_02.jpeg" alt="Accommodation" class="booking-image" />
+        <div class="card-content">
+          <div class="info-row">
+            <h3>{{ booking.name }}</h3>
+            <span class="status" [ngClass]="booking.status">{{ booking.status | titlecase }}</span>
+          </div>
+          <p class="dates">
+            📅 {{ booking.checkIn }} → {{ booking.checkOut }}
+          </p>
+          <p class="details">
+            🏠 {{ booking.location }}
+          </p>
+          <p class="details">
+            👤 Max Guests: {{ booking.maxGuests }}
+          </p>
+          <p class="details">
+            🛡️ Policy: {{ booking.bookingPolicy }}
+          </p>
+          <p class="details" *ngIf="booking.description">
+            📌 {{ booking.description }}
+          </p>
+          <!-- Action buttons -->
+          <div class="actions">
+            <ion-button fill="outline" size="small" color="success" *ngIf="booking.status === 'upcoming'" (click)="navigateToChat()">
+              Chat
+            </ion-button>
+            <ion-button fill="outline" size="small" color="danger" *ngIf="booking.status === 'upcoming'" (click)="cancelBooking(booking)">
+              Cancel
+            </ion-button>
+            <ion-button fill="outline" size="small" color="success" *ngIf="booking.status === 'past'" (click)="rateBooking()">
+              Rate
+            </ion-button>
+            <ion-button fill="outline" size="small" color="primary" (click)="viewDetails(booking)">
+              View Details
+            </ion-button>
+          </div>
         </div>
 
-        <p class="dates">
-          📅 {{ booking.checkIn }} → {{ booking.checkOut }}
-        </p>
-
-        <div class="actions">
-          <ion-button fill="outline" size="small" color="success" *ngIf="booking.status === 'upcoming'" (click)="navigateToChat()">
-            Chat
-          </ion-button>
-          <ion-button fill="outline" size="small" color="danger" *ngIf="booking.status === 'upcoming'" (click)="cancelBooking(booking)">
-            Cancel
-          </ion-button>
-           <ion-button fill="outline" size="small" color="success" *ngIf="booking.status === 'past'" (click)="rateBooking()">
-            Rate
-          </ion-button>
-          <ion-button fill="outline" size="small" color="primary" (click)="viewDetails(booking)">
-            View Details
-          </ion-button>
-        </div>
       </div>
     </div>
+
   </div>
-</div>
 </ion-content>

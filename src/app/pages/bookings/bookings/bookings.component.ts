@@ -5,6 +5,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { RateAccomodationModalComponent } from 'src/app/re-useable-components/rate-accomodation-modal/rate-accomodation-modal/rate-accomodation-modal.component';
+import { CalendarService } from 'src/app/servicess/calendar-service/calendar.service';
+import { PropertyService } from 'src/app/servicess/property-service/property.service';
+import { BookingWithProperty } from 'src/app/models/BookingWithProperty';
+
 
 @Component({
   selector: 'app-bookings',
@@ -16,35 +20,22 @@ import { RateAccomodationModalComponent } from 'src/app/re-useable-components/ra
 export class BookingsComponent  implements OnInit {
 
   selectedSegment: string = 'all';
-
-  bookings = [
-    {
-      name: 'GreenVilla Lodge',
-      image: 'assets/accomodation_01.jpeg',
-      status: 'upcoming',
-      checkIn: '2025-08-10',
-      checkOut: '2025-08-15'
-    },
-    {
-      name: 'Urban Nest',
-      image: 'assets/accomodation_02.jpeg',
-      status: 'past',
-      checkIn: '2025-06-01',
-      checkOut: '2025-06-05'
-    },
-  ];
+  userId!: number;
+  allBookings: BookingWithProperty[] = [];
+  filteredBookings: BookingWithProperty[] = [];
 
   constructor(
     private alertCtrl: AlertController,
     private navCtrl: NavController,
     private modalController:ModalController,
+    private slotService:CalendarService,
+    private propertyService:PropertyService
   ) { }
 
-  ngOnInit() {}
-
-  get filteredBookings() {
-    if (this.selectedSegment === 'all') return this.bookings;
-    return this.bookings.filter(b => b.status === this.selectedSegment);
+  ngOnInit() {
+    const userStr = localStorage.getItem('user');
+    this.userId = userStr ? Number(userStr) : 0;
+    this.loadBookings();
   }
 
   cancelBooking(booking: any) {
@@ -73,4 +64,48 @@ export class BookingsComponent  implements OnInit {
   }
 }
 
+ loadBookings() {
+  this.slotService.getSlotsByUserId().subscribe((slots: any[]) => {
+    const bookingsWithPropertyDetails = slots.map(slot =>
+      this.propertyService.getPropertyById(slot.propertyId).toPromise().then((property: any) => {
+        return {
+          id: slot.id,
+          checkIn: slot.availabilityDates?.[0],  
+          checkOut: slot.availabilityDates?.[0],
+          status: slot.status,
+          name: property.name,
+          image: property.image || 'assets/default-property.jpg',
+          location: property.location || '', // Added location property
+          description: property.description,
+          maxGuests: slot.maxGuests,
+          bookingPolicy: slot.bookingPolicy,
+          propertyId: slot.propertyId
+        };
+      })
+    );
+
+    Promise.all(bookingsWithPropertyDetails).then((results) => {
+      this.allBookings = results;
+      this.filterBookings();
+    });
+  });
+}
+
+
+
+
+  filterBookings() {
+    if (this.selectedSegment === 'all') {
+      this.filteredBookings = this.allBookings;
+    } else {
+      this.filteredBookings = this.allBookings.filter(
+        b => b.status === this.selectedSegment
+      );
+    }
+  }
+
+  segmentChanged(event: any) {
+   this.selectedSegment = event.detail.value;
+   this.filterBookings();
+}
 }

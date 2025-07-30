@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserDTO } from 'src/app/models/UserDTO';
+import { ChangePasswordPayload } from 'src/app/models/ChangePasswordPayload';
 
 @Injectable({
   providedIn: 'root'
@@ -29,4 +30,13 @@ export class AuthService {
     return this.http.get<UserDTO>(`${this.apiUrl}/user/${userId}`);
   }
 
+  changePassword(payload: ChangePasswordPayload): Observable<any> {
+    return this.http.post(`${this.apiUrl}/change-password`, payload, {responseType: 'text'});
+  }
+
+  updateProfile(payload: { userId: number; fullName: string; phoneNumber: string }): Observable<any> {
+   return this.http.put(`${this.apiUrl}/update-profile`, payload, { responseType: 'text' });
+  }
+
+  
 }

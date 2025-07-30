@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserDTO } from 'src/app/models/UserDTO';
+import { CalendarService } from 'src/app/servicess/calendar-service/calendar.service';
 
 @Component({
   selector: 'app-accomodation-details',
@@ -14,33 +16,33 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AccomodationDetailsComponent  implements OnInit {
 
+  slots: any[] = [];
+
   accommodation: any;
+  landlord: UserDTO | null = null;
 
   constructor(
     private route: ActivatedRoute, 
     private router:Router, 
     private navCtrl: NavController,
     private toastController: ToastController,
-    ) {
-    this.accommodation = {
-      id: 1,
-      name: 'GreenVilla Lodge',
-      price: 650,
-      images: [
-        'assets/accomodation_01.jpeg',
-        'assets/accomodation_02.jpeg',
-        'assets/accomodation_03.jpeg'
-      ],
-      description: 'A peaceful lodge perfect for family getaways and cozy weekends.',
-      amenities: ['Wi-Fi', 'Swimming Pool', 'Parking', 'Kitchenette'],
-      landlord: {
-        name: 'Lungile H.',
-        contact: '083 456 7890'
-      }
-    };
-  }
+    private slotService:CalendarService
+    ) 
+  {}
 
   ngOnInit() {
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras?.state as { post: any };
+   if (state?.post) {
+    this.accommodation = state.post;
+   } else {
+    this.presentErrorToast();
+   }
+
+   const propertyId = this.route.snapshot.params['id']; // or however you get the property ID
+   this.slotService.getSlotsByProperty(propertyId).subscribe((data) => {
+    this.slots = data;
+  });
   }
 
   bookNow() {
@@ -63,5 +65,16 @@ export class AccomodationDetailsComponent  implements OnInit {
   goBack(){
     this.navCtrl.back();
   }
+
+  async presentErrorToast() {
+  const toast = await this.toastController.create({
+    message: 'Failed to load accommodation details.',
+    duration: 2000,
+    color: 'danger',
+    position: 'top'
+  });
+  await toast.present();
+  this.navCtrl.back();
+}
 
 }

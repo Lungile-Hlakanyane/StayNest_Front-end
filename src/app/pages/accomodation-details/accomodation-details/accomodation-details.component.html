@@ -9,7 +9,7 @@
 
   <!-- 🏡 Static Image Preview -->
   <div class="image-preview" style="position: relative; bottom:25px;">
-    <img [src]="accommodation.images[0]" class="details-image" alt="Accommodation Image" />
+   <img [src]="accommodation.imageUrl" class="details-image" alt="Accommodation Image" />
   </div>
 
   <div class="details-content">
@@ -35,9 +35,9 @@
 
     <!-- 🧑‍💼 Landlord Info -->
     <div class="section">
-      <h4 class="section-title">Landlord Info</h4>
-      <p><strong>Name:</strong> {{ accommodation.landlord.name }}</p>
-      <p><strong>Contact:</strong> {{ accommodation.landlord.contact }}</p>
+      <h4 class="section-title">Contact Info</h4>
+      <p><strong>Email:</strong> {{  accommodation.email }}</p>
+      <p><strong>Contact:</strong> +27{{  accommodation.phoneNumber }}</p>
     </div>
 
     <!-- 🔘 Action Buttons -->

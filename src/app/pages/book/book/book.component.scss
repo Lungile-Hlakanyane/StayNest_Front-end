@@ -63,3 +63,45 @@ ion-datetime {
   padding: 8px;
   --background: #fff;
 }
+
+.slots-grid {
+  padding: 20px 0;
+}
+
+ion-card {
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+}
+
+ion-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+ion-card.selected {
+  border: 2px solid #4caf50;
+  background-color: #e8f5e9;
+}
+
+ion-card-content p {
+  margin: 6px 0;
+  color: #444;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+ion-row {
+  margin-bottom: 16px;
+}
+
+ion-col {
+  padding: 8px;
+}
+
+.selected-slot {
+  border: 2px solid var(--ion-color-primary);
+}
+
