@@ -160,3 +160,23 @@ body, html {
   text-align: center;
 }
 
+.password-group {
+  position: relative;
+
+  input {
+    width: 100%;
+    padding-right: 40px;
+  }
+
+  .toggle-eye {
+    position: absolute;
+    right: 10px;
+    top: 40%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #666;
+    cursor: pointer;
+  }
+}
+
+

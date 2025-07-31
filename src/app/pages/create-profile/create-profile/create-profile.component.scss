@@ -133,3 +133,20 @@
   color: #4caf50;
   margin-top: 8px;
 }
+
+// password vissibilty toggle
+.input-group {
+  position: relative;
+}
+
+.toggle-password-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+}
+
+

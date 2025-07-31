@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertController, IonicModule, NavController } from '@ionic/angular';
+import { Message } from 'src/app/models/Message';
+import { MessageDTO } from 'src/app/models/MessageDTO';
+import { MessageService } from 'src/app/servicess/message-service/message.service';
 
 @Component({
   selector: 'app-notifications',
@@ -12,40 +15,48 @@ import { AlertController, IonicModule, NavController } from '@ionic/angular';
 })
 export class NotificationsComponent  implements OnInit {
 
-  recentChats = [
-    {
-      landlord: 'John Mokoena',
-      message: 'Your check-in is confirmed for tomorrow!',
-      time: '09:45 AM',
-      avatar: 'assets/profile-pic-image.jpg',
-      bookingId: 101
-    },
-    {
-      landlord: 'Sarah Ndlovu',
-      message: 'Let me know if you need help with WiFi setup.',
-      time: 'Yesterday',
-      avatar: 'assets/profile-pic-image.jpg',
-      bookingId: 102
-    },
-    {
-      landlord: 'Michael Khumalo',
-      message: 'Thanks for choosing our place. Enjoy!',
-      time: '2 days ago',
-      avatar: 'assets/profile-pic-image.jpg',
-      bookingId: 103
-    }
-  ];
+  recentChats: any[] = [];
 
-  constructor(private navCtrl: NavController) { }
+  constructor(
+    private navCtrl: NavController,
+    private messageService: MessageService
+  ) { }
 
-  ngOnInit() {}
-
-   openChat(chat: any) {
-    this.navCtrl.navigateForward(`/chat`);
+  ngOnInit() {
+    this.fetchUserNotifications();
   }
+
+openChat(chat: any) {
+  this.navCtrl.navigateForward(['/chat'], {
+    state: { receiverId: chat.senderId } // 👈 correct field
+  });
+}
+
+
 
   goBack(){
     this.navCtrl.back();
+  }
+
+  fetchUserNotifications(){
+    const userId = localStorage.getItem('user');
+    if (userId) {
+      const receiverId = Number(userId);
+      this.messageService.getMessagesForReceiver(receiverId).subscribe({
+        next: (messages: Message[]) => {
+          this.recentChats = messages.map((msg) => ({
+            landlord: `Landlord ID: ${msg.senderId}`, // You can fetch name if needed
+            message: msg.content,
+            time: new Date(msg.timestamp).toLocaleString(),
+            avatar: 'assets/profile-pic-image.jpg',
+            senderId: msg.senderId
+          }));
+        },
+        error: (err) => {
+          console.error('Failed to load messages for receiver:', err);
+        }
+      });
+    }
   }
 
 }

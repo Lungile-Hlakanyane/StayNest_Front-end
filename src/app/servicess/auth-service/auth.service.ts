@@ -38,5 +38,9 @@ export class AuthService {
    return this.http.put(`${this.apiUrl}/update-profile`, payload, { responseType: 'text' });
   }
 
+  getUserCount(): Observable<number> {
+   return this.http.get<number>(`${this.apiUrl}/users/count`);
+  }
+
   
 }

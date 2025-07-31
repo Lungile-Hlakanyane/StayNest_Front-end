@@ -47,9 +47,11 @@
           <option value="female">Female</option>
         </select>
       </div>
-      <div class="input-group">
-        <input type="password" placeholder="Password" required [(ngModel)]="user.password" name="password" />
-      </div>
+
+ <div class="input-group">
+    <input [type]="showPassword ? 'text' : 'password'" placeholder="Password" required [(ngModel)]="user.password" name="password"/>
+    <ion-icon [name]="showPassword ? 'eye-off' : 'eye'" class="toggle-password-icon" (click)="togglePasswordVisibility()"></ion-icon>
+</div>
       <button type="submit" class="save-btn" (click)="signUp()">Sign Up</button>
     </form>
 

@@ -37,5 +37,8 @@ getSlotCountByLandlordId(landlordId: number): Observable<number> {
   return this.http.get<number>(`http://localhost:8080/api/calendar-slots/count/landlord/${landlordId}`);
 }
 
+getTotalBookedSlots(): Observable<number> {
+  return this.http.get<number>('http://localhost:8080/api/calendar-slots/count/booked');
+}
 
 }

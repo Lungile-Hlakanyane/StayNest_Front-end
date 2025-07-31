@@ -17,6 +17,7 @@ import { UserDTO } from 'src/app/models/UserDTO';
 export class CreateProfileComponent  implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef;
   avatarPreview: string | ArrayBuffer | null = null;
+  showPassword: boolean = false;
 
   constructor(
     private router: Router,
@@ -24,7 +25,6 @@ export class CreateProfileComponent  implements OnInit {
     private toastController: ToastController,
     private navCtrl: NavController,
     private authService: AuthService
-
   ) { }
 
   user: UserDTO = {
@@ -37,6 +37,10 @@ export class CreateProfileComponent  implements OnInit {
   }
 
   ngOnInit() {}
+
+ togglePasswordVisibility() {
+   this.showPassword = !this.showPassword;
+ }
 
   triggerFileInput() {
     this.fileInput.nativeElement.click();

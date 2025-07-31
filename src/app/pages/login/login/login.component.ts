@@ -19,6 +19,9 @@ export class LoginComponent  implements OnInit {
     password: ''
   };
 
+  rememberMe: boolean = false; 
+  showPassword: boolean = false;
+
   constructor(
     private router: Router,
     private loadingController:LoadingController,
@@ -27,40 +30,66 @@ export class LoginComponent  implements OnInit {
     private authService:AuthService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    const rememberedEmail = localStorage.getItem('rememberedEmail');
+    const rememberedPassword = localStorage.getItem('rememberedPassword');
 
-async onLogin() {
-  const loading = await this.loadingController.create({
-    message: 'Logging In...',
-    spinner: 'crescent',
-  });
-  await loading.present();
-
-  this.authService.login(this.loginData.email, this.loginData.password).subscribe({
-    next: async (res) => {
-      await loading.dismiss();
-      localStorage.setItem('role', res.role);
-      localStorage.setItem('user', res.userId);
-      this.showToast('Login successful', 'success');
-      this.router.navigate(['/home']);
-    },
-    error: async (err) => {
-      await loading.dismiss();
-      this.showToast(err.error.message || 'Login failed', 'danger');
+    if (rememberedEmail && rememberedPassword) {
+      this.loginData.email = rememberedEmail;
+      this.loginData.password = rememberedPassword;
+      this.rememberMe = true;
     }
-  });
-}
+  }
 
+  togglePasswordVisibility() {
+   this.showPassword = !this.showPassword;
+  }
 
-async showToast(message: string, color: string = 'success') {
-  const toast = await this.toastController.create({
-    message: message,
-    duration: 3000,
-    position: 'top',
-    color: color
-  });
-  await toast.present();
-}
+ async onLogin() {
+    const loading = await this.loadingController.create({
+      message: 'Logging In...',
+      spinner: 'crescent',
+    });
+    await loading.present();
+    this.authService.login(this.loginData.email, this.loginData.password).subscribe({
+      next: async (res) => {
+        await loading.dismiss();
+        if (res && res.userId && res.role) {
+          localStorage.setItem('user', res.userId);
+          localStorage.setItem('role', res.role);
+          if (this.rememberMe) {
+            localStorage.setItem('rememberedEmail', this.loginData.email);
+          } else {
+            localStorage.removeItem('rememberedEmail');
+          }
+          await this.showToast('Login successful', 'success');
+          if (res.role === 'landlord') {
+            this.router.navigate(['/home']);
+          } else if (res.role === 'admin') {
+            this.router.navigate(['/home']);
+          } else {
+            this.router.navigate(['/home']);
+          }
+        } else {
+          this.showToast('Invalid response from server', 'danger');
+        }
+      },
+      error: async (err) => {
+        await loading.dismiss();
+        this.showToast(err.error?.message || 'Login failed', 'danger');
+      }
+    });
+  }
+
+  async showToast(message: string, color: string = 'success') {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'top',
+      color: color
+    });
+    await toast.present();
+  }
 
 
 navigate(link: string){

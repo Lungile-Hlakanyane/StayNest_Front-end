@@ -19,12 +19,17 @@
     <div class="chat-window">
       <div class="message-list">
         <div
-          *ngFor="let message of messages"
-          [ngClass]="{ 'message-bubble': true, 'sent': message.fromUser, 'received': !message.fromUser }"
-        >
-          <p>{{ message.text }}</p>
-          <span class="time">{{ message.time }}</span>
-        </div>
+  *ngFor="let message of messages"
+  [ngClass]="{
+    'message-bubble': true,
+    'sent': message.senderId === loggedInUserId,
+    'received': message.senderId !== loggedInUserId
+  }"
+>
+  <p>{{ message.content }}</p>
+  <span class="time">{{ message.timestamp }}</span>
+</div>
+
       </div>
     </div>
   </div>

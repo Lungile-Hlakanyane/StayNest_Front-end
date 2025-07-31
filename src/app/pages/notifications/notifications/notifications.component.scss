@@ -66,3 +66,57 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+
+// New styles for Notifications
+.notification-card {
+  display: flex;
+  padding: 12px;
+  gap: 10px;
+  border-bottom: 1px solid #eee;
+  align-items: flex-start;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chat-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+  color: #1a1a1a;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: #999;
+  white-space: nowrap;
+  margin-left: 10px;
+}
+
+.preview {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  max-width: 100%;
+}

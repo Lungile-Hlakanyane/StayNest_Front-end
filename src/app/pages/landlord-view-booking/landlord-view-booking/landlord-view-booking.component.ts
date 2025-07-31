@@ -7,6 +7,7 @@ import { AuthService } from '../../../servicess/auth-service/auth.service';
 import { UserDTO } from 'src/app/models/UserDTO';
 import { PropertyService } from '../../../servicess/property-service/property.service';
 import { Property } from 'src/app/models/Property';
+import { MessageService } from 'src/app/servicess/message-service/message.service';
 
 
 @Component({
@@ -30,7 +31,8 @@ export class LandlordViewBookingComponent  implements OnInit {
     private router:Router,
     private actionSheetController:ActionSheetController,
     private authService:AuthService,
-    private propertyService:PropertyService
+    private propertyService:PropertyService,
+    private messageService:MessageService
   ) { }
 
   ngOnInit() {
@@ -62,6 +64,33 @@ export class LandlordViewBookingComponent  implements OnInit {
           });
 
           await toast.present();
+
+          const landlordId = localStorage.getItem('user'); // assuming logged-in landlord
+          const tenantId = this.booking?.bookedById;
+
+          if (landlordId && tenantId) {
+            // Prepare welcome message
+            const messageDTO = {
+              senderId: Number(landlordId),
+              receiverId: tenantId,
+              content: `Hi! You have successfully checked in. Welcome to your StayNest apartment! 😊`
+            };
+
+            // Send the message
+            this.messageService.sendMessage(messageDTO).subscribe({
+              next: () => {
+                // Navigate to Chat after successful message
+                this.router.navigateByUrl('/chat', {
+                  state: { receiverId: tenantId }
+                });
+              },
+              error: (err) => {
+                console.error('Failed to send check-in message:', err);
+              }
+            });
+          } else {
+            console.warn('Missing sender or receiver ID');
+          }
         }
       }
     ]
@@ -72,8 +101,12 @@ export class LandlordViewBookingComponent  implements OnInit {
 
 
 navigateToChat() {
-  this.router.navigateByUrl('/chat');
+  const tenantId = this.booking?.bookedById;
+  this.router.navigateByUrl('/chat', {
+    state: { receiverId: tenantId }
+  });
 }
+
 
 async presentInvoiceActionSheet() {
     const actionSheet = await this.actionSheetController.create({
