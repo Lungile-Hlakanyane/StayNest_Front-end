@@ -44,6 +44,7 @@ import { AdminPaymentsTransactionsComponent } from './pages/admin-payments-trans
 import { PushNotificationsComponent } from './pages/push-notifications/push-notifications/push-notifications.component';
 import { AddCalenderComponent } from './pages/add-calender/add-calender/add-calender.component';
 import { CalendarSlotsComponent } from './pages/calendar-slots/calendar-slots/calendar-slots.component';
+import { BlockedUserComponent } from './pages/blocked-user/blocked-user/blocked-user.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -73,7 +74,7 @@ const routes: Routes = [
   { path: 'help-faq', component: HelpFaqComponent},
   { path: 'terms-and-conditions', component: TermsAndConditionsComponent},
   { path: 'manage-users', component: ManageUsersComponent},
-  { path: 'view-user', component: ViewUserComponent},
+  { path: 'view-user/:id', component: ViewUserComponent},
   { path: 'manage-properties', component: ManagePropertiesComponent},
   { path: 'admin-view-property', component: AdminViewPropertyComponent},
   { path: 'admin-view-booking', component:AdminViewBookingComponent},
@@ -83,6 +84,7 @@ const routes: Routes = [
   { path: 'push-announcements', component: PushNotificationsComponent},
   { path: 'add-calender/:propertyId', component: AddCalenderComponent},
   { path: 'calendar-slots/:propertyId', component: CalendarSlotsComponent},
+  { path: 'blocked-user',component:BlockedUserComponent},
   {
     path: '',
     component: TabsComponent,

@@ -1,0 +1,58 @@
+.login-wrapper {
+  padding: 25px;
+  width: 100%;
+}
+
+.login-box {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.welcome-title {
+  color: #d32f2f;
+}
+
+.subtitle {
+  color: #888;
+  margin-bottom: 20px;
+
+  strong {
+    color: #d32f2f;
+  }
+}
+
+.sign-in {
+  --background: #d32f2f;
+  color: white;
+  font-weight: 500;
+}
+
+.logo-brand {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.logo-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+
+.block-user-card {
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  animation: fadeInUp 0.5s ease;
+
+   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

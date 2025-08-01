@@ -18,7 +18,7 @@ export class AdminDashboardComponent  implements OnInit {
   totalUsers = 0;
   totalProperties = 0;
   totalBookings = 0;
-  totalEarnings = 148320;
+  totalEarnings = 0;
 
   constructor(
     private router: Router, 
@@ -31,6 +31,7 @@ export class AdminDashboardComponent  implements OnInit {
     this.loadUserCount();
     this.loadPropertyCount();
     this.loadTotalBookings();
+    this.loadTotalEarnings();
   }
   
   navigateTo(path: string) {
@@ -65,6 +66,17 @@ export class AdminDashboardComponent  implements OnInit {
       error: (err) => console.error('Failed to fetch total bookings', err)
     });
   }
+
+  loadTotalEarnings() {
+  this.calendarService.getTotalEarnings().subscribe({
+    next: (total: number) => {
+      this.totalEarnings = total;
+    },
+    error: (err) => {
+      console.error('Failed to fetch total earnings', err);
+    }
+  });
+}
 
 
 }

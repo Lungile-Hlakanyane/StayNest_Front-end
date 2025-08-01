@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule, LoadingController, NavController, ToastController } from '@ionic/angular';
+import { IonicModule, LoadingController, NavController, ToastController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servicess/auth-service/auth.service';
+import { BlockedUserComponent } from '../../blocked-user/blocked-user/blocked-user.component';
+
 
 @Component({
   selector: 'app-login',
@@ -27,7 +29,8 @@ export class LoginComponent  implements OnInit {
     private loadingController:LoadingController,
     private toastController: ToastController,
     private navCtrl: NavController,
-    private authService:AuthService
+    private authService:AuthService,
+    private modalController:ModalController
   ) { }
 
   ngOnInit() {
@@ -46,40 +49,72 @@ export class LoginComponent  implements OnInit {
   }
 
  async onLogin() {
-    const loading = await this.loadingController.create({
-      message: 'Logging In...',
-      spinner: 'crescent',
-    });
-    await loading.present();
-    this.authService.login(this.loginData.email, this.loginData.password).subscribe({
-      next: async (res) => {
-        await loading.dismiss();
-        if (res && res.userId && res.role) {
-          localStorage.setItem('user', res.userId);
-          localStorage.setItem('role', res.role);
-          if (this.rememberMe) {
-            localStorage.setItem('rememberedEmail', this.loginData.email);
-          } else {
-            localStorage.removeItem('rememberedEmail');
-          }
-          await this.showToast('Login successful', 'success');
-          if (res.role === 'landlord') {
-            this.router.navigate(['/home']);
-          } else if (res.role === 'admin') {
-            this.router.navigate(['/home']);
-          } else {
-            this.router.navigate(['/home']);
-          }
-        } else {
-          this.showToast('Invalid response from server', 'danger');
-        }
-      },
-      error: async (err) => {
-        await loading.dismiss();
-        this.showToast(err.error?.message || 'Login failed', 'danger');
+  const loading = await this.loadingController.create({
+    message: 'Logging In...',
+    spinner: 'crescent',
+  });
+  await loading.present();
+
+  this.authService.login(this.loginData.email, this.loginData.password).subscribe({
+    next: async (res) => {
+      await loading.dismiss();
+
+      // Check if user is blocked
+      if (res.blocked) {
+        console.log('User is blocked, opening modal'); 
+        await this.showBlockedUserModal();
+        return;
       }
+
+      if (res && res.userId && res.role) {
+        localStorage.setItem('user', res.userId);
+        localStorage.setItem('role', res.role);
+
+        if (this.rememberMe) {
+          localStorage.setItem('rememberedEmail', this.loginData.email);
+        } else {
+          localStorage.removeItem('rememberedEmail');
+        }
+
+        await this.showToast('Login successful', 'success');
+
+        // Role-based routing
+        if (res.role === 'landlord') {
+          this.router.navigate(['/home']);
+        } else if (res.role === 'admin') {
+          this.router.navigate(['/home']);
+        } else {
+          this.router.navigate(['/home']);
+        }
+
+      } else {
+        this.showToast('Invalid response from server', 'danger');
+      }
+    },
+
+   error: async (err) => {
+  await loading.dismiss();
+
+  const errorMessage = err.error?.message || 'Login failed';
+
+  // If backend sends a message indicating the user is blocked
+  if (errorMessage.toLowerCase().includes('blocked') || errorMessage.toLowerCase().includes('banned')) {
+    const modal = await this.modalController.create({
+      component: BlockedUserComponent,
+      backdropDismiss: false,
+      cssClass: 'blocked-user-modal'
     });
+    await modal.present();
+    return;
   }
+
+  this.showToast(errorMessage, 'danger');
+}
+
+
+  });
+}
+
 
   async showToast(message: string, color: string = 'success') {
     const toast = await this.toastController.create({
@@ -94,6 +129,15 @@ export class LoginComponent  implements OnInit {
 
 navigate(link: string){
  return this.router.navigate([link]);
+}
+
+async showBlockedUserModal() {
+  const modal = await this.modalController.create({
+    component: BlockedUserComponent,
+    cssClass: 'booking-success-modal',
+    backdropDismiss: false 
+  });
+  await modal.present();
 }
 
 

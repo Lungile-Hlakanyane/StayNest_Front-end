@@ -53,7 +53,7 @@ import { PushNotificationsComponent } from './pages/push-notifications/push-noti
 import { HttpClientModule } from '@angular/common/http';
 import { AddCalenderComponent } from './pages/add-calender/add-calender/add-calender.component';
 import { CalendarSlotsComponent } from './pages/calendar-slots/calendar-slots/calendar-slots.component';
-
+import { BlockedUserComponent } from './pages/blocked-user/blocked-user/blocked-user.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -67,7 +67,7 @@ import { CalendarSlotsComponent } from './pages/calendar-slots/calendar-slots/ca
   HelpFaqComponent, TermsAndConditionsComponent, AdminDashboardComponent, ManageUsersComponent, ViewUserComponent, 
   ManagePropertiesComponent, AdminViewPropertyComponent, AdminBookingOversightComponent, AdminViewBookingComponent, 
   AdminSupportTicketComponent, AdminReportsAnalyticsComponent, AdminPaymentsTransactionsComponent, PushNotificationsComponent,
-  AddCalenderComponent, CalendarSlotsComponent
+  AddCalenderComponent, CalendarSlotsComponent, BlockedUserComponent
 ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

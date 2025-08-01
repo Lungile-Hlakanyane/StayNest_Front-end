@@ -42,5 +42,16 @@ export class AuthService {
    return this.http.get<number>(`${this.apiUrl}/users/count`);
   }
 
+ getAllUsers(): Observable<UserDTO[]> {
+  return this.http.get<UserDTO[]>(`${this.apiUrl}/users`);
+ }
+
+ deleteUserById(userId: number) {
+  return this.http.delete(`${this.apiUrl}/user/${userId}`, {responseType: 'text'});
+}
+
+blockUser(userId: number, block: boolean): Observable<any> {
+  return this.http.put(`${this.apiUrl}/user/${userId}/block?block=${block}`, null, { responseType: 'text' });
+}
   
 }

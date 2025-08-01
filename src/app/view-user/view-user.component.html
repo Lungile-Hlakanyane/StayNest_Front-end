@@ -20,9 +20,20 @@
 
     <!-- 🖼 Avatar + Basic Info -->
     <div style="text-align: center; margin-top: 20px;">
-      <img [src]="user.photo" alt="User Photo" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #4caf50;" />
-      <h2 style="margin-top: 10px;">{{ user.fullName }}</h2>
-      <p style="color: #666;">{{ user.role }}</p>
+      <img  src="../../../../assets/profile-pic-image.jpg" alt="User Photo" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #4caf50;" />
+      <h2 style="margin-top: 10px;">{{ user?.fullName }}</h2>
+      <p style="color: #666;">{{ user?.role }}</p>
+    </div>
+
+    <div class="status-code-container">
+
+    <ion-item>
+     <ion-label color="medium">Status:</ion-label>
+      <ion-note slot="end" color="{{ user?.block ? 'danger' : 'success' }}">
+      {{ user?.block ? 'Blocked' : 'Active' }}
+     </ion-note>
+    </ion-item>
+
     </div>
 
     <!-- 🧾 Enhanced Info Cards -->
@@ -32,13 +43,17 @@
     <h4>Basic Information</h4>
   </div>
   <div class="card-detail">
-    <p><strong>Email:</strong> {{ user.email }}</p>
-    <p>
-      <strong>Status:</strong>
-      <span [style.color]="user.status === 'Active' ? '#4caf50' : 'red'">
-        {{ user.status }}
-      </span>
-    </p>
+    <p><strong>Email:</strong> {{ user?.email }}</p>
+    <p><strong>Male:</strong> {{ user?.gender }}</p>
+    
+
+    <!-- Will fix this error at the later stage -->
+   <!-- <p>
+    <strong>Status:</strong>
+    <span [style.color]="user?.is_active ? '#4caf50' : 'red'">
+     {{ user?.is_active ? 'Active' : 'Inactive' }}
+    </span>
+   </p> -->
   </div>
 </div>
 
@@ -48,15 +63,13 @@
     <h4>Contact Information</h4>
   </div>
   <div class="card-detail">
-    <p><strong>Phone:</strong> {{ user.phone || 'N/A' }}</p>
-    <p><strong>Emergency Contact:</strong> {{ user.emergencyContact || 'N/A' }}</p>
+    <p><strong>Phone:</strong> {{ user?.phoneNumber || 'N/A' }}</p>
+    <!-- <p><strong>Emergency Contact:</strong> {{ user.emergencyContact || 'N/A' }}</p> -->
   </div>
 </div>
-
-
     <!-- ⚙️ Actions -->
     <div style="margin-top: 30px; display: flex;gap: 15px;">
-      <ion-button color="danger" expand="block" (click)="blockUser()">Block</ion-button>
+      <ion-button [color]="user?.block ? 'success' : 'danger'" expand="block" (click)="toggleBlockUser()"> {{ user?.block ? 'Unblock' : 'Block' }}</ion-button>
       <ion-button color="medium" expand="block" (click)="deleteUser()">Delete User</ion-button>
       <ion-button fill="outline" color="success" expand="block" (click)="goBack()">Back</ion-button>
     </div>

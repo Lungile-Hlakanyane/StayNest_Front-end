@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/servicess/auth-service/auth.service';
+import { UserDTO } from 'src/app/models/UserDTO';
 
 @Component({
   selector: 'app-manage-users',
@@ -14,30 +16,16 @@ import { Router } from '@angular/router';
 export class ManageUsersComponent  implements OnInit {
 
   searchTerm: string = '';
-  users = [
-    {
-      fullName: 'Lungile Hlakanyane',
-      email: 'lungile@gmail.com',
-      role: 'Tenant',
-      photo: 'assets/profile-pic-image.jpg'
-    },
-    {
-      fullName: 'Nandi Nkosi',
-      email: 'nandi@landlord.co.za',
-      role: 'Landlord',
-      photo: 'assets/profile-pic-image.jpg'
-    },
-    {
-      fullName: 'Admin Manager',
-      email: 'admin@staynest.co.za',
-      role: 'Admin',
-      photo: 'assets/profile-pic-image.jpg'
-    }
-  ];
+  users: UserDTO[] = [];
+ 
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
-  constructor(private router: Router) { }
-
-  ngOnInit() {}
+  ngOnInit() {
+    this.fetchAllUsers();
+  }
 
    filteredUsers() {
     if (!this.searchTerm) return this.users;
@@ -49,12 +37,19 @@ export class ManageUsersComponent  implements OnInit {
     );
   }
 
-  viewUser() {
-    this.router.navigate(['/view-user']);
+  viewUser(id: number) {
+    this.router.navigate(['/view-user', id]);
   }
 
   goBack() {
     this.router.navigate(['/admin-dashboard']);
+  }
+
+  fetchAllUsers() {
+    this.authService.getAllUsers().subscribe({
+      next: (data) => this.users = data,
+      error: (err) => console.error('Failed to fetch users:', err)
+    });
   }
 
 }
