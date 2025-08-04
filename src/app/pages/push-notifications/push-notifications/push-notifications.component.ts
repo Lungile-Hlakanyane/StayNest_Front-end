@@ -17,7 +17,8 @@ export class PushNotificationsComponent  implements OnInit {
 
    newAnnouncement = {
     title: '',
-    message: ''
+    message: '',
+    recipient: ''
   };
 
  announcements: Announcement[] = [];
@@ -28,34 +29,33 @@ export class PushNotificationsComponent  implements OnInit {
     private announcementService: AnnouncementService
   ) {}
 
-   async sendAnnouncement() {
-    const { title, message } = this.newAnnouncement;
-    if (!title || !message) return;
+async sendAnnouncement() {
+  const { title, message, recipient } = this.newAnnouncement;
+  if (!title || !message || !recipient) return;
+  this.announcementService.sendAnnouncement({ title, message, recipient}).subscribe({
+    next: async (response) => {
+      this.announcements.unshift(response);
+      this.newAnnouncement = { title: '', message: '', recipient: '' };
+      const toast = await this.toastCtrl.create({
+        message: 'Announcement sent!',
+        duration: 2000,
+        color: 'success',
+        position: 'top'
+      });
+      toast.present();
+    },
+    error: async (err) => {
+      const toast = await this.toastCtrl.create({
+        message: 'Failed to send announcement',
+        duration: 2000,
+        color: 'danger',
+        position: 'top'
+      });
+      toast.present();
+    }
+  });
+}
 
-    this.announcementService.sendAnnouncement({ title, message, date: '' }).subscribe({
-      next: async (response) => {
-        this.announcements.unshift(response);
-        this.newAnnouncement = { title: '', message: '' };
-
-        const toast = await this.toastCtrl.create({
-          message: 'Announcement sent to all users!',
-          duration: 2000,
-          color: 'success',
-          position: 'top'
-        });
-        toast.present();
-      },
-      error: async (err) => {
-        const toast = await this.toastCtrl.create({
-          message: 'Failed to send announcement',
-          duration: 2000,
-          color: 'danger',
-          position: 'top'
-        });
-        toast.present();
-      }
-    });
-  }
 
   goBack() {
     this.navCtrl.back();

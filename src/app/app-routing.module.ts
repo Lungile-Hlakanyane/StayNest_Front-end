@@ -45,6 +45,8 @@ import { PushNotificationsComponent } from './pages/push-notifications/push-noti
 import { AddCalenderComponent } from './pages/add-calender/add-calender/add-calender.component';
 import { CalendarSlotsComponent } from './pages/calendar-slots/calendar-slots/calendar-slots.component';
 import { BlockedUserComponent } from './pages/blocked-user/blocked-user/blocked-user.component';
+import { UpdatesComponent } from './pages/updates/updates/updates.component';
+import { TenantRequestMaintenanceComponent } from './pages/tenant-request-maintenance/tenant-request-maintenance/tenant-request-maintenance.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -85,6 +87,8 @@ const routes: Routes = [
   { path: 'add-calender/:propertyId', component: AddCalenderComponent},
   { path: 'calendar-slots/:propertyId', component: CalendarSlotsComponent},
   { path: 'blocked-user',component:BlockedUserComponent},
+  { path: 'updates', component: UpdatesComponent},
+  { path: 'tenant-request-maintenance', component: TenantRequestMaintenanceComponent},
   {
     path: '',
     component: TabsComponent,

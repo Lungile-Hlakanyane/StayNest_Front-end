@@ -1,0 +1,25 @@
+.logo-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.enhanced-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-family: 'Poppins', sans-serif;
+
+  h4 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #4caf50;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+  }
+}

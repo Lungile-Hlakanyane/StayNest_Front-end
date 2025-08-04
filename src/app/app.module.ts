@@ -54,6 +54,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddCalenderComponent } from './pages/add-calender/add-calender/add-calender.component';
 import { CalendarSlotsComponent } from './pages/calendar-slots/calendar-slots/calendar-slots.component';
 import { BlockedUserComponent } from './pages/blocked-user/blocked-user/blocked-user.component';
+import { UpdatesComponent } from './pages/updates/updates/updates.component';
+import { TenantRequestMaintenanceComponent } from './pages/tenant-request-maintenance/tenant-request-maintenance/tenant-request-maintenance.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -67,7 +69,7 @@ import { BlockedUserComponent } from './pages/blocked-user/blocked-user/blocked-
   HelpFaqComponent, TermsAndConditionsComponent, AdminDashboardComponent, ManageUsersComponent, ViewUserComponent, 
   ManagePropertiesComponent, AdminViewPropertyComponent, AdminBookingOversightComponent, AdminViewBookingComponent, 
   AdminSupportTicketComponent, AdminReportsAnalyticsComponent, AdminPaymentsTransactionsComponent, PushNotificationsComponent,
-  AddCalenderComponent, CalendarSlotsComponent, BlockedUserComponent
+  AddCalenderComponent, CalendarSlotsComponent, BlockedUserComponent,UpdatesComponent,TenantRequestMaintenanceComponent
 ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

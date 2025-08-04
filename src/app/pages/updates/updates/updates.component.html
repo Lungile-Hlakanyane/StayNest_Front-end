@@ -1,0 +1,35 @@
+<ion-content>
+  <div class="bookings-wrapper" style="padding: 20px;">
+
+    <!-- 🔙 Back & Title -->
+    <div class="action-btn-container" style="display: flex; gap: 15px;">
+      <p (click)="goBack()" style="font-size: 30px; font-weight: bold;">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </p>
+      <p style="position: relative; top: 5px; font-size: 25px;">Updates</p>
+    </div>
+
+    <!-- 🧠 Branding Header -->
+    <div class="header">
+      <div class="logo-brand" style="display: flex; gap:5px;">
+        <div class="logo-dot"></div>
+        <span class="logo-text">StayNest</span>
+      </div>
+      <p class="subtitle">Latest announcements for our users</p>
+    </div>
+
+    <!-- 📢 Announcements -->
+    <div class="info-card">
+      <div *ngIf="announcements.length === 0">
+        <p>No announcements yet.</p>
+      </div>
+
+      <div *ngFor="let announcement of announcements" class="announcement-card">
+        <h5>{{ announcement.title }}</h5>
+        <p>{{ announcement.message }}</p>
+        <span class="date">{{ announcement.date }}</span>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

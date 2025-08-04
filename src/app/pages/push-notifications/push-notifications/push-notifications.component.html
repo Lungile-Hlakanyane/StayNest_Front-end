@@ -33,6 +33,16 @@
         </ion-textarea>
       </ion-item>
 
+      <!-- 🎯 Audience Selection -->
+     <ion-item>
+       <ion-label>Target Audience</ion-label>
+        <ion-select [(ngModel)]="newAnnouncement.recipient" interface="popover" placeholder="Select User Type">
+        <ion-select-option value="ALL">All Users</ion-select-option>
+        <ion-select-option value="LANDLORD">Landlords</ion-select-option>
+        <ion-select-option value="TENANT">Tenants</ion-select-option>
+       </ion-select>
+      </ion-item>
+
       <ion-button expand="block" color="success" (click)="sendAnnouncement()">
         <ion-icon name="send-outline" slot="start"></ion-icon>
         Send Announcement
