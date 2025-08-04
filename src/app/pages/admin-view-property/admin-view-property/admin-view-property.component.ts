@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, IonicModule, NavController, ToastController } from '@ionic/angular';
+import { PropertyService } from '../../../servicess/property-service/property.service';
+
 
 @Component({
   selector: 'app-admin-view-property',
@@ -20,45 +22,91 @@ export class AdminViewPropertyComponent  implements OnInit {
     private router:Router, 
     private navCtrl: NavController,
     private toastController: ToastController,
-  ) { 
-     this.accommodation = {
-      id: 1,
-      name: 'GreenVilla Lodge',
-      price: 650,
-      images: [
-        'assets/accomodation_01.jpeg',
-        'assets/accomodation_02.jpeg',
-        'assets/accomodation_03.jpeg'
-      ],
-      description: 'A peaceful lodge perfect for family getaways and cozy weekends.',
-      amenities: ['Wi-Fi', 'Swimming Pool', 'Parking', 'Kitchenette'],
-      landlord: {
-        name: 'Lungile H.',
-        contact: '083 456 7890',
-        email: 'info@greenvilla.co.za'
-      }
-    };
-  }
+    private propertyService: PropertyService,
+    private alertController: AlertController
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fetchPropertyDetails();
+  }
 
   editAccomodation() {
     this.router.navigate(['/edit-accomodation']);
   }
 
-  async deleteAccomodation() {
-    const toast = await this.toastController.create({
-      message: 'Accommodation deleted',
-      duration: 2000,
-      color: 'success',
-      position: 'top'
-    });
-    await toast.present();
-  }
+ async deleteAccomodation() {
+  const alert = await this.alertController.create({
+    header: 'Confirm Deletion',
+    message: 'Are you sure you want to delete this accommodation?',
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel'
+      },
+      {
+        text: 'Delete',
+        role: 'destructive',
+        handler: () => {
+          this.performDelete();
+        }
+      }
+    ]
+  });
+  await alert.present();
+}
 
   goBack(){
     this.navCtrl.back();
   }
 
+  fetchPropertyDetails(){
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    if (id) {
+      this.propertyService.getPropertyById(id).subscribe({
+        next: (res) => {
+          this.accommodation = {
+            ...res,
+            images: [`data:image/jpeg;base64,${res.image}`],
+            landlord: {
+              name: res.email,
+              contact: res.phoneNumber,
+              email: res.email
+            }
+          };
+        },
+        error: (err) => {
+          console.error('Failed to fetch property', err);
+        }
+      });
+    }
+  }
+
+  private async performDelete() {
+  const id = Number(this.route.snapshot.paramMap.get('id'));
+  if (!id) return;
+
+  this.propertyService.deleteProperty(id).subscribe({
+    next: async () => {
+      const toast = await this.toastController.create({
+        message: 'Accommodation deleted successfully',
+        duration: 2000,
+        color: 'success',
+        position: 'top'
+      });
+      await toast.present();
+      this.navCtrl.back(); 
+    },
+    error: async (error) => {
+      console.error('Failed to delete accommodation', error);
+      const toast = await this.toastController.create({
+        message: 'Failed to delete accommodation',
+        duration: 2000,
+        color: 'danger',
+        position: 'top'
+      });
+      await toast.present();
+    }
+  });
+}
 
 }

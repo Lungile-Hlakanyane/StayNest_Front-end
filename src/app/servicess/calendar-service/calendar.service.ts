@@ -45,5 +45,10 @@ getTotalEarnings(): Observable<number> {
   return this.http.get<number>(`${this.apiUrl}/earnings/total`);
 }
 
+getAllBookedSlots(): Observable<any[]> {
+  return this.http.get<any[]>(`${this.apiUrl}/status/booked`);
+}
+
+
 
 }

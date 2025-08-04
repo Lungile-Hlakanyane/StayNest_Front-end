@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { CalendarService } from 'src/app/servicess/calendar-service/calendar.service';
 
 @Component({
   selector: 'app-admin-booking-oversight',
@@ -14,34 +15,13 @@ import { Router } from '@angular/router';
 })
 export class AdminBookingOversightComponent  implements OnInit {
 
-    bookings = [
-    {
-      tenantName: 'Sipho Mokoena',
-      propertyName: 'Hilltop Apartments',
-      checkIn: '2025-08-10',
-      checkOut: '2025-08-15',
-      status: 'pending'
-    },
-    {
-      tenantName: 'Nadine Radebe',
-      propertyName: 'Seaside Villa',
-      checkIn: '2025-07-02',
-      checkOut: '2025-07-09',
-      status: 'approved'
-    },
-    {
-      tenantName: 'James Zulu',
-      propertyName: 'Mountain Retreat',
-      checkIn: '2025-06-01',
-      checkOut: '2025-06-05',
-      status: 'checked-out'
-    }
-  ];
+  bookings: any[] = [];
 
   constructor(
     private alertCtrl: AlertController, 
     private toastCtrl: ToastController,
-    private router:Router
+    private router:Router,
+    private calendarService: CalendarService
   ) {}
 
   goBack() {
@@ -106,6 +86,26 @@ export class AdminBookingOversightComponent  implements OnInit {
     await alert.present();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fetchBookedSlots();
+  }
+
+ fetchBookedSlots() {
+  this.calendarService.getAllBookedSlots().subscribe({
+    next: (data) => {
+      this.bookings = data.map(slot => ({
+        tenantName: slot.bookedBy?.fullName || 'Unknown Tenant',
+        propertyName: slot.property?.name || 'Unknown Property',
+        maxGuests: slot.maxGuests,
+        bookingPolicy: slot.bookingPolicy,
+        status: slot.status,
+        availableDate: slot.availableDate,
+      }));
+    },
+    error: (err) => {
+      console.error('Failed to load booked slots', err);
+    }
+  });
+}
 
 }

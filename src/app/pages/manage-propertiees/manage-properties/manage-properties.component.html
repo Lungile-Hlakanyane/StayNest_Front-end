@@ -19,7 +19,6 @@
     </div>
 
     <!-- 🔎 Search Bar -->
-    <!-- <ion-searchbar [(ngModel)]="searchText" placeholder="Search properties..."></ion-searchbar> -->
   <ion-searchbar [(ngModel)]="searchText"
    placeholder="Search properties..." 
    mode="ios" showCancelButton="focus" 
@@ -29,22 +28,21 @@
     <!-- 🏘️ Property Cards -->
     <div class="booking-feed">
       <div class="booking-card" *ngFor="let property of filteredProperties()">
-        <img [src]="property.image" alt="Property" class="booking-image" />
-
+       <img [src]="'data:image/jpeg;base64,' + property.image" alt="Property" class="booking-image" />
         <div class="card-content">
           <div class="info-row">
             <h3>{{ property.name }}</h3>
-            <span class="status" [ngClass]="property.status">{{ property.status }}</span>
+           <span class="status" [ngClass]="property.blocked ? 'blocked' : 'active'">
+            {{ property.blocked ? 'Blocked' : 'Active' }}
+          </span>
           </div>
-
           <p class="dates">
             📍 {{ property.location }}<br />
             🧑 Owner: {{ property.owner }}
           </p>
-
           <div class="actions">
-            <ion-button fill="outline" size="small" color="primary" (click)="viewProperty()">View</ion-button>
-            <ion-button fill="outline" size="small" color="danger" (click)="blockProperty(property)">Block</ion-button>
+            <ion-button fill="outline" size="small" color="primary" (click)="viewProperty(property.id)">View</ion-button>
+            <ion-button fill="outline" size="small" color="danger" (click)="toggleBlockStatus(property)">{{ property.blocked ? 'Unblock' : 'Block' }}</ion-button>
             <ion-button fill="outline" size="small" color="medium" (click)="deleteProperty(property)">Delete</ion-button>
           </div>
         </div>

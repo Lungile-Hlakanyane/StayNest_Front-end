@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NavController, ToastController } from '@ionic/angular';
+import { AnnouncementService } from 'src/app/servicess/announcement-service/announcement.service';
+import { Announcement } from 'src/app/models/Announcement';
 
 @Component({
   selector: 'app-push-notifications',
@@ -18,41 +20,55 @@ export class PushNotificationsComponent  implements OnInit {
     message: ''
   };
 
-  announcements = [
-    { title: 'System Update', message: 'Maintenance tonight from 11PM.', date: '2025-07-10' },
-    { title: 'New Features', message: 'Analytics Dashboard has been added!', date: '2025-07-01' }
-  ];
+ announcements: Announcement[] = [];
 
   constructor(
     private toastCtrl: ToastController, 
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private announcementService: AnnouncementService
   ) {}
 
-  async sendAnnouncement() {
-    if (!this.newAnnouncement.title || !this.newAnnouncement.message) return;
+   async sendAnnouncement() {
+    const { title, message } = this.newAnnouncement;
+    if (!title || !message) return;
 
-    this.announcements.unshift({
-      title: this.newAnnouncement.title,
-      message: this.newAnnouncement.message,
-      date: new Date().toISOString().split('T')[0]
+    this.announcementService.sendAnnouncement({ title, message, date: '' }).subscribe({
+      next: async (response) => {
+        this.announcements.unshift(response);
+        this.newAnnouncement = { title: '', message: '' };
+
+        const toast = await this.toastCtrl.create({
+          message: 'Announcement sent to all users!',
+          duration: 2000,
+          color: 'success',
+          position: 'top'
+        });
+        toast.present();
+      },
+      error: async (err) => {
+        const toast = await this.toastCtrl.create({
+          message: 'Failed to send announcement',
+          duration: 2000,
+          color: 'danger',
+          position: 'top'
+        });
+        toast.present();
+      }
     });
-
-    this.newAnnouncement = { title: '', message: '' };
-
-    const toast = await this.toastCtrl.create({
-      message: 'Announcement sent to all users!',
-      duration: 2000,
-      color: 'success',
-      position: 'top'
-    });
-
-    toast.present();
   }
 
   goBack() {
     this.navCtrl.back();
   }
 
-  ngOnInit() {}
+  fetAllAnnouncements() {
+     this.announcementService.fetchAnnouncements().subscribe((data) => {
+      this.announcements = data.sort((a, b) => b.date.localeCompare(a.date));
+    });
+  }
+
+  ngOnInit() {
+    this.fetAllAnnouncements();
+  }
 
 }

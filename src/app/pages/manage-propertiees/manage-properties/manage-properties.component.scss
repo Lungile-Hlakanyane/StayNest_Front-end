@@ -55,3 +55,22 @@
   border-radius: 50%;
   margin-right: 8px;
 }
+
+
+.status {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.active {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.blocked {
+  background-color: #f8d7da;
+  color: #721c24;
+}

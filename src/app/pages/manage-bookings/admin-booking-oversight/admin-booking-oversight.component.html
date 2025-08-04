@@ -24,12 +24,11 @@
         <div style="padding: 15px;">
           <div class="info-row">
             <h3>{{ booking.tenantName }}</h3>
-            <span class="status" [ngClass]="booking.status">{{ booking.status | titlecase }}</span>
+            <span style="color: #4caf50;" class="status" [ngClass]="booking.status">{{ booking.status | titlecase }}</span>
           </div>
-
-          <p class="dates">🏠 {{ booking.propertyName }}</p>
-          <p class="dates">📅 {{ booking.checkIn }} → {{ booking.checkOut }}</p>
-
+          <p class="dates">📅 {{ booking.availableDate }}</p>
+          <p class="dates">👥 Max Guests: {{ booking.maxGuests }}</p>
+          <p class="dates">📜 Policy: {{ booking.bookingPolicy }}</p>
           <div class="actions">
             <ion-button fill="outline" color="primary" size="small" (click)="viewBooking(booking)">
               View Booking

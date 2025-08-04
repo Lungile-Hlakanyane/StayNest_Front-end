@@ -76,7 +76,7 @@ const routes: Routes = [
   { path: 'manage-users', component: ManageUsersComponent},
   { path: 'view-user/:id', component: ViewUserComponent},
   { path: 'manage-properties', component: ManagePropertiesComponent},
-  { path: 'admin-view-property', component: AdminViewPropertyComponent},
+  { path: 'admin-view-property/:id', component: AdminViewPropertyComponent},
   { path: 'admin-view-booking', component:AdminViewBookingComponent},
   { path: 'admin-support-ticket', component: AdminSupportTicketComponent},
   { path: 'admin-report-analytics', component: AdminReportsAnalyticsComponent},

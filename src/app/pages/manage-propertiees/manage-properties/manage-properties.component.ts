@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertController, IonicModule, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { PropertyService } from 'src/app/servicess/property-service/property.service';
 
 @Component({
   selector: 'app-manage-properties',
@@ -13,31 +14,18 @@ import { Router } from '@angular/router';
 })
 export class ManagePropertiesComponent  implements OnInit {
   searchText = '';
-  properties = [
-    {
-      name: 'Rosewood Apartments',
-      image: '../../../../assets/accomodation_01.jpeg',
-      location: 'Cape Town, SA',
-      owner: 'Lungile H.',
-      status: 'active',
-    },
-    {
-      name: 'Urban Stay Villa',
-      image: '../../../../assets/accomodation_02.jpeg',
-      location: 'Sandton, Johannesburg',
-      owner: 'Nomvula S.',
-      status: 'blocked',
-    },
-    // Add more mocked properties as needed
-  ];
+  properties: any[] = [];
 
   constructor(
     private alertCtrl: AlertController, 
     private toastCtrl: ToastController,
-    private router: Router
+    private router: Router,
+    private propertyService: PropertyService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fetchProperties();
+  }
 
   filteredProperties() {
     return this.properties.filter((p) =>
@@ -45,33 +33,49 @@ export class ManagePropertiesComponent  implements OnInit {
     );
   }
 
-  viewProperty() {
-   this.router.navigateByUrl('/admin-view-property');
-  }
+ viewProperty(id: number) {
+   this.router.navigate(['/admin-view-property', id]);
+ }
 
-   async blockProperty(property: any) {
-    const alert = await this.alertCtrl.create({
-      header: 'Block Property',
-      message: `Are you sure you want to block "${property.name}"?`,
-      buttons: [
-        { text: 'Cancel', role: 'cancel' },
-        {
-          text: 'Yes',
-          handler: async () => {
-            property.status = 'blocked';
-            const toast = await this.toastCtrl.create({
-              message: `${property.name} has been blocked.`,
-              duration: 3000,
-              color: 'danger',
-              position: 'top',
-            });
-            await toast.present();
-          },
+
+async blockProperty(property: any) {
+  const alert = await this.alertCtrl.create({
+    header: 'Block Property',
+    message: `Are you sure you want to block "${property.name}"?`,
+    buttons: [
+      { text: 'Cancel', role: 'cancel' },
+      {
+        text: 'Yes',
+        handler: async () => {
+          this.propertyService.blockProperty(property.id).subscribe({
+            next: async () => {
+              property.blocked = true; // update locally if needed
+              const toast = await this.toastCtrl.create({
+                message: `${property.name} has been blocked.`,
+                duration: 3000,
+                color: 'success',
+                position: 'top',
+              });
+              await toast.present();
+            },
+            error: async (err) => {
+              const toast = await this.toastCtrl.create({
+                message: `Failed to block ${property.name}.`,
+                duration: 3000,
+                color: 'danger',
+                position: 'top',
+              });
+              await toast.present();
+              console.error(err);
+            }
+          });
         },
-      ],
-    });
-    await alert.present();
-  }
+      },
+    ],
+  });
+  await alert.present();
+}
+
 
   async deleteProperty(property: any) {
     const alert = await this.alertCtrl.create({
@@ -100,5 +104,66 @@ export class ManagePropertiesComponent  implements OnInit {
   goBack() {
     history.back();
   }
+
+  
+  fetchProperties() {
+    this.propertyService.getAllProperties().subscribe({
+      next: (data) => {
+        this.properties = data;
+      },
+      error: (err) => {
+        console.error('Failed to fetch properties', err);
+      }
+    });
+  }
+
+getImageSrc(imageData: string): string {
+  return `data:image/jpeg;base64,${imageData}`;
+}
+
+async toggleBlockStatus(property: any) {
+  const action = property.blocked ? 'unblock' : 'block';
+  const alert = await this.alertCtrl.create({
+    header: `${action.charAt(0).toUpperCase() + action.slice(1)} Property`,
+    message: `Are you sure you want to ${action} "${property.name}"?`,
+    buttons: [
+      { text: 'Cancel', role: 'cancel' },
+      {
+        text: 'Yes',
+        handler: async () => {
+          const request = property.blocked
+            ? this.propertyService.unblockProperty(property.id)
+            : this.propertyService.blockProperty(property.id);
+
+          request.subscribe({
+            next: async () => {
+              property.blocked = !property.blocked; // Toggle the flag locally
+              const toast = await this.toastCtrl.create({
+                message: `${property.name} has been ${action}ed.`,
+                duration: 3000,
+                color: property.blocked ? 'danger' : 'success',
+                position: 'top',
+              });
+              await toast.present();
+            },
+            error: async (err) => {
+              const toast = await this.toastCtrl.create({
+                message: `Failed to ${action} ${property.name}.`,
+                duration: 3000,
+                color: 'danger',
+                position: 'top',
+              });
+              await toast.present();
+              console.error(err);
+            }
+          });
+        }
+      }
+    ]
+  });
+  await alert.present();
+}
+
+
 
 }

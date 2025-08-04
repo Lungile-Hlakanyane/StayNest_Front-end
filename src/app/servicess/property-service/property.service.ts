@@ -44,5 +44,14 @@ countAllProperties(): Observable<number> {
   return this.http.get<number>(`${this.apiUrl}/count-all`);
 }
 
+blockProperty(propertyId: number): Observable<any> {
+  return this.http.put(`${this.apiUrl}/${propertyId}/block`, {}, { responseType: 'text' });
+}
+
+unblockProperty(propertyId: number): Observable<any> {
+  return this.http.put(`${this.apiUrl}/${propertyId}/unblock`, null, { responseType: 'text' });
+}
+
+
 
 }
