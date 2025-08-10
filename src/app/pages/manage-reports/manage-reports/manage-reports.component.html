@@ -1,0 +1,52 @@
+<ion-content>
+
+  <div class="action-btn-container" style="display: flex; gap: 15px; padding:15px;">
+    <p style="font-weight: bold; font-size: 35px;" (click)="goBack()"><ion-icon name="arrow-back-outline"></ion-icon></p>
+    <h2 class="welcome-title" style="font-size: 30px; position: relative; top: 17px;">Manage Reports</h2>
+  </div>
+
+  <div class="home-wrapper">
+
+    <div class="home-header">
+      <div style="display:flex; justify-content: space-between;">
+        <div class="logo-brand">
+          <div class="logo-dot"></div>
+          <span class="logo-text">StayNest</span>
+        </div>
+        <div style="font-size: 25px; cursor: pointer; position: relative; bottom:10px;" (click)="openMenuModal()">
+          <p style="color:#4caf50; font-weight: bold"><ion-icon name="grid"></ion-icon></p>
+        </div>
+      </div>
+     
+    </div>
+
+    <div class="feed">
+      <div class="accommodation-card" *ngFor="let report of reports">
+        <div class="card-content">
+          <div class="card-header">
+            <p><strong>Tenant:</strong> {{ report.tenantFullName || 'Loading...' }}</p> <br>
+          </div>
+
+          <div class="report-id-container" style="position: relative; bottom:25px;">
+            <p><strong>Report ID:</strong> {{report.id}} </p>
+          </div>
+
+          <p class="caption">
+            <strong>Reason:</strong> {{ report.reason }}<br />
+            <strong>Reported By:</strong> {{ report.landlordFullName || ('Landlord #' + report.landlordId) }}<br />
+            <strong>Date:</strong> {{ report.reportedAt | date:'short' }}
+          </p>
+
+          <div class="card-footer">
+            <ion-button fill="outline" size="small" (click)="blockTenant(report.tenantId)">
+              Block
+            </ion-button>
+            <ion-button *ngIf="report.id !== undefined" fill="outline" color="danger" size="small" (click)="deleteReport(report.id!)">
+              Delete
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

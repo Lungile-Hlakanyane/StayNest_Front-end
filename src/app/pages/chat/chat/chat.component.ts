@@ -22,6 +22,13 @@ export class ChatComponent  implements OnInit {
   receiverId: number | null = null;
   loggedInUserId!: number;
 
+  // fields
+  propertyName = '';
+  propertyEmail = '';
+  propertyPhone = '';
+  propertyLocation = '';
+  landlordName = '';
+
   constructor(
     private alertCtrl: AlertController,
     private navCtrl: NavController,
@@ -31,9 +38,21 @@ export class ChatComponent  implements OnInit {
   ) { }
 
   ngOnInit() {
-    const state = this.location.getState() as { receiverId?: number };
+    const state = this.location.getState() as { 
+    receiverId?: number,
+    propertyName?: string,
+    propertyEmail?: string,
+    propertyPhone?: string,
+    propertyLocation?: string,
+    landlordName?: string
+    };
     if (state?.receiverId) {
       this.receiverId = state.receiverId;
+      this.propertyName = state.propertyName ?? '';
+      this.propertyEmail = state.propertyEmail ?? '';
+      this.propertyPhone = state.propertyPhone ?? '';
+      this.propertyLocation = state.propertyLocation ?? '';
+      this.landlordName = state.landlordName ?? '';
     } else {
       this.navCtrl.back();
       return;

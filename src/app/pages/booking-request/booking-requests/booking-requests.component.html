@@ -33,20 +33,17 @@
     <div class="booking-feed">
       <div
         class="booking-card"
-        *ngFor="let booking of filteredBookings()"
-      >
+        *ngFor="let booking of filteredBookings()">
         <img [src]="booking.imageUrl" alt="Accommodation" class="booking-image" />
-
         <div class="card-content">
           <div class="info-row">
             <h3>{{ booking.propertyName }}</h3>
-            <span class="status" [ngClass]="booking.status">{{ booking.status | titlecase }}</span>
+            <span class="status" [ngClass]="booking.status">
+              {{ booking.type === 'past' ? 'Past' : 'Booked' }}
+            </span>
           </div>
-
           <p class="dates">📅 {{ booking.status }} → {{ booking.availableDate }}</p>
-
           <p class="location">📍 {{ booking.propertyLocation }}</p>
-
           <div class="actions">
             <ion-button *ngIf="selectedTab === 'upcoming'" color="success" size="small" (click)="approveBooking(booking)">
               Approve

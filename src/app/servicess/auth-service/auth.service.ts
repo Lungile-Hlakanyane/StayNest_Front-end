@@ -53,5 +53,14 @@ export class AuthService {
 blockUser(userId: number, block: boolean): Observable<any> {
   return this.http.put(`${this.apiUrl}/user/${userId}/block?block=${block}`, null, { responseType: 'text' });
 }
+
+getCurrentUser(): Observable<UserDTO> {
+  const userId = localStorage.getItem('user');
+  if (!userId) {
+    throw new Error('No user ID found in localStorage.');
+  }
+  return this.getUserById(Number(userId));
+}
+
   
 }

@@ -30,28 +30,51 @@
     <div class="accommodation-card" *ngFor="let post of filteredAccommodations">
       <img [src]="post.imageUrl" alt="Accommodation Image" class="accommodation-image" />
       
-      <div class="card-content">
-        <div class="card-header">
-          <h3 class="landlord-name">{{ post.landlord }}</h3>
-          <div class="stars">
-            <ion-icon name="star" *ngFor="let star of [].constructor(post.rating)"></ion-icon>
-          </div>
-        </div>
-
-        <p class="caption">{{ post.caption }}</p>
-
-        <div class="card-footer">
-          <div class="comments">
-            <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-            <span>{{ post.comments }} comments</span>
-          </div>
-
-          <ion-button fill="outline" size="small" (click)="viewMore(post)">
-            View More
-          </ion-button>
-        </div>
-      </div>
+     <div class="card-content">
+  <div class="card-header">
+    <h3 class="landlord-name">{{ post.landlord }}</h3>
+    <div class="stars">
+      <ion-icon name="star" *ngFor="let star of [].constructor(post.rating)"></ion-icon>
     </div>
   </div>
+
+  <p class="caption">{{ post.caption }}</p>
+
+  <div class="card-footer">
+    <!-- Toggle Comments -->
+    <div class="comments" (click)="toggleComment(post)">
+      <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+      <span>{{ post.comments.length }} comments</span>
+    </div>
+
+    <ion-button fill="outline" size="small" (click)="viewMore(post)">
+      View More
+    </ion-button>
+
+  </div>
+
+<div class="comment-section" *ngIf="post.showCommentBox">
+  <div class="existing-comments" *ngIf="post.comments.length > 0">
+    <div *ngFor="let c of post.comments" class="comment-item" style="font-size:13px;">
+      <strong style="font-size:13px">{{ c.fullName }}:</strong> {{ c.comment }}
+      <small style="display:block; color:gray;">{{ c.dateTime | date:'short' }}</small>
+    </div>
+  </div>
+  <ion-item lines="none" class="comment-input">
+    <ion-input placeholder="Write a comment..." [(ngModel)]="post.newComment"></ion-input>
+    <ion-button fill="solid" color="success" size="small" (click)="addComment(post)">
+      Post
+    </ion-button>
+  </ion-item>
 </div>
+
+</div>
+
+
+    </div>
+
+  </div>
+
+</div>
+
 </ion-content>

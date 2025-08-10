@@ -56,6 +56,8 @@ import { CalendarSlotsComponent } from './pages/calendar-slots/calendar-slots/ca
 import { BlockedUserComponent } from './pages/blocked-user/blocked-user/blocked-user.component';
 import { UpdatesComponent } from './pages/updates/updates/updates.component';
 import { TenantRequestMaintenanceComponent } from './pages/tenant-request-maintenance/tenant-request-maintenance/tenant-request-maintenance.component';
+import { ReportReasonsModalComponent } from './re-useable-components/report-reasons-modal/report-reasons-modal/report-reasons-modal.component';
+import { ManageReportsComponent } from './pages/manage-reports/manage-reports/manage-reports.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -69,7 +71,8 @@ import { TenantRequestMaintenanceComponent } from './pages/tenant-request-mainte
   HelpFaqComponent, TermsAndConditionsComponent, AdminDashboardComponent, ManageUsersComponent, ViewUserComponent, 
   ManagePropertiesComponent, AdminViewPropertyComponent, AdminBookingOversightComponent, AdminViewBookingComponent, 
   AdminSupportTicketComponent, AdminReportsAnalyticsComponent, AdminPaymentsTransactionsComponent, PushNotificationsComponent,
-  AddCalenderComponent, CalendarSlotsComponent, BlockedUserComponent,UpdatesComponent,TenantRequestMaintenanceComponent
+  AddCalenderComponent, CalendarSlotsComponent, BlockedUserComponent,UpdatesComponent,TenantRequestMaintenanceComponent,
+  ReportReasonsModalComponent,ManageReportsComponent
 ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

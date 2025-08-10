@@ -47,6 +47,8 @@ import { CalendarSlotsComponent } from './pages/calendar-slots/calendar-slots/ca
 import { BlockedUserComponent } from './pages/blocked-user/blocked-user/blocked-user.component';
 import { UpdatesComponent } from './pages/updates/updates/updates.component';
 import { TenantRequestMaintenanceComponent } from './pages/tenant-request-maintenance/tenant-request-maintenance/tenant-request-maintenance.component';
+import { ManageReportsComponent } from './pages/manage-reports/manage-reports/manage-reports.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -89,6 +91,7 @@ const routes: Routes = [
   { path: 'blocked-user',component:BlockedUserComponent},
   { path: 'updates', component: UpdatesComponent},
   { path: 'tenant-request-maintenance', component: TenantRequestMaintenanceComponent},
+  { path: 'manage-reports', component: ManageReportsComponent},
   {
     path: '',
     component: TabsComponent,

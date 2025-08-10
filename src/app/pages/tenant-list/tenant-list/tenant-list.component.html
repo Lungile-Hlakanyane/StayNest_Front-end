@@ -9,38 +9,49 @@
       <p style="position: relative; top: 5px; font-size: 25px;">Tenant List</p>
     </div>
 
-    <!-- 🔍 Add Search Below Header -->
-  <ion-searchbar [(ngModel)]="searchTerm"
-   placeholder="Search tenants..." 
-   (ionInput)="filterTenants()" 
-   mode="ios" showCancelButton="focus" 
-   animated="true">
-  </ion-searchbar>
+    <div class="logo-brand" style="display: flex; gap:5px;">
+      <div class="logo-dot"></div>
+      <span class="logo-text">StayNest</span>
+    </div>
+
+    <!-- 🔍 Search Bar -->
+    <ion-searchbar [(ngModel)]="searchTerm"
+      placeholder="Search tenants..." 
+      (ionInput)="filterTenants()" 
+      mode="ios" showCancelButton="focus" 
+      animated="true">
+    </ion-searchbar>
 
     <!-- 🏷 Header Branding -->
     <div class="header">
-      <div class="logo-brand" style="display: flex; gap:5px;">
-        <div class="logo-dot"></div>
-        <span class="logo-text">StayNest</span>
-      </div>
       <p class="subtitle">View all tenants renting your properties</p>
     </div>
 
     <!-- 👥 Tenant Cards -->
     <div class="booking-feed">
-      <div class="booking-card" *ngFor="let tenant of filteredTenants">
-        <div style="display: flex; align-items: center; gap: 15px; padding: 15px;">
-          <img [src]="tenant.photo" alt="Tenant" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid #4caf50;" />
+      <div class="booking-card" *ngFor="let tenant of filteredTenants"
+        style="margin-bottom: 15px; border: 1px solid #ccc; border-radius: 10px; background-color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+        
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; gap: 15px; flex-wrap: wrap;">
+          
+          <!-- Avatar & Details -->
+          <div style="display: flex; align-items: center; gap: 15px; flex: 1 1 auto; min-width: 200px;">
+            <img [src]="tenant.photo" alt="Tenant" 
+              style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid #4caf50;" />
 
-          <div style="flex: 1;">
-            <h3 style="margin: 0;">{{ tenant.fullName }}</h3>
-            <p style="margin: 4px 0; font-size: 14px; color: #666;">{{ tenant.email }}</p>
-            <p style="font-size: 13px; color: #999;">Staying at: {{ tenant.propertyName }}</p>
+            <div>
+              <h3 style="margin: 0;">{{ tenant.fullName }}</h3>
+              <p style="margin: 4px 0; font-size: 14px; color: #666;">{{ tenant.email }}</p>
+              <p style="font-size: 13px; color: #999;">Staying at: {{ tenant.propertyName }}</p>
+            </div>
           </div>
 
-          <ion-button fill="outline" color="success" size="small" (click)="viewTenant()">
-            View
-          </ion-button>
+          <!-- View Button -->
+          <div style="flex-shrink: 0;">
+            <ion-button fill="outline" color="success" size="small" (click)="viewTenant(tenant)" expand="block">
+              View
+            </ion-button>
+          </div>
         </div>
       </div>
     </div>

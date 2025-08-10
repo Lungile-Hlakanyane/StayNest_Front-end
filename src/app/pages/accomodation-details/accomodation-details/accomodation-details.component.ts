@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserDTO } from 'src/app/models/UserDTO';
 import { CalendarService } from 'src/app/servicess/calendar-service/calendar.service';
+import { FavoriteService } from 'src/app/servicess/favorite-service/favorite.service';
 
 @Component({
   selector: 'app-accomodation-details',
@@ -26,7 +27,8 @@ export class AccomodationDetailsComponent  implements OnInit {
     private router:Router, 
     private navCtrl: NavController,
     private toastController: ToastController,
-    private slotService:CalendarService
+    private slotService:CalendarService,
+    private favoriteService:FavoriteService
     ) 
   {}
 
@@ -50,23 +52,40 @@ export class AccomodationDetailsComponent  implements OnInit {
     console.log('Booking:', this.accommodation);
   }
 
-  async addToFavorites() {
-    console.log('Added to favorites:', this.accommodation.id);
-    const toast = await this.toastController.create({
-      message: 'Added to favorites',
-      duration: 2000, 
-      color: 'success',
-      position: 'top'
-    });
-
-    await toast.present();
+async addToFavorites() {
+  const storedUserId = localStorage.getItem('user');
+  const userId = storedUserId ? Number(storedUserId) : null;
+  if (!userId) {
+    console.error('No logged-in user ID found in local storage');
+    return;
   }
+  this.favoriteService.addFavorite(userId, this.accommodation.id).subscribe({
+    next: async () => {
+      const toast = await this.toastController.create({
+        message: 'Added to favorites',
+        duration: 2000,
+        color: 'success',
+        position: 'top'
+      });
+      await toast.present();
+    },
+    error: async () => {
+      const toast = await this.toastController.create({
+        message: 'Failed to add to favorites',
+        duration: 2000,
+        color: 'danger',
+        position: 'top'
+      });
+      await toast.present();
+    }
+  });
+}
 
-  goBack(){
-    this.navCtrl.back();
-  }
+goBack(){
+  this.navCtrl.back();
+}
 
-  async presentErrorToast() {
+async presentErrorToast() {
   const toast = await this.toastController.create({
     message: 'Failed to load accommodation details.',
     duration: 2000,

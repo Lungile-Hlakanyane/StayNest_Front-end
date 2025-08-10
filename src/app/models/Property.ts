@@ -1,4 +1,7 @@
 export interface Property {
+  rating: number;
+  landlord: string;
+  caption: string;
   id: number;
   name: string;
   location: string;

@@ -19,7 +19,7 @@
 
  <div class="favorites-feed" *ngIf="filteredFavorites.length > 0; else noFavorites">
     <div class="accommodation-card" *ngFor="let item of filteredFavorites">
-      <img [src]="item.imageUrl" alt="Favorite Image" class="accommodation-image" />
+      <img src="../../../../assets/accomodation_02.jpeg" alt="Favorite Image" class="accommodation-image" />
       
       <div class="card-content">
         <div class="card-header">
@@ -39,6 +39,7 @@
           <ion-button size="small" color="danger" fill="outline" (click)="remove(item)">
             Remove
           </ion-button>
+          
         </div>
       </div>
     </div>

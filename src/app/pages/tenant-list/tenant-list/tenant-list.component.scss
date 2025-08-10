@@ -100,3 +100,11 @@ ion-segment {
   justify-content: flex-end;
   gap: 10px;
 }
+
+.booking-card {
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}

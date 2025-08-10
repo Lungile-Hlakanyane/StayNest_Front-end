@@ -19,22 +19,17 @@
    <!-- 🏡 Property Info -->
 <div class="info-card enhanced-card">
   <h4><ion-icon name="home-outline" style="margin-right: 6px;"></ion-icon> Property Info</h4>
+
   <div class="info-row">
     <p><strong>🏠 Staying at:</strong></p>
     <span>{{ tenant.propertyName }}</span>
   </div>
+
   <div class="info-row">
-    <p><strong>🔢 Room Number:</strong></p>
-    <span>{{ tenant.roomNumber }}</span>
+   <p><strong>🏠 Date Booked:</strong></p>
+   <span>{{ tenant.availableDate | date: 'mediumDate' }}</span>
   </div>
-  <div class="info-row">
-    <p><strong>📅 Check-in:</strong></p>
-    <span>{{ tenant.checkInDate }}</span>
-  </div>
-  <div class="info-row">
-    <p><strong>📆 Check-out:</strong></p>
-    <span>{{ tenant.checkOutDate }}</span>
-  </div>
+
 </div>
 
 <!-- 📞 Contact Info -->
@@ -42,18 +37,14 @@
   <h4><ion-icon name="call-outline" style="margin-right: 6px;"></ion-icon> Contact Info</h4>
   <div class="info-row">
     <p><strong>📱 Phone:</strong></p>
-    <span>{{ tenant.phone }}</span>
-  </div>
-  <div class="info-row">
-    <p><strong>👨‍👩‍👧 Emergency Contact:</strong></p>
-    <span>{{ tenant.emergencyContact }}</span>
+    <span>{{ tenant.phoneNumber }}</span>
   </div>
 </div>
 
-    <!-- 🚫 Block Button -->
-    <ion-button expand="block" color="danger" style="margin-top: 30px;" (click)="blockTenant()">
+  <!-- 🚫 Block Button -->
+    <ion-button expand="block" color="danger" style="margin-top: 30px;" (click)="reportTenant()">
       <ion-icon name="ban-outline" slot="start"></ion-icon>
-      Block Tenant
+      Report Tenant
     </ion-button>
 
   </div>

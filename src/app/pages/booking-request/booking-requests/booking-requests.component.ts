@@ -37,7 +37,7 @@ export class BookingRequestsComponent  implements OnInit {
           this.bookings = data.map(booking => {
             return {
               ...booking,
-              type: booking.status === 'approved' || booking.status === 'rejected' ? 'past' : 'upcoming',
+              type: new Date(booking.availableDate) < new Date() ? 'past' : 'upcoming',
               image: booking.imageUrl || 'assets/default-placeholder.jpg'
             };
           });

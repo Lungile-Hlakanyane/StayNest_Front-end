@@ -2,7 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, IonicModule, ToastController } from '@ionic/angular';
+import { AlertController, IonicModule, ToastController, ModalController } from '@ionic/angular';
+import { Location } from '@angular/common';
+import { ReportReasonsModalComponent } from 'src/app/re-useable-components/report-reasons-modal/report-reasons-modal/report-reasons-modal.component';
+import { ReportService } from 'src/app/servicess/report-service/report.service';
 
 @Component({
   selector: 'app-tenant-profile',
@@ -13,55 +16,82 @@ import { AlertController, IonicModule, ToastController } from '@ionic/angular';
 })
 export class TenantProfileComponent  implements OnInit {
 
-  tenant = {
-    fullName: 'Lungile Hlakanyane',
-    email: 'lungile@gmail.com',
-    phone: '+27 123 456 7890',
-    emergencyContact: '+27 987 654 3210',
-    propertyName: 'Green Villa 103',
-    roomNumber: 'Room 12B',
-    checkInDate: '2025-07-01',
-    checkOutDate: '2025-12-31',
-    photo: 'assets/profile-pic-image.jpg'
-  };
+tenant = {
+  fullName: '',
+  email: '',
+  phoneNumber: '',
+  emergencyContact: '',
+  propertyName: '',
+  roomNumber: '',
+  checkInDate: '',
+  checkOutDate: '',
+  photo: 'assets/profile-pic-image.jpg',
+  availableDate: '',
+  id: 0,
+};
 
   constructor(
     private router: Router,
     private alertCtrl: AlertController,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private location: Location,
+    private modalController: ModalController,
+    private reportService: ReportService
   ) { }
 
   goBack() {
     this.router.navigate(['/tenant-list']);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    const nav = this.router.getCurrentNavigation();
+    const state = nav?.extras?.state as { tenant: any };
+    if (state?.tenant) {
+    this.tenant = state.tenant;
+    }
+}
 
-  async blockTenant() {
-    const alert = await this.alertCtrl.create({
-      header: 'Block Tenant',
-      message: 'Are you sure you want to block this tenant?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        },
-        {
-          text: 'Yes, Block',
-          handler: async () => {
-            const toast = await this.toastCtrl.create({
-              message: 'Tenant has been blocked successfully.',
-              color: 'danger',
-              duration: 3000,
-              position: 'top'
-            });
-            await toast.present();
-          }
-        }
-      ]
+async reportTenant() {
+    const modal = await this.modalController.create({
+      component: ReportReasonsModalComponent,
+      cssClass: 'booking-success-modal',
+      backdropDismiss: true,
+      animated: true,
+      componentProps: {
+        tenantId: this.tenant.id
+      }
     });
+    await modal.present();
+    const { data: selectedReason } = await modal.onDidDismiss();
+    if (selectedReason) {
+      const landlordId = Number(localStorage.getItem('user'));
+      const reportData = {
+        landlordId: landlordId,
+        tenantId: this.tenant.id,
+        reason: selectedReason
+      };
 
-    await alert.present();
+      this.reportService.reportTenant(reportData).subscribe({
+        next: async () => {
+          const toast = await this.toastCtrl.create({
+            message: 'Tenant reported successfully.',
+            color: 'danger',
+            duration: 3000,
+            position: 'top'
+          });
+          await toast.present();
+        },
+        error: async () => {
+          const toast = await this.toastCtrl.create({
+            message: 'Failed to report tenant. Try again later.',
+            color: 'warning',
+            duration: 3000,
+            position: 'top'
+          });
+          await toast.present();
+        }
+      });
+    }
   }
 
 }

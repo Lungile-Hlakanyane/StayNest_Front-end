@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { AuthService } from 'src/app/servicess/auth-service/auth.service';
+import { CalendarService } from 'src/app/servicess/calendar-service/calendar.service';
+import { PropertyService } from 'src/app/servicess/property-service/property.service';
+
 
 @Component({
   selector: 'app-tenant-list',
@@ -16,31 +20,15 @@ export class TenantListComponent  implements OnInit {
   tenants: any[] = []; // all tenants
   filteredTenants: any[] = []; // filtered list for display
 
-
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router, 
+    private authService: AuthService, 
+    private calendarService: CalendarService, 
+    private propertyService: PropertyService
+  ) {}
 
   ngOnInit() {
-  this.tenants = [
-    {
-      fullName: 'Lungile Hlakanyane',
-      email: 'lungile@gmail.com',
-      photo: 'assets/profile-pic-image.jpg',
-      propertyName: 'Green Villa 103'
-    },
-    {
-      fullName: 'Nomsa Dlamini',
-      email: 'nomsa.d@example.com',
-      photo: 'assets/profile-pic-image.jpg',
-      propertyName: 'Oceanview Apartment'
-    },
-    {
-      fullName: 'Thabo Nkosi',
-      email: 'thabo.n@example.com',
-      photo: 'assets/profile-pic-image.jpg',
-      propertyName: 'Luxury Heights'
-    }
-  ];
-  this.filteredTenants = [...this.tenants];
+  this.loadTenants();
 }
 
 
@@ -48,8 +36,10 @@ goBack() {
   this.router.navigate(['/home']);
 }
 
-viewTenant() {
-  this.router.navigateByUrl('/tenant-profile');
+viewTenant(tenant: any) {
+  this.router.navigateByUrl('/tenant-profile', {
+    state: { tenant }
+  });
   console.log('Viewing tenant:');
 }
 
@@ -61,5 +51,42 @@ filterTenants() {
     tenant.propertyName.toLowerCase().includes(term)
   );
 }
+
+loadTenants() {
+  const landlordId = Number(localStorage.getItem('user'));
+  if (!landlordId) return;
+
+  this.calendarService.getAllBookedSlots().toPromise()
+    .then(slots => {
+      if (!slots) return;
+
+      const bookedSlotsForLandlord = slots.filter(slot =>
+        slot.landlord?.id === landlordId
+      );
+
+      this.tenants = bookedSlotsForLandlord.map(slot => {
+        const tenantData = {
+          id: slot.bookedBy?.id,
+          fullName: slot.bookedBy?.fullName || 'Unknown Tenant',
+          email: slot.bookedBy?.email || 'Unknown Email',
+          photo: 'assets/profile-pic-image.jpg',
+          propertyName: slot.property?.name || 'Unknown Property',
+          phoneNumber: slot.bookedBy?.phoneNumber || 'Unknown Phone',
+          availableDate: slot.availableDate || '',
+        };
+        console.log('Mapped tenant data:', tenantData);
+        return tenantData;
+      });
+
+      this.filteredTenants = [...this.tenants];
+      console.log('Filtered tenants:', this.filteredTenants);
+    })
+    .catch(err => {
+      console.error('Failed to load tenants:', err);
+    });
+}
+
+
+
 
 }

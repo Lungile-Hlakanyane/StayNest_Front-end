@@ -1,0 +1,11 @@
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-radio-group [(ngModel)]="selectedReason">
+      <ion-item *ngFor="let reason of reportReasons">
+        <ion-label>{{ reason }}</ion-label>
+            <ion-radio slot="start" [value]="reason"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+    <ion-button expand="block" color="danger" (click)="submit()">Submit</ion-button>
+</ion-content>
