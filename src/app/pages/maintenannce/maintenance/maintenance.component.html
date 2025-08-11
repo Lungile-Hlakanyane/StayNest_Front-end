@@ -30,12 +30,12 @@
           <p style="font-size: 12px; color: #bbb;">🕒 {{ request.date | date:'mediumDate' }}</p>
 
           <div style="margin-top: 15px; display: flex; justify-content: flex-end; gap: 10px;">
-            <ion-button fill="outline" color="success" size="small" (click)="approveRequest(request)">Approve</ion-button>
-            <ion-button fill="outline" color="danger" size="small" (click)="rejectRequest(request)">Reject</ion-button>
+           <ion-button fill="outline" color="success" size="small" (click)="updateStatus(request, 'Fixed')">Fixed</ion-button>
+           <ion-button fill="outline" color="warning" size="small" (click)="updateStatus(request, 'In-Progress')">In-Progress</ion-button>
+           <ion-button fill="outline" color="danger" size="small" (click)="updateStatus(request, 'Decline')">Decline</ion-button>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </ion-content>

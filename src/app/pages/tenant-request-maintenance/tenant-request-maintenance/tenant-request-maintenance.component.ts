@@ -5,6 +5,7 @@ import { NavController, ToastController, LoadingController, ModalController, Ion
 import { IonContent } from "@ionic/angular/standalone";
 import { MaintenanceService } from 'src/app/servicess/maintenance-service/maintenance.service';
 import { MaintenanceRequest } from 'src/app/models/MaintenanceRequest';
+import { PropertyService } from 'src/app/servicess/property-service/property.service';
 
 @Component({
   selector: 'app-tenant-request-maintenance',
@@ -15,12 +16,14 @@ import { MaintenanceRequest } from 'src/app/models/MaintenanceRequest';
 })
 export class TenantRequestMaintenanceComponent  implements OnInit {
 
+  properties: any[] = [];
   form: MaintenanceRequest = {
     title: '',
     description: '',
     propertyName: '',
     tenantName: 'Lungile Hlakanyane', // Ideally from auth/user context
     date: new Date().toISOString(),
+    userId: 0
   };
 
 
@@ -29,10 +32,13 @@ export class TenantRequestMaintenanceComponent  implements OnInit {
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
     private modalCtrl: ModalController,
-    private maintenanceService:MaintenanceService
+    private maintenanceService:MaintenanceService,
+    private propertyService: PropertyService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadProperties();
+  }
 
   goBack(){
     this.navCtrl.back();
@@ -70,5 +76,18 @@ async submitRequest() {
     });
   }
 
+  loadProperties() {
+    this.propertyService.getAllProperties().subscribe((data: any[]) => {
+      this.properties = data;
+    });
+  }
+  
+onPropertyChange(event: any) {
+  const selectedProperty = event.detail.value;
+  if (selectedProperty) {
+    this.form.propertyName = selectedProperty.name;
+    this.form.userId = selectedProperty.userId || selectedProperty.user_id;
+  }
+}
 
 }

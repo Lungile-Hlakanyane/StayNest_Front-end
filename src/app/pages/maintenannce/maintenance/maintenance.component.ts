@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { MaintenanceService } from 'src/app/servicess/maintenance-service/maintenance.service';
 
 @Component({
   selector: 'app-maintenance',
@@ -14,30 +15,18 @@ import { Router } from '@angular/router';
 })
 export class MaintenanceComponent  implements OnInit {
 
-   maintenanceRequests = [
-    {
-      title: 'Leaking Tap in Bathroom',
-      description: 'The tap in the main bathroom is leaking continuously.',
-      propertyName: 'Green Villa 103',
-      tenantName: 'Lungile Hlakanyane',
-      date: new Date('2025-07-15')
-    },
-    {
-      title: 'Broken Window',
-      description: 'One of the bedroom windows won’t close completely.',
-      propertyName: 'Oceanview Apartment',
-      tenantName: 'Thabo Nkosi',
-      date: new Date('2025-07-14')
-    }
-  ];
+   maintenanceRequests: any[] = [];
 
   constructor(
     private router: Router,
     private toastCtrl: ToastController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private maintenanceService: MaintenanceService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadMaintenanceRequests();
+  }
 
   goBack() {
     this.router.navigate(['/home']);
@@ -53,7 +42,7 @@ export class MaintenanceComponent  implements OnInit {
     await toast.present();
   }
 
-   async rejectRequest(request: any) {
+  async rejectRequest(request: any) {
     const alert = await this.alertCtrl.create({
       header: 'Reject Request',
       message: `Are you sure you want to reject "${request.title}"?`,
@@ -76,8 +65,49 @@ export class MaintenanceComponent  implements OnInit {
         }
       ]
     });
-
     await alert.present();
   }
+
+  loadMaintenanceRequests() {
+    const currentUserId = localStorage.getItem('user');
+    if (!currentUserId) {
+      console.error('No logged-in user ID found in localStorage.');
+      return;
+    }
+    this.maintenanceService.getAllRequests().subscribe({
+      next: (requests: any[]) => {
+        this.maintenanceRequests = requests.filter(r => r.userId == currentUserId);
+      },
+      error: (err) => {
+        console.error('Failed to fetch maintenance requests:', err);
+      }
+    });
+  }
+
+  updateStatus(request: any, status: string) {
+  this.maintenanceService.updateStatus(request.id, status).subscribe({
+    next: updatedRequest => {
+      const index = this.maintenanceRequests.findIndex(r => r.id === updatedRequest.id);
+      if (index > -1) {
+        this.maintenanceRequests[index].status = updatedRequest.status;
+      }
+      this.toastCtrl.create({
+        message: `Status updated to ${status} for "${updatedRequest.title}"`,
+        color: 'success',
+        duration: 2000,
+        position: 'top'
+      }).then(toast => toast.present());
+    },
+    error: err => {
+      this.toastCtrl.create({
+        message: 'Failed to update status. Try again.',
+        color: 'danger',
+        duration: 2000,
+        position: 'top'
+      }).then(toast => toast.present());
+    }
+  });
+}
+
 
 }

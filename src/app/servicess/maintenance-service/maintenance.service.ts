@@ -21,4 +21,10 @@ export class MaintenanceService {
   getAllRequests(): Observable<MaintenanceRequest[]> {
     return this.http.get<MaintenanceRequest[]>(this.apiUrl);
   }
+
+  updateStatus(requestId: number, status: string) {
+   return this.http.patch<MaintenanceRequest>(`${this.apiUrl}/${requestId}/status?status=${status}`, {});
+  }
+
+
 }

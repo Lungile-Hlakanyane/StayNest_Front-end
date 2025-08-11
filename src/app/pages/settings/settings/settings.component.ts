@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/servicess/auth-service/auth.service';
 
 @Component({
   selector: 'app-settings',
@@ -19,29 +20,42 @@ export class SettingsComponent  implements OnInit {
   constructor(
     private alertCtrl: AlertController,
     private navCtrl: NavController,
-    private router:Router
+    private router:Router,
+    private userService: AuthService
   ) { }
 
   ngOnInit() {}
 
-  async confirmDelete() {
-    const alert = await this.alertCtrl.create({
-      header: 'Delete Account',
-      message: 'This action is irreversible. Are you sure you want to delete your account?',
-      buttons: [
-        { text: 'Cancel', role: 'cancel' },
-        {
-          text: 'Delete',
-          role: 'destructive',
-          handler: () => {
-            console.log('Account deleted');
+async confirmDelete() {
+  const alert = await this.alertCtrl.create({
+    header: 'Delete Account',
+    message: 'This action is irreversible. Are you sure you want to delete your account?',
+    buttons: [
+      { text: 'Cancel', role: 'cancel' },
+      {
+        text: 'Delete',
+        role: 'destructive',
+        handler: () => {
+          const userId = Number(localStorage.getItem('user'));
+          if (!userId) {
+            console.error('No logged-in user found');
+            return;
           }
+          this.userService.deleteUser(userId).subscribe({
+            next: () => {
+              localStorage.clear(); 
+              this.router.navigateByUrl('/login');
+            },
+            error: (err) => {
+              console.error('Error deleting account', err);
+            }
+          });
         }
-      ]
-    });
-
-    await alert.present();
-  }
+      }
+    ]
+  });
+  await alert.present();
+}
 
   openPolicy(type: 'privacy' | 'terms') {
     const url = type === 'privacy'

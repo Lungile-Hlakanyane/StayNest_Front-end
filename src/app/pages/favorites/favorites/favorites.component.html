@@ -32,14 +32,9 @@
         <p class="caption">{{ item.caption }}</p>
 
         <div class="card-footer">
-          <ion-button size="small" fill="clear" color="primary" (click)="view(item)">
-            View
-          </ion-button>
-
-          <ion-button size="small" color="danger" fill="outline" (click)="remove(item)">
+          <ion-button size="small" color="danger" fill="outline" (click)="remove(item)" expand="block">
             Remove
           </ion-button>
-          
         </div>
       </div>
     </div>

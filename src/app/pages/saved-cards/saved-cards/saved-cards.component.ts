@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, IonicModule, ToastController } from '@ionic/angular';
+import { BankDetailsService } from 'src/app/servicess/bank-details-service/bank-details.service';
 
 @Component({
   selector: 'app-saved-cards',
@@ -12,28 +13,21 @@ import { AlertController, IonicModule, ToastController } from '@ionic/angular';
   imports: [CommonModule, IonicModule, FormsModule, ReactiveFormsModule],
 })
 export class SavedCardsComponent  implements OnInit {
-   savedCards = [
-    {
-      last4: '4242',
-      expiry: '12/26',
-      cardholder: 'Lungile Hlakanyane'
-    },
-    {
-      last4: '1122',
-      expiry: '04/25',
-      cardholder: 'StayNest Rentals'
-    }
-  ];
 
+  savedCards: any = [];
+    
   constructor(
     private router: Router,
     private toastCtrl: ToastController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private bankCardDetailsService: BankDetailsService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadSavedCards();
+  }
 
-    goBack() {
+  goBack() {
     this.router.navigate(['/home']);
   }
 
@@ -44,20 +38,34 @@ export class SavedCardsComponent  implements OnInit {
       buttons: [
         { text: 'Cancel', role: 'cancel' },
         {
-          text: 'Yes, Remove',
-          handler: async () => {
-            this.savedCards = this.savedCards.filter(c => c !== card);
-            const toast = await this.toastCtrl.create({
-              message: 'Card removed successfully',
-              duration: 3000,
-              color: 'danger',
-              position: 'top'
-            });
-            await toast.present();
-          }
-        }
-      ]
+           text: 'Yes, Remove',
+           handler: async () => {
+           this.bankCardDetailsService.deleteCard(card.id).subscribe({
+           next: async () => {
+           this.savedCards = this.savedCards.filter((c: any) => c.id !== card.id);
+           const toast = await this.toastCtrl.create({
+           message: 'Card removed successfully',
+           duration: 3000,
+           color: 'success',
+           position: 'top'
+        });
+         await toast.present();
+       },
+       error: async (err) => {
+         const toast = await this.toastCtrl.create({
+         message: 'Error removing card',
+         duration: 3000,
+         color: 'warning',
+         position: 'top'
+        });
+        await toast.present();
+        console.error('Delete error:', err);
+     }
     });
+   }
+  }
+    ]
+  });
 
     await alert.present();
   }
@@ -65,5 +73,27 @@ export class SavedCardsComponent  implements OnInit {
   addNewBankAccount() {
     this.router.navigate(['/bank-details']);
   }
+
+loadSavedCards() {
+  const landlordId = localStorage.getItem('user');
+  if (!landlordId) {
+    console.error('No landlordId found in local storage');
+    return;
+  }
+  this.bankCardDetailsService.getBankDetailsByUser(Number(landlordId))
+    .subscribe({
+      next: (cards: any[]) => {
+       this.savedCards = cards.map(card => ({
+       id: card.id,  // <-- include id from backend
+       last4: card.last4Digits, 
+       expiry: card.expiry,
+       cardholder: card.cardholder
+      }));
+      },
+      error: (err) => {
+        console.error('Error fetching saved cards:', err);
+      }
+    });
+}
 
 }

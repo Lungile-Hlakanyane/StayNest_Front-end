@@ -62,5 +62,9 @@ getCurrentUser(): Observable<UserDTO> {
   return this.getUserById(Number(userId));
 }
 
+ deleteUser(userId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/user/${userId}`, {responseType: 'text'});
+}
+
   
 }

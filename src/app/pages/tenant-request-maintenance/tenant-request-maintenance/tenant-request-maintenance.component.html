@@ -36,7 +36,11 @@
 
         <ion-item lines="inset">
           <ion-label position="floating">Property Name</ion-label>
-          <ion-input [(ngModel)]="form.propertyName" name="propertyName" required></ion-input>
+          <ion-select [(ngModel)]="form.propertyName" name="propertyName" required (ionChange)="onPropertyChange($event)">
+          <ion-select-option *ngFor="let property of properties" [value]="property">
+           {{ property.name }}
+         </ion-select-option>
+         </ion-select>
         </ion-item>
 
         <ion-item lines="inset">
